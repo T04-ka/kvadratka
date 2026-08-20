@@ -1,9 +1,11 @@
 #include <stdio.h>
 
 #define INF -1
-
+#define ERR -2
+#define EMPTY -3
 
 int squareSolve(double *coefs, double *roots);
+void printRes(double *roots, int nroots);
 
 
 int main(){
@@ -13,9 +15,16 @@ int main(){
       double coefs[] = {0, 0, 0}; // A B C
       double roots[] = {0, 0};
       
-      scanf("%lg %lg %lg", coefs, coefs+1, coefs+2);   
+      char input = scanf("%lg %lg %lg", coefs, coefs+1, coefs+2);   
       
-      int nroots = squareSolve(coefs, roots);
+      int nroots = (input == 0) ? ERR : (input == EOF) ? EMPTY : squareSolve(coefs, roots);
+      
+      printRes(roots, nroots);
+        
+      return 0;
+}
+
+void printRes(double *roots, int nroots){
       
       switch (nroots) {
       
@@ -39,11 +48,14 @@ int main(){
                 break;
           }
           
+          case EMPTY: {
+                printf("Error: empty input.\n");
+                break;
+          }
+          
           default: {
-                printf("Wrong input.\n");
+                printf("\nError: wrong input.\n");
                 break;
           }
       }
-      
-      return 0;
 }
