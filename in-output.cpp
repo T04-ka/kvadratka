@@ -1,11 +1,11 @@
 #include "in-output.h"
 
-//###READING BODY ANSWEAR TO CONTINUE SOLVING###
+//###READING BODY ANSWER TO CONTINUE SOLVING###
 bool readAnswear(void){
       
       int c = 0;      
       
-      //asking body until get the answear or program ends by him
+      //asking body until get the answer or program ends by him
       while (1){
             
             //skip spaces
@@ -48,25 +48,47 @@ bool readParam(const char type_param, double *param){
             if (len == 0){
                   
                   
-                        printRes({0}, EMPTY_INPUT);
+                        printErrors(EMPTY_INPUT);
                         return true;
                   
             }
             
             if (is_OnlySpace_in_line(line)) {
                         
-                  printRes({0}, EMPTY_INPUT);
+                  printErrors(EMPTY_INPUT);
                   err = true;
             }
             
             else if (!is_OnlyDigit_in_line(line)){
                   
-                  printRes({0}, INPUT_ERROR);
+                  printErrors(INPUT_ERROR);
                   err = true;
             }
       
       } while (!(input == 1 && !err));
       return false;
+}
+
+//-----------------------------------------
+//###PRINTING ERRORS###
+void printErrors(Errors error){
+      switch (error) {
+          
+          case EMPTY_INPUT: {
+                printf("\nError: empty input.\n");
+                break;
+          }
+          
+          case INPUT_ERROR: {
+                printf("\nError: wrong input.\n");
+                break;
+          }
+          
+          default: {
+                
+                printf("\nUnknown error.\n");
+          }
+      }
 }
 
 //----------------------------------------------------------------------------
@@ -93,16 +115,6 @@ void printRes(const double *roots, Nroots nroots){
           
           case INF_ROOT: {
                 printf("\nEquation has infinity roots.\n");
-                break;
-          }
-          
-          case EMPTY_INPUT: {
-                printf("\nError: empty input.\n");
-                break;
-          }
-          
-          case INPUT_ERROR: {
-                printf("\nError: wrong input.\n");
                 break;
           }
           

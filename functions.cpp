@@ -39,14 +39,20 @@ bool is_OnlySpace_in_line(char *s){
 //###CHECKING IF ONLY DIGITS IN LINE###
 bool is_OnlyDigit_in_line(char *s){
       
-      int i = 0;
+      int i = 0, dot_count = 0;
       char c = 0;
       while ((c=s[i++]) != '\n' && c != '\0'){
             
-            if (!isdigit(c)) return false;
+            if (!(isdigit(c) || c == '.')) return false;
+            
+            if (c == '.'){
+                  
+                  dot_count++;
+            }
       }
       
-      return true;
+      return (dot_count < 2) ? true
+                             : false;
 }
 
 //------------------------------------------------------

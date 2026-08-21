@@ -11,7 +11,9 @@
 
 
 //#################INITIALIZATION######################
-void printRes(const double *roots, enum Nroots nroots);
+void printRes(const double *roots, Nroots nroots);
+
+void printErrors(Errors error);
 
 bool readParam(const char type_of_param, double *param);
 

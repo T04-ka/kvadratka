@@ -3,10 +3,10 @@
 //###SOLVING SQUARE EQUATION###
 Nroots squareSolve(const double *coefs, double *roots){
       double a = *coefs, b = *(coefs+1), c = *(coefs+2);
-      if (is_zero(a)){ //A=0
+      if (is_zero(a)){ //A?=0
       
-            if (is_zero(b)){ //B=0
-                        
+            if (is_zero(b)){ //B?=0
+                  
                   return (is_zero(c)) ? INF_ROOT : ZERO_ROOT; //A=0 B=0 C?=0
             }
             else { //A=0 B!=0 C?=0
@@ -17,6 +17,7 @@ Nroots squareSolve(const double *coefs, double *roots){
       }
       else { //A!=0 B?=0 C?=0
             
+            //finding descrimiinant
             double D = b * b - 4.0 * a * c;
             
             if (is_zero(D)){
