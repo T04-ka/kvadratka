@@ -39,32 +39,44 @@ bool readParam(const char type_param, double *param){
       do {  
             printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
             
-            err = false; //set the error flag in false
-            
             len = get_line(line, MAXLEN); //taking line from input stream
             input = sscanf(line, "%lg", param); //taking param from line
             
+            /*
             //###END OF INPUT CHECK###
             if (len == 0){
                   
                         printErrors(EMPTY_INPUT);
                         return true;
                   
-            }
+            } */
             
-            //###EMPTY ERROR CHECK###
-            if (is_OnlySpace_in_line(line)) {
-                        
-                  printErrors(EMPTY_INPUT);
-                  err = true;
+            //ERROR CHECK
+            switch (is_input_correct(line)){
+
+                  case INPUT_ERROR: {
+
+                        printErrors(INPUT_ERROR);
+                        err = true;
+                        break;
+                  }
+
+                  case EMPTY_INPUT: {
+
+                        printErrors(EMPTY_INPUT);
+                        err = true;
+                        break;
+                  }
+
+                  case NO_ERROR: {
+
+                        err = false;
+                        break;
+                  }
+
+                  default: {}
             }
-            
-            //###WRONG INPUT ERROR CHECK###
-            else if (!is_OnlyDigit_in_line(line)){
-                  
-                  printErrors(INPUT_ERROR);
-                  err = true;
-            }
+
       
       } while (!(input == 1 && !err)); //stoping cicl if no errors
       return false;
@@ -85,6 +97,8 @@ void printErrors(Errors error){
                 break;
           }
           
+         // case NO_ERROR: {}
+
           default: {
                 
                 printf("\nUnknown error.\n");

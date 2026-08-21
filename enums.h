@@ -11,7 +11,8 @@ enum Nroots {
 
 enum Errors {
   INPUT_ERROR = -1,
-  EMPTY_INPUT = -2
+  EMPTY_INPUT = -2,
+  NO_ERROR = -3
 };
 
 #endif
