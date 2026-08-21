@@ -11,32 +11,52 @@ int main(){
       printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
       
       int i = 0;
+      Bool is_input_empty = NO;
+      
       for (i = 0; i < 3; i++){
-            readParam(types[i], coefs+i);
+      
+            is_input_empty = readParam(types[i], coefs+i);
+            if (is_input_empty == YES){
+                  
+                  break;
+            }
       }
       
+      if (is_input_empty == NO){
       
-      Nroots nroots =  squareSolve(coefs, roots);
+            Nroots nroots =  squareSolve(coefs, roots);
+            
+            printRes(roots, nroots);
+      }
       
-      printRes(roots, nroots);
-        
       return 0;   
 }
 
 //------------------------------------------------
 
-void readParam(const char type_param, double *param){
+Bool readParam(const char type_param, double *param){
       
       char line[MAXLEN] = {};
-      int input=0;
-      Bool err = NO;
+      int input=0, len=0;
+      Bool err = NO; //error flag to help detecting errors
       
       
       do {  
             printf("\nPlease, enter parametr %c: ", type_param);  
-            err = NO;
-            get_line(line, MAXLEN);            
+            
+            err = NO; //set the error flag in false
+            
+            len = get_line(line, MAXLEN);            
             input = sscanf(line, "%lg", param);
+            
+            //###END OF INPUT CHECK###
+            if (len == 0){
+                  
+                  
+                        printRes({0}, EMPTY_INPUT);
+                        return YES;
+                  
+            }
             
             if (is_OnlySpace_in_line(line) == YES) {
                         
@@ -51,7 +71,7 @@ void readParam(const char type_param, double *param){
             }
       
       } while (!(input == 1 && err == NO));
-          
+      return NO;
 }
 
 //--------------------------------
@@ -116,22 +136,22 @@ void printRes(const double *roots, Nroots nroots){
           }
           
           case ONE_ROOT: {
-                printf("Equation has 1 root: x = %g.\n", roots[0]);
+                printf("\nEquation has 1 root: x = %g.\n", roots[0]);
                 break;
           }
           
           case TWO_ROOT: {
-                printf("Equation has 2 roots: x1 = %g, x2 = %g.\n", roots[0], roots[1]);
+                printf("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots[0], roots[1]);
                 break;
           }
           
           case INF_ROOT: {
-                printf("Equation has infinity roots.\n");
+                printf("\nEquation has infinity roots.\n");
                 break;
           }
           
           case EMPTY_INPUT: {
-                printf("Error: empty input.\n");
+                printf("\nError: empty input.\n");
                 break;
           }
           
@@ -142,7 +162,7 @@ void printRes(const double *roots, Nroots nroots){
           
           default: {
                 
-                printf("Unknown error.\n");
+                printf("\nUnknown error.\n");
           }
       }
 }

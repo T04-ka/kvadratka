@@ -43,6 +43,6 @@ Nroots squareSolve(const double *coefs, double *roots);
 
 void printRes(const double *roots, enum Nroots nroots);
 
-void readParam(const char type_of_param, double *param);
+Bool readParam(const char type_of_param, double *param);
 
 #endif
