@@ -10,6 +10,7 @@
 //############INITIALIZATION##########
 Nroots squareSolve(const double *coefs, double *roots);
 
+Nroots linearSolve(const double a, const double b, double *x);
 
 #endif
 

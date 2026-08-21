@@ -79,11 +79,19 @@ Errors is_input_correct(char *s){
             return INPUT_ERROR;
       }
 
-      char *first_digit, *dot, *last_digit, *ps;
+      char *first_digit = s, *dot = s, *last_digit = s, *ps = s;
       bool is_number_exist = false, is_dot_exist = false;
 
       int len = strlen(s);
+      ps = s;
+      while (*ps != '\n' && *ps != '\0'){ //"as..sd\n\0"
+            if (*(ps++) == '.'){
 
+                  dot = --ps;
+                  is_dot_exist = true;
+                  break;
+            }
+      }
 
       //find first digit in stroke
       ps = s;

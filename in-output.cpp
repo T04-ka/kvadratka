@@ -40,6 +40,7 @@ bool readParam(const char type_param, double *param){
             printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
             
             len = get_line(line, MAXLEN); //taking line from input stream
+
             input = sscanf(line, "%lg", param); //taking param from line
             
             /*
@@ -97,7 +98,7 @@ void printErrors(Errors error){
                 break;
           }
           
-         // case NO_ERROR: {}
+         case NO_ERROR: {break;}
 
           default: {
                 

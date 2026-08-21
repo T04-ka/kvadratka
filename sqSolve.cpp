@@ -1,22 +1,22 @@
 #include "sqSolve.h"
 
-//###SOLVING SQUARE EQUATION###
+//###SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
 Nroots squareSolve(const double *coefs, double *roots){
       double a = *coefs, b = *(coefs+1), c = *(coefs+2);
-      if (is_zero(a)){ //A?=0
+      if (is_zero(a)){ //A=0
       
-            if (is_zero(b)){ //B?=0
-                  
-                  return (is_zero(c)) ? INF_ROOT : ZERO_ROOT; //A=0 B=0 C?=0
-            }
-            else { //A=0 B!=0 C?=0
-                  
-                  *roots = -c/b;
-                  return ONE_ROOT;
-            }
+            return linearSolve(b,c,roots);
       }
-      else { //A!=0 B?=0 C?=0
+      else { //A!=0 
             
+            if (is_zero(c)){ //Ax^2 + Bx = 0 <=> x(Ax + B) = 0
+
+                  *roots = 0;
+                  linearSolve(a,b,roots+1);
+                  return TWO_ROOT;
+            }
+
+            //now its normal square equation
             //finding descrimiinant
             double D = b * b - 4.0 * a * c;
             
@@ -37,5 +37,19 @@ Nroots squareSolve(const double *coefs, double *roots){
                   
                   return TWO_ROOT;
             }
+      }
+}
+
+//###GIVE SOLUTION FOR EQUATION AX+B=0###
+Nroots linearSolve(const double a, const double b, double *x){
+
+      if (is_zero(a)){ //a=0
+
+            return is_zero(b) ? INF_ROOT
+                              : ZERO_ROOT;
+      } else { //a!=0
+            
+            *x = -b/a;
+            return ONE_ROOT;
       }
 }
