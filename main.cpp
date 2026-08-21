@@ -11,18 +11,18 @@ int main(){
       printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
       
       int i = 0;
-      Bool is_input_empty = NO;
+      bool is_input_empty = false;
       
       for (i = 0; i < 3; i++){
       
             is_input_empty = readParam(types[i], coefs+i);
-            if (is_input_empty == YES){
+            if (is_input_empty){
                   
                   break;
             }
       }
       
-      if (is_input_empty == NO){
+      if (!is_input_empty){
       
             Nroots nroots =  squareSolve(coefs, roots);
             
@@ -34,17 +34,17 @@ int main(){
 
 //------------------------------------------------
 
-Bool readParam(const char type_param, double *param){
+bool readParam(const char type_param, double *param){
       
       char line[MAXLEN] = {};
       int input=0, len=0;
-      Bool err = NO; //error flag to help detecting errors
+      bool err = false; //error flag to help detecting errors
       
       
       do {  
             printf("\nPlease, enter parametr %c: ", type_param);  
             
-            err = NO; //set the error flag in false
+            err = false; //set the error flag in false
             
             len = get_line(line, MAXLEN);            
             input = sscanf(line, "%lg", param);
@@ -54,52 +54,52 @@ Bool readParam(const char type_param, double *param){
                   
                   
                         printRes({0}, EMPTY_INPUT);
-                        return YES;
+                        return true;
                   
             }
             
-            if (is_OnlySpace_in_line(line) == YES) {
+            if (is_OnlySpace_in_line(line)) {
                         
                   printRes({0}, EMPTY_INPUT);
-                  err = YES;
+                  err = true;
             }
             
-            else if (is_OnlyDigit_in_line(line) == NO){
+            else if (!is_OnlyDigit_in_line(line)){
                   
                   printRes({0}, INPUT_ERROR);
-                  err = YES;
+                  err = true;
             }
       
-      } while (!(input == 1 && err == NO));
-      return NO;
+      } while (!(input == 1 && !err));
+      return false;
 }
 
 //--------------------------------
 
-Bool is_OnlySpace_in_line(char *s){
+bool is_OnlySpace_in_line(char *s){
 
       int i = 0;
       char c = 0;
       while ((c = s[i++]) != '\n' && c != '\0'){
       
-            if (!isspace(c)) return NO;
+            if (!isspace(c)) return false;
       }
       
-      return YES;
+      return true;
 }
 
 //------------------------------------
 
-Bool is_OnlyDigit_in_line(char *s){
+bool is_OnlyDigit_in_line(char *s){
       
       int i = 0;
       char c = 0;
       while ((c=s[i++]) != '\n' && c != '\0'){
             
-            if (!isdigit(c)) return NO;
+            if (!isdigit(c)) return false;
       }
       
-      return YES;
+      return true;
 }
 
 //---------------------------------------------------------

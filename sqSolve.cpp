@@ -41,17 +41,17 @@ Nroots squareSolve(const double *coefs, double *roots){
 
 //-------------------------------------------------
 
-Bool is_zero(double x){
+bool is_zero(double x){
       
       if (x > 0){
             
-            return (x < ZERO_BORDER) ? YES
-                                     : NO;
+            return (x < ZERO_BORDER) ? true
+                                     : false;
       }
       else{
       
-            return (x > -ZERO_BORDER) ? YES
-                                      : NO;
+            return (x > -ZERO_BORDER) ? true
+                                      : false;
       }
 }
 

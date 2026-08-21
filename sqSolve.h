@@ -21,16 +21,9 @@ enum Nroots {
   EMPTY_INPUT = -2
 };
 
-
-enum Bool {
-
-    YES = 1,
-    NO = 0
-};
-
 //----------------------------------
 //############INITIALIZATION##########
-Bool is_zero(double x);
+bool is_zero(double x);
 
 Nroots squareSolve(const double *coefs, double *roots);
 
