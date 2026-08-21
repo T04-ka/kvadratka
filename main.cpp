@@ -1,16 +1,5 @@
-#include "./init.h"
+#include "./main.h"
 
-#include <ctype.h>
-
-
-Bool is_OnlySpace_in_line(char *s);
-Bool is_OnlyDigit_in_line(char *s);
-int get_line(char *s, int maxlen);
-Nroots squareSolve(const double *coefs, double *roots);
-void printRes(const double *roots, enum Nroots nroots);
-void readParam(const char type_of_param, double *param);
-
-const char types[] = {'A','B','C'};
 
 int main(){
       
@@ -39,7 +28,7 @@ int main(){
 void readParam(const char type_param, double *param){
       
       char line[MAXLEN] = {};
-      int f = 0, input=0;
+      int input=0;
       Bool err = NO;
       
       
@@ -79,7 +68,7 @@ Bool is_OnlySpace_in_line(char *s){
       return YES;
 }
 
-//--------------------
+//------------------------------------
 
 Bool is_OnlyDigit_in_line(char *s){
       

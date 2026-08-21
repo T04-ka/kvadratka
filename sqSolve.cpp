@@ -1,9 +1,5 @@
-#include "./init.h"
+#include "./sqSolve.h"
 
-Bool is_zero(double x);
-Nroots squareSolve(const double *coefs, double *roots);
-
-#define ZERO_BORDER 0.000001
 
 Nroots squareSolve(const double *coefs, double *roots){
       double a = *coefs, b = *(coefs+1), c = *(coefs+2);
@@ -43,19 +39,19 @@ Nroots squareSolve(const double *coefs, double *roots){
       }
 }
 
+//-------------------------------------------------
 
 Bool is_zero(double x){
       
       if (x > 0){
             
             return (x < ZERO_BORDER) ? YES
-                            : NO;
+                                     : NO;
       }
-      
       else{
       
             return (x > -ZERO_BORDER) ? YES
-                             : NO;
+                                      : NO;
       }
 }
 
