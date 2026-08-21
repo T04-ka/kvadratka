@@ -1,6 +1,6 @@
 #include "sqSolve.h"
 
-
+//###SOLVING SQUARE EQUATION###
 Nroots squareSolve(const double *coefs, double *roots){
       double a = *coefs, b = *(coefs+1), c = *(coefs+2);
       if (is_zero(a)){ //A=0
@@ -38,20 +38,3 @@ Nroots squareSolve(const double *coefs, double *roots){
             }
       }
 }
-
-//-------------------------------------------------
-
-bool is_zero(double x){
-      
-      if (x > 0){
-            
-            return (x < ZERO_BORDER) ? true
-                                     : false;
-      }
-      else{
-      
-            return (x > -ZERO_BORDER) ? true
-                                      : false;
-      }
-}
-
