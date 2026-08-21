@@ -37,19 +37,19 @@ bool readParam(const char type_param, double *param){
             
             len = get_line(line, MAXLEN); //taking line from input stream
 
-            input = sscanf(line, "%lg", param); //taking param from line
+            //input = sscanf(line, "%lg", param); //taking param from line
             
-            /*
+            
             //###END OF INPUT CHECK###
             if (len == 0){
                   
                         printErrors(EMPTY_INPUT);
                         return true;
                   
-            } */
+            } 
             
-            //ERROR CHECK
-            switch (is_input_correct(line)){
+            //ERROR CHECK and taking param from line
+            switch (is_input_correct(line, param)){
 
                   case INPUT_ERROR: {
 
@@ -75,7 +75,7 @@ bool readParam(const char type_param, double *param){
             }
 
       
-      } while (!(input == 1 && !err)); //stoping cicl if no errors
+      } while (err); //stoping cicl if no errors
       return false;
 }
 

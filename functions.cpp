@@ -72,8 +72,31 @@ bool is_zero(double x){
 }
 
 //-------------------------------------------------------------
-Errors is_input_correct(char *s){
+Errors is_input_correct(char *s, double *input_d){
 
+      *input_d = 0;
+      char *endptr=s, *ps=s;
+
+      *input_d = strtod(ps, &endptr);
+
+      if (*input_d == 0 && ps == endptr) {
+
+            return is_OnlySpace_in_line(endptr) ? EMPTY_INPUT 
+                                                : INPUT_ERROR;
+      } else {
+
+            return is_OnlySpace_in_line(endptr) ? NO_ERROR
+                                                : INPUT_ERROR;
+      }
+
+
+      
+
+
+
+
+
+/*
       if (!is_OnlyDigit_in_line(s)){
 
             return INPUT_ERROR; //IN INPUT EXIST SOME NOT DIGITS (WRONG)
@@ -141,6 +164,7 @@ Errors is_input_correct(char *s){
       } 
 
       return NO_ERROR; //INPUT IS CORRECT
+      */
 }
 
 

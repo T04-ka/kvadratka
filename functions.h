@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "enums.h"
 
 //############DEFINES##############
@@ -20,7 +21,7 @@ int get_line(char *s, int maxlen);
 
 bool is_zero(double x);
 
-Errors is_input_correct(char *line);
+Errors is_input_correct(char *line, double *input_d);
 
 void clearBuffer(const int last_char);
 
