@@ -31,41 +31,42 @@ bool readAnswear(void){
 //###READING INPUT PARAM A/B/C###
 bool readParam(const char type_param, double *param){
       
-      char line[MAXLEN] = {};
-      int input=0, len=0;
+      char line[MAXLEN] = {}; //space for input line
+      int input=0, len=0; //len is a len of line readed
       bool err = false; //error flag to help detecting errors
       
       
       do {  
-            printf("\nPlease, enter parametr %c: ", type_param);  
+            printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
             
             err = false; //set the error flag in false
             
-            len = get_line(line, MAXLEN);            
-            input = sscanf(line, "%lg", param);
+            len = get_line(line, MAXLEN); //taking line from input stream
+            input = sscanf(line, "%lg", param); //taking param from line
             
             //###END OF INPUT CHECK###
             if (len == 0){
-                  
                   
                         printErrors(EMPTY_INPUT);
                         return true;
                   
             }
             
+            //###EMPTY ERROR CHECK###
             if (is_OnlySpace_in_line(line)) {
                         
                   printErrors(EMPTY_INPUT);
                   err = true;
             }
             
+            //###WRONG INPUT ERROR CHECK###
             else if (!is_OnlyDigit_in_line(line)){
                   
                   printErrors(INPUT_ERROR);
                   err = true;
             }
       
-      } while (!(input == 1 && !err));
+      } while (!(input == 1 && !err)); //stoping cicl if no errors
       return false;
 }
 

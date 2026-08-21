@@ -43,7 +43,7 @@ bool is_OnlyDigit_in_line(char *s){
       char c = 0;
       while ((c=s[i++]) != '\n' && c != '\0'){
             
-            if (!(isdigit(c) || c == '.')) return false;
+            if (!(isdigit(c) || c == '.' || isspace(c))) return false;
             
             if (c == '.'){
                   

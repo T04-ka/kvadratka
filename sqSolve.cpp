@@ -20,17 +20,17 @@ Nroots squareSolve(const double *coefs, double *roots){
             //finding descrimiinant
             double D = b * b - 4.0 * a * c;
             
-            if (is_zero(D)){
+            if (is_zero(D)){ //D == 0
             
                   *roots = -b / (2.0*a);
                   
                   return ONE_ROOT;
             }
-            else if (D < 0) {
+            else if (D < 0) { //D < 0
                   
                   return ZERO_ROOT;
             }
-            else {
+            else { //D > 0
             
                   *roots = (-b - sqrt(D)) / (2.0 * a); //x1
                   *(roots+1) = (-b + sqrt(D)) / (2.0 * a); //x2
