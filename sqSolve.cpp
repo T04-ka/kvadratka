@@ -1,4 +1,4 @@
-#include "./sqSolve.h"
+#include "sqSolve.h"
 
 
 Nroots squareSolve(const double *coefs, double *roots){

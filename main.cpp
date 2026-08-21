@@ -1,5 +1,6 @@
-#include "./main.h"
+#include "main.h"
 
+// убрать из мейна реализацию функций
 
 int main(){
       
@@ -8,28 +9,72 @@ int main(){
       double roots[] = {0, 0}; // x1 x2
       
       
-      printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
-      
       int i = 0;
-      bool is_input_empty = false;
+      bool is_input_ends = false; //to catch the moment with end of input stream
       
-      for (i = 0; i < 3; i++){
-      
-            is_input_empty = readParam(types[i], coefs+i);
-            if (is_input_empty){
+      //many square solve addition
+      while (1){
+            
+            //starting message
+            printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
+            
+            //reading input parametrs
+            for (i = 0; i < 3; i++){
+                  
+                  //reading coeffs and checking on input end
+                  is_input_ends = readParam(types[i], coefs+i); 
+                  
+                  //if input ends breaking up the program
+                  if (is_input_ends){
+                        
+                        return 0;
+                  }
+            }
+            
+            //finding roots
+            Nroots nroots =  squareSolve(coefs, roots);
+            
+            //printing results
+            printRes(roots, nroots);
+            
+            
+            //asking body if he wants another equation to solve
+            printf("Write n if you want to quit program or continue solving equations.\t");
+            
+            if (!readAnswear()){
                   
                   break;
             }
       }
-      
-      if (!is_input_empty){
-      
-            Nroots nroots =  squareSolve(coefs, roots);
-            
-            printRes(roots, nroots);
-      }
-      
       return 0;   
+}
+
+//-----------------------------------------------
+
+bool readAnswear(void){
+      
+      int c = 0;      
+      
+      //asking body until get the answear or program ends by him
+      while (1){
+            
+            //skip spaces
+            while (isspace((c=getchar())) && c != '\n') {}
+           
+            //anal answear
+            switch (c){
+              
+              case 'n': {
+                  
+                  return false;
+              }
+              
+              default: {
+                  
+                  return true;
+              }
+            }
+      }
 }
 
 //------------------------------------------------
@@ -109,7 +154,7 @@ int get_line(char *s, int mxlen){
       int c = 0;
       int len = 0;
       
-      while ((c=getchar()) != '\n' && c != EOF && len < mxlen){
+      while ((c = getchar()) != '\n' && c != EOF && len < mxlen){
             
             s[len++] = (char) c;      
       }
@@ -127,6 +172,7 @@ int get_line(char *s, int mxlen){
 //------------------------------------------------------------
 
 void printRes(const double *roots, Nroots nroots){
+    //  assert(roots);
       
       switch (nroots) {
       
