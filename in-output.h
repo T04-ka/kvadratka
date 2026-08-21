@@ -17,7 +17,7 @@ void printErrors(Errors error);
 
 bool readParam(const char type_of_param, double *param);
 
-bool readAnswear(void);
+bool readAnswear(int *last_char);
 
 
 #endif

@@ -22,4 +22,6 @@ bool is_zero(double x);
 
 Errors is_input_correct(char *line);
 
+void clearBuffer(const int last_char);
+
 #endif

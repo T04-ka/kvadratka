@@ -76,22 +76,13 @@ Errors is_input_correct(char *s){
 
       if (!is_OnlyDigit_in_line(s)){
 
-            return INPUT_ERROR;
+            return INPUT_ERROR; //IN INPUT EXIST SOME NOT DIGITS (WRONG)
       }
 
       char *first_digit = s, *dot = s, *last_digit = s, *ps = s;
       bool is_number_exist = false, is_dot_exist = false;
 
       int len = strlen(s);
-      ps = s;
-      while (*ps != '\n' && *ps != '\0'){ //"as..sd\n\0"
-            if (*(ps++) == '.'){
-
-                  dot = --ps;
-                  is_dot_exist = true;
-                  break;
-            }
-      }
 
       //find first digit in stroke
       ps = s;
@@ -105,7 +96,7 @@ Errors is_input_correct(char *s){
             }
       }
 
-      //dot find
+      //find dot in stroke
       ps = s;
       while (*ps != '\n'){ //"as..sd\n\0"
             if (*(ps++) == '.'){
@@ -116,6 +107,7 @@ Errors is_input_correct(char *s){
             }
       }
       
+      //check maybe errors
       if (!is_number_exist){
 
             return (is_dot_exist) ? INPUT_ERROR //ONLY DOT EXIST IN INPUT
@@ -150,4 +142,20 @@ Errors is_input_correct(char *s){
 
       return NO_ERROR; //INPUT IS CORRECT
 }
+
+
 //------------------------------------------------------------------------
+//###CLEARS INPUT BUFFER###
+void clearBuffer(int last_char){
+
+      if (last_char == '\n'){
+
+            return;
+      }
+
+      int c = 0;
+      while ((c = getchar()) != '\n') {}
+}
+
+
+//------------------------------------------------------------

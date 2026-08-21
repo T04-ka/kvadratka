@@ -41,11 +41,15 @@ int main(){
             //asking body if he wants another equation to solve
             printf("Write n if you want to quit program or continue solving equations.\t");
             
+            int last_char = 0; //needed to do not clear the buffer if it already clear
+
             //if body want to stop program -> program stops
-            if (!readAnswear()){
+            if (!readAnswear(&last_char)){
                   
                   break;
             }
+            
+            clearBuffer(last_char);
       }
       return 0;   
 }

@@ -1,28 +1,24 @@
 #include "in-output.h"
 
 //###READING BODY ANSWER TO CONTINUE SOLVING###
-bool readAnswear(void){
+bool readAnswear(int *last_char){  
       
-      int c = 0;      
-      
-      //asking body until get the answer or program ends by him
-      while (1){
+      //asking person until get the answer or program ends by him
+      int c = getchar();
+
+      *last_char = c; //needed for not clear buffer if c = '\n'. see main
+
+      //anal answear
+      switch (c){
             
-            //skip spaces
-            while (isspace((c=getchar())) && c != '\n') {}
-           
-            //anal answear
-            switch (c){
-              
-              case 'n': {
-                  
+            case 'n': {
+            
                   return false;
-              }
-              
-              default: {
-                  
+            }
+            
+            default: {
+            
                   return true;
-              }
             }
       }
 }
