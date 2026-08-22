@@ -1,5 +1,9 @@
 #include "sqSolve.h"
 
+//######INCIDE FUNCTIONS INITILIZATION######
+Nroots linearSolve(const double a, const double b, double *x);
+
+
 //###SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
 Nroots squareSolve(const double *coefs, double *roots){
       double a = *coefs, b = *(coefs+1), c = *(coefs+2);

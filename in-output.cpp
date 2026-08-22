@@ -28,12 +28,12 @@ bool readAnswear(int *last_char){
 bool readParam(const char type_param, double *param){
       
       char line[MAXLEN] = {}; //space for input line
-      int input=0, len=0; //len is a len of line readed
+      int len=0; //len is a len of line readed
       bool err = false; //error flag to help detecting errors
       
       
       do {  
-            printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
+            _WHITE printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
             
             len = get_line(line, MAXLEN); //taking line from input stream
 
@@ -85,21 +85,18 @@ void printErrors(Errors error){
       switch (error) {
           
           case EMPTY_INPUT: {
-                printf("\nError: empty input.\n");
+                _RED printf("\nError: empty input.\n");
                 break;
           }
           
           case INPUT_ERROR: {
-                printf("\nError: wrong input.\n");
+                _RED printf("\nError: wrong input.\n");
                 break;
           }
           
          case NO_ERROR: {break;}
 
-          default: {
-                
-                printf("\nUnknown error.\n");
-          }
+          default: {}
       }
 }
 
@@ -111,29 +108,26 @@ void printRes(const double *roots, Nroots nroots){
       switch (nroots) {
       
           case ZERO_ROOT: {
-                printf("\nEquation has no roots.\n");
+                _YELLOW printf("\nEquation has no roots.\n");
                 break;
           }
           
           case ONE_ROOT: {
-                printf("\nEquation has 1 root: x = %g.\n", roots[0]);
+                _YELLOW printf("\nEquation has 1 root: x = %g.\n", roots[0]);
                 break;
           }
           
           case TWO_ROOT: {
-                printf("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots[0], roots[1]);
+                _YELLOW printf("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots[0], roots[1]);
                 break;
           }
           
           case INF_ROOT: {
-                printf("\nEquation has infinity roots.\n");
+                _YELLOW printf("\nEquation has infinity roots.\n");
                 break;
           }
           
-          default: {
-                
-                printf("\nUnknown error.\n");
-          }
+          default: {}
       }
 }
 //-------------------------------------------------------------------------

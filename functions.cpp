@@ -10,6 +10,9 @@ int get_line(char *s, int mxlen){
             
             s[len++] = (char) c;      
       }
+
+      
+
       
       if (c == '\n') {
       
@@ -22,7 +25,17 @@ int get_line(char *s, int mxlen){
 }
 
 //---------------------------------------------------------
-//###CHECKING IF ONLY SPACE IN LINE###
+/// CHECKING IF ONLY SPACE IN LINE
+///
+///
+///
+///
+///
+///
+///
+///
+//---------------------------------------------------------
+
 bool is_OnlySpace_in_line(char *s){
 
       int i = 0;
@@ -75,96 +88,19 @@ bool is_zero(double x){
 Errors is_input_correct(char *s, double *input_d){
 
       *input_d = 0;
-      char *endptr=s, *ps=s;
+      char *endptr = NULL, *ps = s;
 
       *input_d = strtod(ps, &endptr);
 
       if (*input_d == 0 && ps == endptr) {
 
-            return is_OnlySpace_in_line(endptr) ? EMPTY_INPUT 
-                                                : INPUT_ERROR;
+            return (endptr != NULL && is_OnlySpace_in_line(endptr)) ? EMPTY_INPUT 
+                                                                    : INPUT_ERROR;
       } else {
 
             return is_OnlySpace_in_line(endptr) ? NO_ERROR
                                                 : INPUT_ERROR;
       }
-
-
-      
-
-
-
-
-
-/*
-      if (!is_OnlyDigit_in_line(s)){
-
-            return INPUT_ERROR; //IN INPUT EXIST SOME NOT DIGITS (WRONG)
-      }
-
-      char *first_digit = s, *dot = s, *last_digit = s, *ps = s;
-      bool is_number_exist = false, is_dot_exist = false;
-
-      int len = strlen(s);
-
-      //find first digit in stroke
-      ps = s;
-      while (*ps != '\n'){ //"as..sd\n\0"
-
-            if (isdigit(*(ps++))) {
-
-                  first_digit = --ps;
-                  is_number_exist = true;
-                  break;
-            }
-      }
-
-      //find dot in stroke
-      ps = s;
-      while (*ps != '\n'){ //"as..sd\n\0"
-            if (*(ps++) == '.'){
-
-                  dot = --ps;
-                  is_dot_exist = true;
-                  break;
-            }
-      }
-      
-      //check maybe errors
-      if (!is_number_exist){
-
-            return (is_dot_exist) ? INPUT_ERROR //ONLY DOT EXIST IN INPUT
-                                  : EMPTY_INPUT; //EMPTY INPUT
-      }
-
-      //find last digit in stroke
-      ps = s;
-      for (int i = len - 2; i >= 0; i--){ //"as..sd\n\0" -> s[len-2] = '\n'
-
-            if (isdigit(*(ps + i))){
-
-                  last_digit = ps+i;
-                  break;
-            }
-      }
-
-
-      if (is_dot_exist && !(first_digit < dot && dot < last_digit)){
-
-            return INPUT_ERROR; //DOT LOCATED NOT IN NUMBER
-      }
-
-      
-      for (ps = first_digit; ps < last_digit; ps++){
-
-            if (!isdigit(*ps) && *ps != '.') {
-
-                  return INPUT_ERROR; //NOT ONE NUMBER
-            }
-      } 
-
-      return NO_ERROR; //INPUT IS CORRECT
-      */
 }
 
 

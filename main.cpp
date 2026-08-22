@@ -1,9 +1,9 @@
 #include "main.h"
 
+
 //  допилить ввод
 //  *** начать цветной вывод
 int main(){
-      
       //initialization
       double coefs[] = {0, 0, 0}; // A B C
       double roots[] = {0, 0}; // x1 x2
@@ -16,11 +16,11 @@ int main(){
       while (1){
             
             //starting message
+            
             printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
             
             //reading input parametrs
             for (i = 0; i < 3; i++){
-                  
                   //reading coeffs and checking on input end
                   is_input_ends = readParam(types[i], coefs+i); 
                   
@@ -39,7 +39,7 @@ int main(){
             
             
             //asking body if he wants another equation to solve
-            printf("Write n if you want to quit program or continue solving equations.\t");
+            _WHITE printf("Write n if you want to quit program or continue solving equations.\t");
             
             int last_char = 0; //needed to do not clear the buffer if it already clear
 
@@ -49,6 +49,7 @@ int main(){
                   break;
             }
             
+            //clearing input buffer (if needed)
             clearBuffer(last_char);
       }
       return 0;   
