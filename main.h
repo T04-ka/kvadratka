@@ -4,6 +4,7 @@
 //###############INCLUDES#######################
 #include "sqSolve.h"
 #include "in-output.h"
+#include "Diagnostic.h"
 
 
 //################CONSTANTS##############################

@@ -4,6 +4,10 @@
 //  допилить ввод
 //  *** начать цветной вывод
 int main(){
+      
+      RunDiagnostic();
+      return 0;
+
       //initialization
       double coefs[] = {0, 0, 0}; // A B C
       double roots[] = {0, 0}; // x1 x2

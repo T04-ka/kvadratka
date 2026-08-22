@@ -10,7 +10,7 @@
 
 
 //#################INITIALIZATION######################
-bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref);
+void RunDiagnostic(void);
 
 
 #endif
