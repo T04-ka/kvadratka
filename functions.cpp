@@ -78,7 +78,7 @@ Errors is_input_correct(char *s, double *input_d){
 
       *input_d = strtod(ps, &endptr);
 
-      if (is_Equald(*input_d, 0.0) && ps == endptr) {
+      if (isEqual_d(*input_d, 0.0) && ps == endptr) {
 
             return (endptr != NULL && is_OnlySpace_in_line(endptr)) ? EMPTY_INPUT 
                                                                     : INPUT_ERROR;
@@ -106,7 +106,7 @@ void clearBuffer(int last_char){
 
 //------------------------------------------------------------
 /// RETURNS TRUE IF DOUBLE A = DOUBLE B AND FALSE IF NOT
-bool is_Equald (double a, double b){
+bool isEqual_d (double a, double b){
     
     //if nan==nan
     if (isnan(a) && isnan(b)) {

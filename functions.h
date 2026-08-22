@@ -22,7 +22,7 @@ bool is_OnlyDigit_in_line(char *s);
 
 int get_line(char *s, int maxlen);
 
-bool is_Equald(double a, double b);
+bool isEqual_d(double a, double b);
 
 Errors is_input_correct(char *line, double *input_d);
 

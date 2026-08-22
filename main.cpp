@@ -1,13 +1,16 @@
 #include "main.h"
 
 
-//  допилить ввод
-//  *** начать цветной вывод
-int main(){
+int main(int argc, char **argv){
       
-      RunDiagnostic();
-      return 0;
-
+      //if flag F_TEST had written, Diagnostic will be started
+      if (argc == 2 && strcmp(argv[1], TEST_FLAG)){
+      
+           RunDiagnostic();
+           return 0;
+      }
+      
+      
       //initialization
       double coefs[] = {0, 0, 0}; // A B C
       double roots[] = {0, 0}; // x1 x2

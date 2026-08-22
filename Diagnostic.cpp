@@ -33,10 +33,14 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
      //  printf("*roots+1 %lg\n*roots_ref+1 %lg", *(roots+1), *(roots_ref+1));
         
         //got and reference dont match
-        if (! (nroots == nroots_ref && is_Equald(*roots, *roots_ref) && is_Equald(*(roots+1), *(roots_ref+1))) ) {
+        if (! (
+                 nroots == nroots_ref 
+              && isEqual_d(*roots, *roots_ref) 
+              && isEqual_d(*(roots+1), *(roots_ref+1))
+              ) ) {
 
             _RED printf("Test #%d FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
-                                          testN, *params, *(params+1), *(params+2));
+                             testN,                    *params, *(params+1), *(params+2));
                                           
             //print "expected" stroke
             switch (nroots_ref){
