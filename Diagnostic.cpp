@@ -1,23 +1,30 @@
 #include "Diagnostic.h"
 
 //##########################################################
-//доделать равенство NAN в проверке на с39
-//cделать флажок
 //реализовать цикл
 //реализовать считывание из файла
 //#########################################################
 
 //###############INITIALIZATION#######################
 bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref);
+bool read_args(double *params, Nroots nroots, double *x_ref);
 
 
 void RunDiagnostic(void){
+    
+    int n_fail = 0;
+    int testN = 0;
     
     double params[] = {1, 2, 1};    
     Nroots nroots_ref = ONE_ROOT;
     double x_ref[] = {-1, NAN};
     
-    bool f = RunTest(1, params, nroots_ref, x_ref);
+    while (read_args(params, nroots_ref, x_ref)){
+    
+          if (!RunTest(++testN, params, nroots_ref, x_ref)) {
+                n_fail++;
+          }
+    }
     
 }
 
