@@ -25,4 +25,6 @@ Errors is_input_correct(char *line, double *input_d);
 
 void clearBuffer(const int last_char);
 
+void sortRoots(double *roots);
+
 #endif

@@ -70,6 +70,7 @@ bool is_OnlyDigit_in_line(char *s){
 
 
 //-------------------------------------------------------------
+/// CHECK ON CORRECTION INPUT
 Errors is_input_correct(char *s, double *input_d){
 
       *input_d = 0;
@@ -90,7 +91,7 @@ Errors is_input_correct(char *s, double *input_d){
 
 
 //------------------------------------------------------------------------
-//###CLEARS INPUT BUFFER###
+/// CLEARS INPUT BUFFER
 void clearBuffer(int last_char){
 
       if (last_char == '\n'){
@@ -104,10 +105,10 @@ void clearBuffer(int last_char){
 
 
 //------------------------------------------------------------
-/// RETURNS TRUE IS DOUBLE A = DOUBLE B AND FALSE IF NOT
+/// RETURNS TRUE IF DOUBLE A = DOUBLE B AND FALSE IF NOT
 bool is_Equald (double a, double b){
     
-    if (abs(a-b) < BORDER) {
+    if (abs(a - b) < BORDER) {
         
         return true;
     }
@@ -117,4 +118,17 @@ bool is_Equald (double a, double b){
 
 
 //------------------------------------------------------------------
+/// MAKE ROOTS X1 < X2
+void sortRoots(double *roots){
+    
+    double temp = 0.0;
+    if (*roots > *(roots + 1)){
+        
+        temp = *roots;
+        *roots = *(roots + 1);
+        *(roots + 1) = temp;        
+    }
+}
 
+
+//------------------------------------------------

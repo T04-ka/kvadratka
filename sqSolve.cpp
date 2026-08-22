@@ -20,6 +20,8 @@ Nroots squareSolve(const double *coefs, double *roots){
 
                   *roots = 0;
                   linearSolve(a,b,roots+1);
+                  
+                  sortRoots(roots);
                   return TWO_ROOT;
             }
 
@@ -42,6 +44,7 @@ Nroots squareSolve(const double *coefs, double *roots){
                   *roots = (-b - sqrt(D)) / (2.0 * a); //x1
                   *(roots+1) = (-b + sqrt(D)) / (2.0 * a); //x2
                   
+                  sortRoots(roots);
                   return TWO_ROOT;
             }
       }
