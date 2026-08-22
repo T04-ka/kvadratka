@@ -16,10 +16,17 @@ Nroots squareSolve(const double *coefs, double *roots){
       }
       else { //A!=0 
             
-            if (is_Equald(b, 0.0)){ //Ax^2 + Bx = 0 <=> x(Ax + B) = 0
+            if (is_Equald(c, 0.0)){ //Ax^2 + Bx = 0 <=> x(Ax + B) = 0
 
                   *roots = 0;
-                  linearSolve(a,b,roots+1);
+                  linearSolve(a, b, roots + 1);
+                  
+                  //check x1=x2=0
+                  if (is_Equald(*(roots + 1), 0.0)){
+                        
+                        *(roots + 1) = NAN;
+                        return ONE_ROOT;
+                  }
                   
                   sortRoots(roots);
                   return TWO_ROOT;
@@ -30,7 +37,8 @@ Nroots squareSolve(const double *coefs, double *roots){
             double D = b * b - 4.0 * a * c;
             
             if (is_Equald(D, 0.0)){ //D == 0
-            
+                  
+                  printf("%lg\n",D);
                   *roots = -b / (2.0*a);
                   
                   return ONE_ROOT;
