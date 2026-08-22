@@ -6,7 +6,10 @@ Nroots linearSolve(const double a, const double b, double *x);
 
 //###SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
 Nroots squareSolve(const double *coefs, double *roots){
+
       double a = *coefs, b = *(coefs+1), c = *(coefs+2);
+   //   *roots = *(roots + 1) = NAN; //set roots in default NAN value
+
       if (is_zero(a)){ //A=0
       
             return linearSolve(b,c,roots);
