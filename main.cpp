@@ -17,7 +17,7 @@ int main(){
             
             //starting message
             
-            printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
+            _WHITE printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
             
             //reading input parametrs
             for (i = 0; i < 3; i++){

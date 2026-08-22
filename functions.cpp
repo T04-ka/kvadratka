@@ -68,21 +68,6 @@ bool is_OnlyDigit_in_line(char *s){
                              : false;
 }
 
-//------------------------------------------------------
-//###CHECKING IF DOUBLE = ZERO###
-bool is_zero(double x){
-      
-      if (x > 0){
-            
-            return (x < ZERO_BORDER) ? true
-                                     : false;
-      }
-      else {
-      
-            return (x > -ZERO_BORDER) ? true
-                                      : false;
-      }
-}
 
 //-------------------------------------------------------------
 Errors is_input_correct(char *s, double *input_d){
@@ -92,7 +77,7 @@ Errors is_input_correct(char *s, double *input_d){
 
       *input_d = strtod(ps, &endptr);
 
-      if (*input_d == 0 && ps == endptr) {
+      if (is_Equald(*input_d, 0.0) && ps == endptr) {
 
             return (endptr != NULL && is_OnlySpace_in_line(endptr)) ? EMPTY_INPUT 
                                                                     : INPUT_ERROR;
@@ -119,3 +104,17 @@ void clearBuffer(int last_char){
 
 
 //------------------------------------------------------------
+/// RETURNS TRUE IS DOUBLE A = DOUBLE B AND FALSE IF NOT
+bool is_Equald (double a, double b){
+    
+    if (abs(a-b) < BORDER) {
+        
+        return true;
+    }
+    
+    return false;
+}
+
+
+//------------------------------------------------------------------
+
