@@ -26,56 +26,30 @@ bool readAnswear(int *last_char){
 //------------------------------------------------
 //###READING INPUT PARAM A/B/C###
 bool readParam(const char type_param, double *param){
-      
-      char line[MAXLEN] = {}; //space for input line
-      int len=0; //len is a len of line readed
-      bool err = false; //error flag to help detecting errors
-      
-      
+
+      Errors input_error = EMPTY_INPUT;
       do {  
             _WHITE printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
             
-            len = get_line(line, MAXLEN); //taking line from input stream
-
-            //input = sscanf(line, "%lg", param); //taking param from line
-            
+            char line[MAXLEN] = {}; //space for input line
+            int len = get_line(line, MAXLEN); //taking line from input stream            
             
             //###END OF INPUT CHECK###
             if (len == 0){
                   
-                        printErrors(EMPTY_INPUT);
-                        return true;
-                  
+                  printErrors(EMPTY_INPUT);
+                  return true;
             } 
             
             //ERROR CHECK and taking param from line
-            switch (is_input_correct(line, param)){
-
-                  case INPUT_ERROR: {
-
-                        printErrors(INPUT_ERROR);
-                        err = true;
-                        break;
-                  }
-
-                  case EMPTY_INPUT: {
-
-                        printErrors(EMPTY_INPUT);
-                        err = true;
-                        break;
-                  }
-
-                  case NO_ERROR: {
-
-                        err = false;
-                        break;
-                  }
-
-                  default: {}
-            }
-
-      
-      } while (err); //stoping cicl if no errors
+            input_error = is_input_correct(line, param);
+            
+            if (input_error){
+            
+                  printErrors(input_error);      
+            }      
+                  
+      } while (input_error); //stoping cicl if no errors
       return false;
 }
 
@@ -85,12 +59,12 @@ void printErrors(Errors error){
       switch (error) {
           
           case EMPTY_INPUT: {
-                _RED printf("\nError: empty input.\n");
+                _RED printf("\nError: empty input.\n"); _WHITE
                 break;
           }
           
           case INPUT_ERROR: {
-                _RED printf("\nError: wrong input.\n");
+                _RED printf("\nError: wrong input.\n"); _WHITE
                 break;
           }
           

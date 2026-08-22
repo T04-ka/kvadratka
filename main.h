@@ -8,8 +8,7 @@
 
 
 //################CONSTANTS##############################
-const char types[] = {'A','B','C'};
-const char TEST_FLAG[] = "--test\n";
+const char TEST_FLAG[] = "--test";
 
 
 #endif
