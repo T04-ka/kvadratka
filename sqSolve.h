@@ -4,7 +4,6 @@
 //############INCLUDES#############
 #include "functions.h"
 #include "enums.h"
-#include <math.h>
 
 
 //############INITIALIZATION##########

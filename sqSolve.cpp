@@ -38,7 +38,6 @@ Nroots squareSolve(const double *coefs, double *roots){
             
             if (is_Equald(D, 0.0)){ //D == 0
                   
-                  printf("%lg\n",D);
                   *roots = -b / (2.0*a);
                   
                   return ONE_ROOT;

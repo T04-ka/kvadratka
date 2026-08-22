@@ -108,6 +108,12 @@ void clearBuffer(int last_char){
 /// RETURNS TRUE IF DOUBLE A = DOUBLE B AND FALSE IF NOT
 bool is_Equald (double a, double b){
     
+    //if nan==nan
+    if (isnan(a) && isnan(b)) {
+        
+        return true;
+    }
+    
     if (abs(a - b) < BORDER) {
         
         return true;

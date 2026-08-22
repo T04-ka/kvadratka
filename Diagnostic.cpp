@@ -2,6 +2,7 @@
 
 //##########################################################
 //доделать равенство NAN в проверке на с39
+//cделать флажок
 //реализовать цикл
 //реализовать считывание из файла
 //#########################################################
@@ -12,18 +13,12 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
 
 void RunDiagnostic(void){
     
-    double params[] = {1, 0, -1};
-    
-    Nroots nroots_ref = TWO_ROOT;
-    
-    double x_ref[] = {-1, 1};
+    double params[] = {1, 2, 1};    
+    Nroots nroots_ref = ONE_ROOT;
+    double x_ref[] = {-1, NAN};
     
     bool f = RunTest(1, params, nroots_ref, x_ref);
     
-    if (f){
-        
-        _GREEN printf("Test passed\n");
-    }
 }
 
 
@@ -33,7 +28,7 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
 
         Nroots nroots = squareSolve(params, roots);
         
-   //     printf("\nnroots == nroots_ref %d\nis_Equald(*roots, *roots_ref) %d\nis_Equald(*(roots+1), *(roots_ref+1) %d\n", nroots == nroots_ref, is_Equald(*roots, *roots_ref), is_Equald(*(roots+1), *(roots_ref+1)));
+   //     printf("\nnroots == nroots_ref %d\nis_Equald(*roots, *roots_ref) %d\nis_Equald(*(roots+1), *(roots_ref+1) %d\n",nroots == nroots_ref, is_Equald(*roots, *roots_ref), is_Equald(*(roots+1), *(roots_ref+1)));
         
      //  printf("*roots+1 %lg\n*roots_ref+1 %lg", *(roots+1), *(roots_ref+1));
         
@@ -107,6 +102,7 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
         }
         
         //else: got and referense mach: OK
+        _GREEN printf("Test #%d passed.\n", testN);
         return true;
 
 

@@ -6,7 +6,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
+
 #include "enums.h"
+
 
 //############DEFINES##############
 #define BORDER 0.000001
