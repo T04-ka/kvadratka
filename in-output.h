@@ -5,7 +5,7 @@
 #include "functions.h"
 #include "enums.h"
 #include "colors.h"
-
+  
 
 //############DEFINES##############
 #define MAXLEN 10000
@@ -20,5 +20,8 @@ bool readParam(const char type_of_param, double *param);
 
 bool readAnswear(int *last_char);
 
+int get_line(char *s, int maxlen);
+
+int get_lineF(FILE *file, char *s, int maxlen);
 
 #endif

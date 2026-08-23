@@ -1,28 +1,5 @@
 #include "functions.h"
 
-//###READING LINE###
-int get_line(char *s, int mxlen){
-      
-      int c = 0;
-      int len = 0;
-      
-      while ((c = getchar()) != '\n' && c != EOF && len < mxlen){
-            
-            s[len++] = (char) c;
-      }
-
-      
-      if (c == '\n') {
-      
-            s[len++] = (char) c;
-      }
-      
-      s[len] = '\0';
-      
-      return len;      
-}
-
-//---------------------------------------------------------
 /// CHECKING IF ONLY SPACE IN LINE
 ///
 ///

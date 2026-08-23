@@ -3,10 +3,13 @@
 
 int main(int argc, char **argv){
       
+      FILE *file = fopen("test.txt","r");
+      
       //if flag F_TEST had written, Diagnostic will be started
       if (argc == 2 && !strcmp(argv[1], TEST_FLAG)){
       
-           RunDiagnostic();
+           RunDiagnostic(file);
+           fclose(file);
            return 0;
       }
       
@@ -52,5 +55,6 @@ int main(int argc, char **argv){
             //clearing input buffer (if needed)
             clearBuffer(last_char);
       }
+      
       return 0;   
 }

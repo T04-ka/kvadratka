@@ -22,12 +22,16 @@ const char const * a;
 
 //###############INITIALIZATION#######################
 bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref);
-bool read_args(int testN, double *params, Nroots *nroots, double *x_ref);
+
+bool read_args(FILE *file, int testN, double *params, Nroots *nroots, double *x_ref);
+
 void print_switch(const TypeNroots type, const double *roots, const Nroots nroots);
+
 const char *str_type(const TypeNroots type);
 
+//-------------------------------------------------------------------
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
-void RunDiagnostic(void){
+void RunDiagnostic(FILE *file){
     
     int n_fail = 0;
     int testN = 0;
@@ -36,7 +40,7 @@ void RunDiagnostic(void){
     Nroots nroots_ref = ONE_ROOT;
     double x_ref[2] = {};
     
-    while (read_args(testN++, params, &nroots_ref, x_ref)){
+    while (read_args(file, testN++, params, &nroots_ref, x_ref)){
     
           if (!RunTest(testN, params, nroots_ref, x_ref)) {
                 n_fail++;
@@ -139,7 +143,7 @@ const char *str_type(const TypeNroots type){
 
 //--------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
-bool read_args(const int testN, double *params, Nroots *nroots, double *x_ref){
+bool read_args(FILE *file, const int testN, double *params, Nroots *nroots, double *x_ref){
 
       //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
       
@@ -149,7 +153,7 @@ bool read_args(const int testN, double *params, Nroots *nroots, double *x_ref){
       int int_nroots = 0;
       int nendptr = 0;
       
-      if (get_line(line, MAXLEN) < 1){
+      if (get_lineF(file, line, MAXLEN) < 1){
             
             return false;
       }

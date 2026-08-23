@@ -8,7 +8,7 @@
 #include "enums.h"
 #include "sqSolve.h"
 #include "functions.h"
-
+#include "in-output.h"
 
 
 
@@ -20,7 +20,7 @@
 
 
 //#################INITIALIZATION######################
-void RunDiagnostic(void);
+void RunDiagnostic(FILE *file);
 
 
 #endif

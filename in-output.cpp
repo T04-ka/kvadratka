@@ -104,5 +104,48 @@ void printRes(const double *roots, Nroots nroots){
           default: {}
       }
 }
-//-------------------------------------------------------------------------
 
+
+//---------------------------------------------------------------
+//###READING LINE###
+int get_line(char *s, int mxlen){
+      
+      int c = 0;
+      int len = 0;
+      
+      while ((c = getchar()) != '\n' && c != EOF && len < mxlen){
+            
+            s[len++] = (char) c;
+      }
+
+      
+      if (c == '\n') {
+      
+            s[len++] = (char) c;
+      }
+      
+      s[len] = '\0';
+      
+      return len;      
+}
+
+
+//-------------------------------------------------------------------------
+/// READING LINE FROM FILE
+int get_lineF(FILE *pfile, char *s, int maxlen){
+    
+    int c = 0, len = 0;
+    while ((c = getc(pfile)) != EOF && c != '\n' && len < maxlen){
+        
+        s[len++] = c;
+    }
+    
+    if (c == '\n') {
+        
+        s[len++] = c;
+    }
+    
+    s[len] = '\0';
+    
+    return len;
+}
