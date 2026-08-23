@@ -9,6 +9,7 @@
 #include <math.h>
 
 #include "enums.h"
+#include "structures.h"
 
 
 //############DEFINES##############
@@ -26,6 +27,8 @@ Errors readDouble(char *line, double *input_d);
 
 void clearBuffer(const int last_char);
 
-void sortRoots(double *roots);
+void sortRoots(Roots *roots);
+
+bool isZero_d(double x);
 
 #endif

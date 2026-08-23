@@ -100,16 +100,27 @@ bool isEqual_d (double a, double b){
 
 //------------------------------------------------------------------
 /// MAKE ROOTS X1 < X2
-void sortRoots(double *roots){
+void sortRoots(Roots *roots){
+    
+    double *x1 = &(roots -> x1);
+    double *x2 = &(roots -> x2);
     
     double temp = 0.0;
-    if (*roots > *(roots + 1)){
+    if (*x1 > *x2){
         
-        temp = *roots;
-        *roots = *(roots + 1);
-        *(roots + 1) = temp;        
+        temp = *x1;
+        *x1 = *x2;
+        *x2 = temp;        
     }
 }
 
 
 //------------------------------------------------
+
+bool isZero_d(double x){
+    
+    return isEqual_d(x, 0.0);
+}
+
+
+//----------------------------------------------

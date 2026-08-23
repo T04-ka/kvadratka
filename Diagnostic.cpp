@@ -1,9 +1,5 @@
 #include "Diagnostic.h"
 
-//##########################################################
-//реализовать считывание из файла
-//#########################################################
-
 /*
 char* a = "123";
 
@@ -19,28 +15,27 @@ const char const * a;
 
 */
 
-
 //###############INITIALIZATION#######################
-void startTests(FILE *file);
+void startTestsFromFile(FILE *file);
 
-bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref);
+bool RunTest(const int testN, Coeffs *coeffs, const Nroots nroots_ref, Roots *xref);
 
-bool read_args(FILE *file, int testN, double *params, Nroots *nroots, double *x_ref);
+bool read_args(FILE *file, int testN, Coeffs *coeffs, Nroots *nroots, Roots *xref);
 
-void print_switch(const TypeNroots type, const double *roots, const Nroots nroots);
+void print_switch(const TypeNroots type, Roots roots, const Nroots nroots);
 
 const char *str_type(const TypeNroots type);
 
 
 ///HEAD DIAGNOSTIC FUNCTION
-bool runDiagnostic(int argc, char **argv){
+bool runDiagnostic(int argc, char **argv) {
 
     //if flag F_TEST had written, Diagnostic will be started
     if ((argc == 2 || argc == 3) && !strcmp(argv[1], TEST_FLAG)){
       
         const char *ps = NULL;
         
-        ps = (argc == 2) ? "stdin" : argv[2];
+        ps = (argc == 2) ? "test.txt" : argv[2];
         
         FILE *file = fopen(ps,"r");
         
@@ -50,7 +45,7 @@ bool runDiagnostic(int argc, char **argv){
             return true;
         }
 
-        startTests(file);
+        startTestsFromFile(file);
         
         fclose(file);
         return true;
@@ -69,20 +64,44 @@ bool runDiagnostic(int argc, char **argv){
 }
 
 
+//------------------------------------------------------
+
+void startTestsFromLocal(void){
+
+    INIT_STARTTEST
+    
+    bool cycle_end = false;
+    
+    for (int testN = 0; testN < LOCALDATALEN; testN++) {  
+          
+          
+          COEFFREAD(a);
+          COEFFREAD(b);
+          COEFFREAD(c);
+          
+          NROOTSREAD
+          
+          XREED(x1);
+          XREED(x2);
+                    
+          if (!RunTest(testN, &coeffs, nroots_ref, &xref)) {
+                n_fail++;
+          }
+          
+    }
+}
+
+
 //-------------------------------------------------------------------
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
-void startTests(FILE *file){
+void startTestsFromFile(FILE *file){
     
-    int n_fail = 0;
-    int testN = 0;
+    INIT_STARTTEST
     
-    double params[3] = {};    
-    Nroots nroots_ref = ONE_ROOT;
-    double x_ref[2] = {};
     
-    while (read_args(file, testN++, params, &nroots_ref, x_ref)){
+    while (read_args(file, testN++, &coeffs, &nroots_ref, &xref)){
     
-          if (!RunTest(testN, params, nroots_ref, x_ref)) {
+          if (!RunTest(testN, &coeffs, nroots_ref, &xref)) {
                 n_fail++;
           }
     }
@@ -91,25 +110,25 @@ void startTests(FILE *file){
 
 
 //--------------------------------------------------------------------------------------------------
-/// RUN TEST WITH GIVEN PARAMS AND REFERENCE VALUES
-bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref){
+/// RUN TEST WITH GIVEN coeffs AND REFERENCE VALUES
+bool RunTest(const int testN, Coeffs *coeffs, const Nroots nroots_ref, Roots *xref){
 
-        double roots[] = {NAN, NAN};
+        Roots roots = {.x1 = NAN, .x2 = NAN};
 
-        Nroots nroots = squareSolve(params, roots);
+        Nroots nroots = squareSolve(*coeffs, &roots);
         
         //got and reference dont match
         if (! (
                  nroots == nroots_ref 
-              && isEqual_d(*roots, *roots_ref) 
-              && isEqual_d(*(roots+1), *(roots_ref+1))
+              && isEqual_d(roots.x1, xref -> x1) 
+              && isEqual_d(roots.x2, xref -> x2)
               ) ) {
 
             _RED printf("Test #%d FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
-                             testN,                    *params, *(params+1), *(params+2)); _WHITE
+                             testN,                    coeffs -> a, coeffs -> b, coeffs -> c); _WHITE
                                           
             //print "expected" stroke
-            print_switch(Expected, roots_ref, nroots_ref);
+            print_switch(Expected, *xref, nroots_ref); 
             //print "got" stroke
             print_switch(Got, roots, nroots);
             
@@ -122,18 +141,18 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
 }
 
 
-void print_switch(const TypeNroots type, const double *roots, const Nroots nroots){
+void print_switch(const TypeNroots type, Roots roots, const Nroots nroots){
 
       switch (nroots){
                   
-                case INF_ROOT: {
-                    
+                case INF_ROOT: 
+                {
                     _RED printf("%s " INFROOTS, str_type(type)); _WHITE
                     break;
                 }
                 
-                case ZERO_ROOT: {
-                
+                case ZERO_ROOT: 
+                {
                     _RED printf("%s " NOROOTS, str_type(type)); _WHITE
                     break;
                 }
@@ -142,11 +161,11 @@ void print_switch(const TypeNroots type, const double *roots, const Nroots nroot
                 
                     if (type == Got){
                     
-                          _RED printf("     %s 1 root x = %lg\n", str_type(type), *roots); _WHITE
+                          _RED printf("     %s 1 root x = %lg\n", str_type(type), roots.x1); _WHITE
                     }
                     else{
                           
-                          _RED printf("%s :1 root x = %lg\n", str_type(type), *roots); _WHITE
+                          _RED printf("%s :1 root x = %lg\n", str_type(type), roots.x1); _WHITE
                     }
                     
                     break;
@@ -154,13 +173,12 @@ void print_switch(const TypeNroots type, const double *roots, const Nroots nroot
                 
                 case TWO_ROOT: {
                     
-                    if (type == Got){
-                    
-                          _RED printf("     " GOT "2 roots x1 = %lg x2 = %lg\n", *roots, *(roots + 1)); _WHITE
-                    }
-                    else{
-                          
-                          _RED printf("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", *roots, *(roots + 1)); _WHITE
+                    if (type == Got)
+                    {
+                        _RED printf("     " GOT "2 roots x1 = %lg x2 = %lg\n", roots.x1, roots.x2); _WHITE
+                    } else 
+                    { 
+                          _RED printf("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", roots.x1, roots.x2); _WHITE
                     }
                     
                     break;
@@ -175,15 +193,15 @@ void print_switch(const TypeNroots type, const double *roots, const Nroots nroot
 ///CONVERTS TYPE TO ITS STR MEANING
 const char *str_type(const TypeNroots type){
     
-    static const char *GOT_WORD = "Got";
-    static const char *EXPECTED_WORD = "Expected";
+    const char GOT_WORD[] = "Got";
+    const char EXPECTED_WORD[] = "Expected";
     
     return (type == Got) ? GOT_WORD : EXPECTED_WORD;
 }
 
 //--------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
-bool read_args(FILE *file, const int testN, double *params, Nroots *nroots, double *x_ref){
+bool read_args(FILE *file, const int testN, Coeffs *coeffs, Nroots *nroots, Roots *xref){
 
       //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
       
@@ -198,10 +216,10 @@ bool read_args(FILE *file, const int testN, double *params, Nroots *nroots, doub
             return false;
       }
       
-      sscanf(line, "%lg %lg %lg %d%n", params, params + 1, params + 2, &int_nroots, &nendptr);
+      sscanf(line, "%lg %lg %lg %d%n", &(coeffs -> a), &(coeffs -> b), &(coeffs -> c), &int_nroots, &nendptr);
       
       
-      *x_ref = *(x_ref + 1) = NAN;
+      xref -> x1 = xref -> x2 = NAN;
       
       switch (int_nroots) {
       
@@ -214,14 +232,14 @@ bool read_args(FILE *file, const int testN, double *params, Nroots *nroots, doub
           case 1: {
                 
                 *nroots = ONE_ROOT;
-                sscanf(line + nendptr, " %lg", x_ref);
+                sscanf(line + nendptr, " %lg", &(xref -> x1));
                 break;
           }
           
           case 2: {
                 
                 *nroots = TWO_ROOT;
-                sscanf(line + nendptr, " %lg %lg", x_ref, x_ref+1);
+                sscanf(line + nendptr, " %lg %lg", &(xref -> x1), &(xref -> x2));
                 break;
           }
           
@@ -234,12 +252,10 @@ bool read_args(FILE *file, const int testN, double *params, Nroots *nroots, doub
           default: {}      
       }
       
-      sortRoots(x_ref);
+      sortRoots(xref);
       
       return true;
 }
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
-
-

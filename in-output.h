@@ -5,6 +5,8 @@
 #include "functions.h"
 #include "enums.h"
 #include "colors.h"
+
+#include "structures.h"
   
 
 //############DEFINES##############
@@ -12,13 +14,13 @@
 
 
 //#################INITIALIZATION######################
-void printRes(const double *roots, Nroots nroots);
+void printRes(Roots roots, Nroots nroots);
 
 void printErrors(Errors error);
 
 bool readParam(const char type_of_param, double *param);
 
-bool readAnswear(int *last_char);
+bool readAnswear();
 
 int get_line(char *s, int maxlen);
 

@@ -4,10 +4,11 @@
 //############INCLUDES#############
 #include "functions.h"
 #include "enums.h"
+#include "structures.h"
 
 
 //############INITIALIZATION##########
-Nroots squareSolve(const double *coefs, double *roots);
+Nroots squareSolve(Coeffs coeffs, Roots *roots);
 
 #endif
 

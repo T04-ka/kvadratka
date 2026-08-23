@@ -1,13 +1,14 @@
 #include "in-output.h"
 
 //###READING BODY ANSWER TO CONTINUE SOLVING###
-bool readAnswear(int *last_char){  
+bool readAnswear(void){  
       
       //asking person until get the answer or program ends by him
       int c = getchar();
-
-      *last_char = c; //needed for not clear buffer if c = '\n'. see main
-
+      
+      //clearing input buffer (if needed)
+      clearBuffer(c);
+      
       //anal answear
       switch (c){
             
@@ -76,7 +77,7 @@ void printErrors(Errors error){
 
 //----------------------------------------------------------------------------
 //###PRINTING RESULTS OF SOLVING EQUATION###
-void printRes(const double *roots, Nroots nroots){
+void printRes(Roots roots, Nroots nroots){
     //  assert(roots);
       
       switch (nroots) {
@@ -87,12 +88,12 @@ void printRes(const double *roots, Nroots nroots){
           }
           
           case ONE_ROOT: {
-                _YELLOW printf("\nEquation has 1 root: x = %g.\n", roots[0]);
+                _YELLOW printf("\nEquation has 1 root: x = %g.\n", roots.x1);
                 break;
           }
           
           case TWO_ROOT: {
-                _YELLOW printf("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots[0], roots[1]);
+                _YELLOW printf("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2);
                 break;
           }
           
@@ -104,7 +105,6 @@ void printRes(const double *roots, Nroots nroots){
           default: {}
       }
 }
-
 
 //---------------------------------------------------------------
 //###READING LINE###
@@ -149,3 +149,6 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
     
     return len;
 }
+
+
+//--------------------------------------------------------------------------
