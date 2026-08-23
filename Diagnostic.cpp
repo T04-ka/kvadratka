@@ -1,5 +1,7 @@
 #include "Diagnostic.h"
 
+//сделать считывание из файла в массив и обьединить в функиию считывание труктур из массива
+
 /*
 char* a = "123";
 
@@ -101,7 +103,7 @@ void startTestsFromLocal(void) {
           xref.x1 = localData[testN].x1;          
           xref.x2 = localData[testN].x2;
                     
-          if (!RunTest(testN, &coeffs, nroots_ref, &xref)) {
+          if (!RunTest(testN + 1, &coeffs, nroots_ref, &xref)) {
                 n_fail++;
           }
           
@@ -118,12 +120,13 @@ void startTestsFromFile(FILE *file){
     Coeffs coeffs {.a = 0, .b = 0, .c = 0}; 
     Roots xref {.x1 = 0, .x2 = 0}; 
     xref.x1 = xref.x2 = NAN;
-    int testN = 0;
+    int testN = 1;
+    
     
     
     while (read_args(file, &coeffs, &nroots_ref, &xref)){
     
-          if (!RunTest(testN, &coeffs, nroots_ref, &xref)) {
+          if (!RunTest(testN + 1, &coeffs, nroots_ref, &xref)) {
                 n_fail++;
           }
     }
