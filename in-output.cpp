@@ -42,7 +42,7 @@ bool readParam(const char type_param, double *param){
             } 
             
             //ERROR CHECK and taking param from line
-            input_error = is_input_correct(line, param);
+            input_error = readDouble(line, param);
             
             if (input_error){
             

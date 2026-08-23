@@ -46,7 +46,7 @@ bool is_OnlyDigit_in_line(char *s){
 
 //-------------------------------------------------------------
 /// CHECK ON CORRECTION INPUT
-Errors is_input_correct(char *s, double *input_d){
+Errors readDouble(char *s, double *input_d){
 
       *input_d = 0;
       char *endptr = NULL, *ps = s;

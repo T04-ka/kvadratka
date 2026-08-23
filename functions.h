@@ -22,7 +22,7 @@ bool is_OnlyDigit_in_line(char *s);
 
 bool isEqual_d(double a, double b);
 
-Errors is_input_correct(char *line, double *input_d);
+Errors readDouble(char *line, double *input_d);
 
 void clearBuffer(const int last_char);
 
