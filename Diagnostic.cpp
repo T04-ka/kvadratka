@@ -1,14 +1,30 @@
 #include "Diagnostic.h"
 
 //##########################################################
-//реализовать цикл
 //реализовать считывание из файла
 //#########################################################
+
+/*
+char* a = "123";
+
+const char* a = "123";
+// char const* a; same
+a = "234567";
+a = "345678901234"; // a can be changed
+
+
+
+char * const a;
+const char const * a;
+
+*/
+
 
 //###############INITIALIZATION#######################
 bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref);
 bool read_args(int testN, double *params, Nroots *nroots, double *x_ref);
-
+void print_switch(const TypeNroots type, const double *roots, const Nroots nroots);
+const char *str_type(const TypeNroots type);
 
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
 void RunDiagnostic(void){
@@ -16,9 +32,9 @@ void RunDiagnostic(void){
     int n_fail = 0;
     int testN = 0;
     
-    double params[] = {1, 2, 1};    
+    double params[3] = {};    
     Nroots nroots_ref = ONE_ROOT;
-    double x_ref[] = {-1, NAN};
+    double x_ref[2] = {};
     
     while (read_args(testN++, params, &nroots_ref, x_ref)){
     
@@ -49,64 +65,9 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
                              testN,                    *params, *(params+1), *(params+2)); _WHITE
                                           
             //print "expected" stroke
-            switch (nroots_ref){
-                  
-                case INF_ROOT: {
-                    
-                    _RED printf("Expected: infinity roots\n"); _WHITE
-                    break;
-                }
-                
-                case ZERO_ROOT: {
-                
-                    _RED printf("Expected: no roots\n"); _WHITE
-                    break;
-                }
-                
-                case ONE_ROOT: {
-                    
-                    _RED printf("Expected: 1 root x = %lg\n", *roots_ref); _WHITE
-                    break;
-                }
-                
-                case TWO_ROOT: {
-                    
-                    _RED printf("Expected: 2 roots x1 = %lg x2 = %lg\n", *roots_ref, *(roots_ref + 1)); _WHITE
-                    break;
-                }
-                
-                default : {}            
-            }
-            
+            print_switch(Expected, roots_ref, nroots_ref);
             //print "got" stroke
-            switch (nroots_ref){
-                  
-                case INF_ROOT: {
-                    
-                    _RED printf("Got: infinity roots\n"); _WHITE
-                    break;
-                }
-                
-                case ZERO_ROOT: {
-                
-                    _RED printf("Got: no roots\n"); _WHITE
-                    break;
-                }
-                
-                case ONE_ROOT: {
-                    
-                    _RED printf("     Got: 1 root x = %lg\n", *roots); _WHITE
-                    break;
-                }
-                
-                case TWO_ROOT: {
-                    
-                    _RED printf("     Got: 2 roots x1 = %lg x2 = %lg\n", *roots, *(roots + 1)); _WHITE
-                    break;
-                }
-                
-                default : {}            
-            }
+            print_switch(Got, roots, nroots);
             
             return false;
         }
@@ -117,11 +78,70 @@ bool RunTest(const int testN, const double *params, const Nroots nroots_ref, con
 }
 
 
+void print_switch(const TypeNroots type, const double *roots, const Nroots nroots){
+
+      switch (nroots){
+                  
+                case INF_ROOT: {
+                    
+                    _RED printf("%s " INFROOTS, str_type(type)); _WHITE
+                    break;
+                }
+                
+                case ZERO_ROOT: {
+                
+                    _RED printf("%s " NOROOTS, str_type(type)); _WHITE
+                    break;
+                }
+                
+                case ONE_ROOT: {
+                
+                    if (type == Got){
+                    
+                          _RED printf("     %s 1 root x = %lg\n", str_type(type), *roots); _WHITE
+                    }
+                    else{
+                          
+                          _RED printf("%s :1 root x = %lg\n", str_type(type), *roots); _WHITE
+                    }
+                    
+                    break;
+                }
+                
+                case TWO_ROOT: {
+                    
+                    if (type == Got){
+                    
+                          _RED printf("     " GOT "2 roots x1 = %lg x2 = %lg\n", *roots, *(roots + 1)); _WHITE
+                    }
+                    else{
+                          
+                          _RED printf("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", *roots, *(roots + 1)); _WHITE
+                    }
+                    
+                    break;
+                }
+                
+                default : {}            
+            }
+}
+
+
+//---------------------------------------------------------
+///CONVERTS TYPE TO ITS STR MEANING
+const char *str_type(const TypeNroots type){
+    
+    static const char *GOT_WORD = "Got";
+    static const char *EXPECTED_WORD = "Expected";
+    
+    return (type == Got) ? GOT_WORD : EXPECTED_WORD;
+}
+
 //--------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
 bool read_args(const int testN, double *params, Nroots *nroots, double *x_ref){
 
-      //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2 
+      //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
       
       //input_line - stroke of input we work with
       char line[MAXLEN] = {};
@@ -158,6 +178,13 @@ bool read_args(const int testN, double *params, Nroots *nroots, double *x_ref){
                 
                 *nroots = TWO_ROOT;
                 sscanf(line + nendptr, " %lg %lg", x_ref, x_ref+1);
+                break;
+          }
+          
+          case -1: {
+                
+                *nroots = INF_ROOT;
+                break;
           }
           
           default: {}      

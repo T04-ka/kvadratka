@@ -13,6 +13,10 @@
 
 
 #define MAXLEN 10000
+#define EXPECTED "Expected: "
+#define GOT "Got: "
+#define INFROOTS "infinity roots\n"
+#define NOROOTS "no roots\n"
 
 
 //#################INITIALIZATION######################

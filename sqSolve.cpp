@@ -25,7 +25,7 @@ if (!3) 2 return
 
 */
 
-//###SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
+///##SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
 Nroots squareSolve(const double *coefs, double *roots){
 
       double a = *coefs, 
@@ -46,7 +46,9 @@ Nroots squareSolve(const double *coefs, double *roots){
       return normalSquare(a, b, c, roots);
 }
 
-//###GIVE SOLUTION FOR EQUATION AX+B=0###
+
+//--------------------------------------------------------------
+///GIVE SOLUTION FOR EQUATION AX+B=0###
 Nroots linearSolve(const double a, const double b, double *x){
 
       if (isEqual_d(a, 0.0)){ //a=0
@@ -60,6 +62,9 @@ Nroots linearSolve(const double a, const double b, double *x){
       }
 }
 
+
+//----------------------------------------------------------------
+///Solving part of square equation with C=0 
 Nroots squareZeroC(const double a, const double b, double *roots){
       
       *roots = 0;
@@ -76,6 +81,9 @@ Nroots squareZeroC(const double a, const double b, double *roots){
       return TWO_ROOT;
 }
 
+
+//-------------------------------------------------------------------------------------
+///SOLVING NORMAL SQUARE, WHERE DISCRIMINANT NEDEED
 Nroots normalSquare(const double a, const double b, const double c, double *roots){
       
         //now its normal square equation

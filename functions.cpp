@@ -8,10 +8,8 @@ int get_line(char *s, int mxlen){
       
       while ((c = getchar()) != '\n' && c != EOF && len < mxlen){
             
-            s[len++] = (char) c;      
+            s[len++] = (char) c;
       }
-
-      
 
       
       if (c == '\n') {

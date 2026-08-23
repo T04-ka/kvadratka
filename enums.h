@@ -15,4 +15,9 @@ enum Errors {
   NO_ERROR = 0
 };
 
+enum TypeNroots {
+  Got = 0,
+  Expected = 1
+};
+
 #endif

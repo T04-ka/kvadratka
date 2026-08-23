@@ -30,7 +30,7 @@ bool readParam(const char type_param, double *param){
       Errors input_error = EMPTY_INPUT;
       do {  
             _WHITE printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
-            
+              
             char line[MAXLEN] = {}; //space for input line
             int len = get_line(line, MAXLEN); //taking line from input stream            
             
@@ -70,7 +70,7 @@ void printErrors(Errors error){
           
          case NO_ERROR: {break;}
 
-          default: {}
+         default: {}
       }
 }
 
