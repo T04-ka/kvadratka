@@ -30,29 +30,41 @@ struct LocalData {
 #define INFROOTS "infinity roots\n"
 #define NOROOTS "no roots\n"
 #define LOCALDATALEN 3
+#define DEFAULTFILE "test.txt"
 
 
-//##############MACROSES##############################
+//##############MACROSES##############################       
 
-#define INIT_STARTTEST int n_fail = 0; \
-                       Nroots nroots_ref = ONE_ROOT; \
-                       Coeffs coeffs {.a = 0, .b = 0, .c = 0}; \
-                       Roots xref {.x1 = 0, .x2 = 0}; \
-                       xref.x1 = xref.x2 = NAN; \
-                       int testN = 0;
+#define FILEOPEN(A) FILE *file = fopen(A,"r"); \
+                    if (file == NULL) {  \
+                        _RED printf("No such file \"%s\".\n", A); _WHITE \
+                        return true; \
+                    }
+                    
+#define TESTFLAGCHECK if (strcmp(argv[1], STARTTEST_FLAG)) \
+                         { \
+                             _RED printf("Unknown option: %s\n", argv[1]); _WHITE \
+                             printf("Usage: [-test]\n"); \
+                             return true; \
+                         }
+                         
+#define FILEFLAGCHECK if (strcmp(argv[2], READFROMFILE_FLAG)) \
+                      { \
+                          _RED printf("Unknown option: %s\n", argv[2]); _WHITE \
+                          printf("Usage: [-f | -f filename.txt]\n"); \
+                          return true; \
+                      }
                       
-#define COEFFREAD(A) coeffs.A = localData[testN].A;
+#define ELSEPRINT _RED printf("Unknown option.\n"); _WHITE \
+                  printf("Usage: [-test] [-f | -f filename.txt]\n"); 
 
-#define NROOTSREAD nroots_ref = localData[testN].nroots;
-
-#define XREED(A) xref.A = localData[testN].A;
 
 //#################INITIALIZATION######################
-bool runDiagnostic(int argc, char **argv);
-
+bool flagSwitch(int argc, char **argv);
 
 //################CONSTANTS##############################
-const char TEST_FLAG[] = "--test";
+const char* const STARTTEST_FLAG = "-test";
+const char* const READFROMFILE_FLAG = "-f";
 
 const LocalData localData[] = {
                     {0, 0, 0, INF_ROOT},

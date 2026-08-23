@@ -18,9 +18,11 @@ const char const * a;
 //###############INITIALIZATION#######################
 void startTestsFromFile(FILE *file);
 
+void startTestsFromLocal(void);
+
 bool RunTest(const int testN, Coeffs *coeffs, const Nroots nroots_ref, Roots *xref);
 
-bool read_args(FILE *file, int testN, Coeffs *coeffs, Nroots *nroots, Roots *xref);
+bool read_args(FILE *file, Coeffs *coeffs, Nroots *nroots, Roots *xref);
 
 void print_switch(const TypeNroots type, Roots roots, const Nroots nroots);
 
@@ -28,61 +30,76 @@ const char *str_type(const TypeNroots type);
 
 
 ///HEAD DIAGNOSTIC FUNCTION
-bool runDiagnostic(int argc, char **argv) {
-
-    //if flag F_TEST had written, Diagnostic will be started
-    if ((argc == 2 || argc == 3) && !strcmp(argv[1], TEST_FLAG)){
-      
-        const char *ps = NULL;
-        
-        ps = (argc == 2) ? "test.txt" : argv[2];
-        
-        FILE *file = fopen(ps,"r");
-        
-        if (file == NULL) {
-            
-            _RED printf("No such file \"%s\".\n", ps); _WHITE
-            return true;
-        }
-
-        startTestsFromFile(file);
-        
-        fclose(file);
-        return true;
-    } 
+bool flagSwitch(int argc, char **argv){
     
-    //entered wrong flags
-    if (argc != 1) {
+    switch (argc){
+        case 1: 
+        {
+            return false;
+        }
         
-        _RED printf("Unknown option: %s\n", argv[1]); _WHITE
-        printf("Usage: --test file.txt | --test\n");
-        return true;
+        case 2:
+        {
+            TESTFLAGCHECK
+            
+            startTestsFromLocal();
+            break;
+        }
+        
+        case 3:
+        {
+            TESTFLAGCHECK
+            
+            FILEFLAGCHECK
+            
+            FILEOPEN(DEFAULTFILE)
+            
+            startTestsFromFile(file);
+            break;
+        }
+        
+        case 4:
+        {
+            TESTFLAGCHECK
+            
+            FILEFLAGCHECK
+            
+            FILEOPEN(argv[3])
+            
+            startTestsFromFile(file);
+            break;
+        }
+        
+        default: 
+        {
+            ELSEPRINT
+        }
     }
     
-    return false;
-    
+    return true;
 }
 
 
 //------------------------------------------------------
 
-void startTestsFromLocal(void){
+void startTestsFromLocal(void) {
 
-    INIT_STARTTEST
+    int n_fail = 0; 
+    Nroots nroots_ref = ONE_ROOT; 
+    Coeffs coeffs {.a = 0, .b = 0, .c = 0}; 
+    Roots xref {.x1 = 0, .x2 = 0}; 
+    xref.x1 = xref.x2 = NAN; 
     
-    bool cycle_end = false;
-    
-    for (int testN = 0; testN < LOCALDATALEN; testN++) {  
+    for (int testN = 0; testN < LOCALDATALEN; testN++) {                   
+                         
+          coeffs.a = localData[testN].a;
+          coeffs.b = localData[testN].b;
+          coeffs.c = localData[testN].c;
           
+          nroots_ref = localData[testN].nroots;
           
-          COEFFREAD(a);
-          COEFFREAD(b);
-          COEFFREAD(c);
-          
-          NROOTSREAD
-          
-          XREED(x1);
-          XREED(x2);
+          xref.x1 = localData[testN].x1;          
+          xref.x2 = localData[testN].x2;
                     
           if (!RunTest(testN, &coeffs, nroots_ref, &xref)) {
                 n_fail++;
@@ -96,10 +113,15 @@ void startTestsFromLocal(void){
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
 void startTestsFromFile(FILE *file){
     
-    INIT_STARTTEST
+    int n_fail = 0;
+    Nroots nroots_ref = ONE_ROOT;  
+    Coeffs coeffs {.a = 0, .b = 0, .c = 0}; 
+    Roots xref {.x1 = 0, .x2 = 0}; 
+    xref.x1 = xref.x2 = NAN;
+    int testN = 0;
     
     
-    while (read_args(file, testN++, &coeffs, &nroots_ref, &xref)){
+    while (read_args(file, &coeffs, &nroots_ref, &xref)){
     
           if (!RunTest(testN, &coeffs, nroots_ref, &xref)) {
                 n_fail++;
@@ -193,15 +215,15 @@ void print_switch(const TypeNroots type, Roots roots, const Nroots nroots){
 ///CONVERTS TYPE TO ITS STR MEANING
 const char *str_type(const TypeNroots type){
     
-    const char GOT_WORD[] = "Got";
-    const char EXPECTED_WORD[] = "Expected";
+    const char *GOT_WORD = "Got";
+    const char *EXPECTED_WORD = "Expected";
     
     return (type == Got) ? GOT_WORD : EXPECTED_WORD;
 }
 
 //--------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
-bool read_args(FILE *file, const int testN, Coeffs *coeffs, Nroots *nroots, Roots *xref){
+bool read_args(FILE *file, Coeffs *coeffs, Nroots *nroots, Roots *xref){
 
       //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
       

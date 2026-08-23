@@ -94,22 +94,22 @@ Nroots normalSquare(const double a, const double b, const double c, Roots *roots
       
         //now its normal square equation
         //finding descrimiinant
-        double D = b * b - 4.0 * a * c;
+        double discr = b * b - 4.0 * a * c;
         
-        if (isZero_d(D)){ //D == 0
+        if (isZero_d(discr)){ //D == 0
               
               roots -> x1 = -b / (2.0 * a);
               
               return ONE_ROOT;
         }
-        else if (D < 0) { //D < 0
+        else if (discr < 0) { //D < 0
               
               return ZERO_ROOT;
         }
         else { //D > 0
-        
-              roots -> x1 = (-b - sqrt(D)) / (2.0 * a); 
-              roots -> x2 = (-b + sqrt(D)) / (2.0 * a);
+              double sqrt_D = sqrt(discr);
+              roots -> x1 = (-b - sqrt_D) / (2.0 * a); 
+              roots -> x2 = (-b + sqrt_D) / (2.0 * a);
               
               sortRoots(roots);
               

@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv){
       
-      if (runDiagnostic(argc, argv)) {
+      if (flagSwitch(argc, argv)) {
             
             return 0;
       }
