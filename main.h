@@ -7,8 +7,4 @@
 #include "Diagnostic.h"
 
 
-//################CONSTANTS##############################
-const char TEST_FLAG[] = "--test";
-
-
 #endif

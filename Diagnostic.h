@@ -13,6 +13,7 @@
 
 
 #define MAXLEN 10000
+#define MAXFLEN 100
 #define EXPECTED "Expected: "
 #define GOT "Got: "
 #define INFROOTS "infinity roots\n"
@@ -20,7 +21,11 @@
 
 
 //#################INITIALIZATION######################
-void RunDiagnostic(FILE *file);
+bool runDiagnostic(int argc, char **argv);
+
+
+//################CONSTANTS##############################
+const char TEST_FLAG[] = "--test";
 
 
 #endif

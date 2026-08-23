@@ -3,14 +3,9 @@
 
 int main(int argc, char **argv){
       
-      FILE *file = fopen("test.txt","r");
-      
-      //if flag F_TEST had written, Diagnostic will be started
-      if (argc == 2 && !strcmp(argv[1], TEST_FLAG)){
-      
-           RunDiagnostic(file);
-           fclose(file);
-           return 0;
+      if (runDiagnostic(argc, argv)) {
+            
+            return 0;
       }
       
       //initialization

@@ -21,6 +21,8 @@ const char const * a;
 
 
 //###############INITIALIZATION#######################
+void startTests(FILE *file);
+
 bool RunTest(const int testN, const double *params, const Nroots nroots_ref, const double *roots_ref);
 
 bool read_args(FILE *file, int testN, double *params, Nroots *nroots, double *x_ref);
@@ -29,9 +31,47 @@ void print_switch(const TypeNroots type, const double *roots, const Nroots nroot
 
 const char *str_type(const TypeNroots type);
 
+
+///HEAD DIAGNOSTIC FUNCTION
+bool runDiagnostic(int argc, char **argv){
+
+    //if flag F_TEST had written, Diagnostic will be started
+    if ((argc == 2 || argc == 3) && !strcmp(argv[1], TEST_FLAG)){
+      
+        const char *ps = NULL;
+        
+        ps = (argc == 2) ? "stdin" : argv[2];
+        
+        FILE *file = fopen(ps,"r");
+        
+        if (file == NULL) {
+            
+            _RED printf("No such file \"%s\".\n", ps); _WHITE
+            return true;
+        }
+
+        startTests(file);
+        
+        fclose(file);
+        return true;
+    } 
+    
+    //entered wrong flags
+    if (argc != 1) {
+        
+        _RED printf("Unknown option: %s\n", argv[1]); _WHITE
+        printf("Usage: --test file.txt | --test\n");
+        return true;
+    }
+    
+    return false;
+    
+}
+
+
 //-------------------------------------------------------------------
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
-void RunDiagnostic(FILE *file){
+void startTests(FILE *file){
     
     int n_fail = 0;
     int testN = 0;
