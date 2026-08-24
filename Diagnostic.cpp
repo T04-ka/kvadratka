@@ -24,7 +24,7 @@ void startTestsFromLocal(void);
 
 bool RunTest(const int testN, Data refData);
 
-bool read_args(FILE *file, Data *refData);
+size_t readArgsF(FILE *file, Data** dataptr);
 
 void print_switch(const TypeNroots type, Data data);
 
@@ -86,12 +86,10 @@ bool flagSwitch(int argc, char **argv){
 
 void startTestsFromLocal(void) {
 
-    Data refData = {};
-
     int n_fail = 0; 
     
     for (int testN = 0; testN < LOCALDATALEN; testN++) {                   
-          refData = localData[testN];
+          Data refData = localData[testN];
           if (!RunTest(testN + 1, refData)) {
                 n_fail++;
           }
@@ -106,17 +104,20 @@ void startTestsFromFile(FILE *file){
     
     int n_fail = 0;
     
-    Data refData = {};
-    int testN = 1;
+    Data *fileData = NULL;
+    
+    size_t fileDataLen = readArgsF(file, &fileData);
     
     
-    while (read_args(file, &refData)){
-    
-          if (!RunTest(testN++, refData)) {
+    for (size_t testN = 0; testN < fileDataLen; testN++) {                   
+          Data refData = fileData[testN];
+          if (!RunTest(testN + 1, refData)) {
                 n_fail++;
           }
+          
     }
     
+    free(fileData);
 }
 
 /*
@@ -217,62 +218,71 @@ const char *str_type(const TypeNroots type){
     return (type == Got) ? GOT_WORD : EXPECTED_WORD;
 }
 
+
 //--------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
-bool read_args(FILE *file, Data *refData){
+size_t readArgsF(FILE *file, Data** dataArr){
 
-      //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
-      
-      //input_line - stroke of input we work with
+//input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
       char line[MAXLEN] = {};
+      
+      size_t testsN = 0;
+      for (; get_lineF(file, line, MAXLEN) > 1; testsN++){
+      
+          
+          *dataArr = (Data*) realloc(*dataArr, sizeofDataStruct * (testsN + 1)); // very dolgo 
+          
+          Data* datatoRead = *dataArr + testsN;
 
-      int int_nroots = 0;
-      int nendptr = 0;
-      
-      if (get_lineF(file, line, MAXLEN) < 1){
-            
-            return false;
+          int int_nroots = 0;
+          int nend = 0;
+          
+          sscanf(line, "%lg %lg %lg %d%n", &(datatoRead -> a), &(datatoRead -> b), &(datatoRead -> c), &int_nroots, &nend);
+          
+        //  printf("%lg %lg %lg \n--------------------\n", datatoRead.a, datatoRead.b, datatoRead.c);
+          datatoRead -> x1 = datatoRead -> x2 = NAN;
+          
+          
+          switch (int_nroots) {
+          
+              case 0: {
+                    
+                    datatoRead -> nroots = ZERO_ROOT;
+                    break;
+              }
+              
+              case 1: {
+                    
+                    datatoRead -> nroots = ONE_ROOT;
+                    sscanf(line + nend, " %lg", &(datatoRead -> x1));
+                    break;
+              }
+              
+              case 2: {
+                    
+                    datatoRead -> nroots = TWO_ROOT;
+                    sscanf(line + nend, " %lg %lg", &(datatoRead -> x1), &(datatoRead -> x2));
+                    break;
+              }
+              
+              case -1: {
+                    
+                    datatoRead -> nroots = INF_ROOT;
+                    break;
+              }
+              
+              default: {}      
+          }
+          
+   //       printf("%lg %lg %lg \n--------------------\n", datatoRead.a, datatoRead.b, datatoRead.c);
+          
+          sortRoots(datatoRead);
       }
-      
-      sscanf(line, "%lg %lg %lg %d%n", &(refData -> a), &(refData -> b), &(refData -> c), &int_nroots, &nendptr);
-      
-      
-      refData -> x1 = refData -> x2 = NAN;
-      
-      switch (int_nroots) {
-      
-          case 0: {
-                
-                refData -> nroots = ZERO_ROOT;
-                break;
-          }
+    for (int i = 0; i < testsN; i++){
           
-          case 1: {
-                
-                refData -> nroots = ONE_ROOT;
-                sscanf(line + nendptr, " %lg", &(refData -> x1));
-                break;
-          }
-          
-          case 2: {
-                
-                refData -> nroots = TWO_ROOT;
-                sscanf(line + nendptr, " %lg %lg", &(refData -> x1), &(refData -> x2));
-                break;
-          }
-          
-          case -1: {
-                
-                refData -> nroots = INF_ROOT;
-                break;
-          }
-          
-          default: {}      
-      }
-      
-      sortRoots(refData);
-      
-      return true;
+          printf("%lg %lg %lg \n", (*dataArr)[i].a, (*dataArr)[i].b, (*dataArr)[i].c);
+    }
+      return testsN;
 }
 
 

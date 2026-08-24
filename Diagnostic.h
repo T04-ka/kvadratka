@@ -24,7 +24,6 @@
 #define LOCALDATALEN 3
 #define DEFAULTFILE "test.txt"
 
-
 //##############MACROSES##############################       
 
 #define FILEOPEN(A) FILE *file = fopen(A,"r");                                    \
@@ -64,4 +63,6 @@ const Data localData[] = {
                     {1, 0, -1, TWO_ROOT, -1, 1}
                     };
 
+
+const unsigned int sizeofDataStruct = sizeof(Data);
 #endif
