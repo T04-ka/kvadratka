@@ -81,7 +81,17 @@ bool flagSwitch(int argc, char **argv){
     return true;
 }
 
+/*
+struct polynom = {
+                  double data[3];
+                  int highDegree;                  
+                  };
+                  
+enum { COEFF_ A = 0 };
 
+
+poly.data [COEFF_A] = 8;
+*/
 //-------------------------------------------------------------------
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
 void startTestsFromFile(FILE *file){
@@ -207,10 +217,13 @@ size_t readArgsF(FILE *file, Data** dataArr){
       char line[MAXLEN] = {};
       
       size_t testsN = 0;
+      size_t ReallocBorder = 0;
       for (; get_lineF(file, line, MAXLEN) > 1; testsN++){
-      
           
-          *dataArr = (Data*) realloc(*dataArr, sizeofDataStruct * (testsN + 1)); // very dolgo 
+          if (testsN == ReallocBorder) {
+          
+               *dataArr = (Data*) realloc(*dataArr, sizeofDataStruct * (ReallocBorder = 2 * testsN + 1));
+          }// very dolgo 
           
           Data* datatoRead = *dataArr + testsN;
 
@@ -262,6 +275,8 @@ size_t readArgsF(FILE *file, Data** dataArr){
           
           printf("%lg %lg %lg \n", (*dataArr)[i].a, (*dataArr)[i].b, (*dataArr)[i].c);
     }*/
+   //   free(*dataArr + testsN + 1);
+      
       return testsN;
 }
 
