@@ -20,9 +20,9 @@ const char const * a;
 //###############INITIALIZATION#######################
 void startTestsFromFile(FILE *file);
 
-void startTestsFromLocal(void);
+void runTests(const Data *refData, size_t len);
 
-bool RunTest(const int testN, Data refData);
+bool runOneTest(const size_t testN, Data refData);
 
 size_t readArgsF(FILE *file, Data** dataptr);
 
@@ -44,7 +44,7 @@ bool flagSwitch(int argc, char **argv){
         {
             TESTFLAGCHECK
             
-            startTestsFromLocal();
+            runTests(localData, LOCALDATALEN);
             break;
         }
         
@@ -82,55 +82,35 @@ bool flagSwitch(int argc, char **argv){
 }
 
 
-//------------------------------------------------------
-
-void startTestsFromLocal(void) {
-
-    int n_fail = 0; 
-    
-    for (int testN = 0; testN < LOCALDATALEN; testN++) {                   
-          Data refData = localData[testN];
-          if (!RunTest(testN + 1, refData)) {
-                n_fail++;
-          }
-          
-    }
-}
-
-
 //-------------------------------------------------------------------
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
 void startTestsFromFile(FILE *file){
-    
-    int n_fail = 0;
     
     Data *fileData = NULL;
     
     size_t fileDataLen = readArgsF(file, &fileData);
     
-    
-    for (size_t testN = 0; testN < fileDataLen; testN++) {                   
-          Data refData = fileData[testN];
-          if (!RunTest(testN + 1, refData)) {
-                n_fail++;
-          }
-          
-    }
+    runTests(fileData, fileDataLen);
     
     free(fileData);
 }
 
-/*
-void readFileData(FILE file){
-    
 
+void runTests(const Data *refData, size_t len){
+      
+      int n_fail = 0;
+      for (size_t testN = 0; testN < len; testN++) {     
+      
+          if (!runOneTest(testN + 1, refData[testN])) {
+                n_fail++;
+          }
+      }
 }
-*/
 
 
 //--------------------------------------------------------------------------------------------------
 /// RUN TEST WITH GIVEN coeffs AND REFERENCE VALUES
-bool RunTest(const int testN, Data refData){
+bool runOneTest(const size_t testN, Data refData){
 
         Data solveData = {};
 
@@ -143,7 +123,7 @@ bool RunTest(const int testN, Data refData){
               && isEqual_d(solveData.x2, refData.x2)
               ) ) {
 
-            _RED printf("Test #%d FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
+            _RED printf("Test #%lu FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
                              testN,                    refData.a, refData.b, refData.c); _WHITE
                                           
             //print "expected" stroke
@@ -155,7 +135,7 @@ bool RunTest(const int testN, Data refData){
         }
         
         //else: got and referense mach: OK
-        _GREEN printf("Test #%d passed.\n", testN); _WHITE
+        _GREEN printf("Test #%lu passed.\n", testN); _WHITE
         return true;
 }
 
@@ -277,11 +257,11 @@ size_t readArgsF(FILE *file, Data** dataArr){
    //       printf("%lg %lg %lg \n--------------------\n", datatoRead.a, datatoRead.b, datatoRead.c);
           
           sortRoots(datatoRead);
-      }
-    for (int i = 0; i < testsN; i++){
+      }/*
+    for (size_t i = 0; i < testsN; i++){
           
           printf("%lg %lg %lg \n", (*dataArr)[i].a, (*dataArr)[i].b, (*dataArr)[i].c);
-    }
+    }*/
       return testsN;
 }
 
