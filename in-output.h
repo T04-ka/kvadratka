@@ -14,7 +14,7 @@
 
 
 //#################INITIALIZATION######################
-void printRes(Roots roots, Nroots nroots);
+void printRes(Data roots);
 
 void printErrors(Errors error);
 

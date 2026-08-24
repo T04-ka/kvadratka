@@ -3,8 +3,8 @@
 
 //######INCIDE FUNCTIONS INITILIZATION######
 Nroots linearSolve(const double a, const double b, double *x);
-Nroots squareZeroC(const double a, const double b, Roots *roots);
-Nroots normalSquare(const double a, const double b, const double c, Roots *roots);
+Nroots squareZeroC(const double a, const double b, Data *solveData);
+Nroots normalSquare(const double a, const double b, const double c, Data *solveData);
 
 /*
 
@@ -27,24 +27,23 @@ if (!3) 2 return
 */
 
 ///##SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
-Nroots squareSolve(Coeffs coeffs, Roots *roots) {
+Nroots squareSolve(Data params, Data *solveData) {
 
-      double a = coeffs.a, 
-             b = coeffs.b,
-             c = coeffs.c;
-      roots -> x1 = roots -> x2 = NAN; //set roots in default NAN value
+      double a = params.a, 
+             b = params.b,
+             c = params.c;
 
       if (isZero_d(a)){ //A=0
       
-            return linearSolve(b, c, &(roots -> x1));
+            return linearSolve(b, c, &(solveData -> x1));
       }
       //A!=0 
       if (isZero_d(c)){ //Ax^2 + Bx = 0 <=> x(Ax + B) = 0
 
-             return squareZeroC(a, b, roots);
+             return squareZeroC(a, b, solveData);
       }
 
-      return normalSquare(a, b, c, roots);
+      return normalSquare(a, b, c, solveData);
 }
 
 
@@ -66,23 +65,23 @@ Nroots linearSolve(const double a, const double b, double *x){
 
 //----------------------------------------------------------------
 ///Solving part of square equation with C=0 
-Nroots squareZeroC(const double a, const double b, Roots *roots){
+Nroots squareZeroC(const double a, const double b, Data *solveData){
       
          //   putchar('\n');
-      roots -> x1 = 0;
-      linearSolve(a, b, &(roots -> x2));
+      solveData -> x1 = 0;
+      linearSolve(a, b, &(solveData -> x2));
       
       //check x1=x2=0
       
      // printf("\nx1 %lg\nx2 %lg\n", roots -> x1, roots -> x2);
       
-      if (isEqual_d(roots -> x2, 0.0)) {
+      if (isEqual_d(solveData -> x2, 0.0)) {
             
-            roots -> x2 = NAN;
+            solveData -> x2 = NAN;
             return ONE_ROOT;
       }
       
-      sortRoots(roots); 
+      sortRoots(solveData); 
       
       return TWO_ROOT;
 }
@@ -90,7 +89,7 @@ Nroots squareZeroC(const double a, const double b, Roots *roots){
 
 //-------------------------------------------------------------------------------------
 ///SOLVING NORMAL SQUARE, WHERE DISCRIMINANT NEDEED
-Nroots normalSquare(const double a, const double b, const double c, Roots *roots){
+Nroots normalSquare(const double a, const double b, const double c, Data *solveData){
       
         //now its normal square equation
         //finding descrimiinant
@@ -98,7 +97,7 @@ Nroots normalSquare(const double a, const double b, const double c, Roots *roots
         
         if (isZero_d(discr)){ //D == 0
               
-              roots -> x1 = -b / (2.0 * a);
+              solveData -> x1 = -b / (2.0 * a);
               
               return ONE_ROOT;
         }
@@ -108,10 +107,10 @@ Nroots normalSquare(const double a, const double b, const double c, Roots *roots
         }
         else { //D > 0
               double sqrt_D = sqrt(discr);
-              roots -> x1 = (-b - sqrt_D) / (2.0 * a); 
-              roots -> x2 = (-b + sqrt_D) / (2.0 * a);
+              solveData -> x1 = (-b - sqrt_D) / (2.0 * a); 
+              solveData -> x2 = (-b + sqrt_D) / (2.0 * a);
               
-              sortRoots(roots);
+              sortRoots(solveData);
               
               return TWO_ROOT;
         }

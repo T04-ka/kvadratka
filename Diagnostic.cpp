@@ -1,7 +1,7 @@
 #include "Diagnostic.h"
 
 //сделать считывание из файла в массив и обьединить в функиию считывание труктур из массива
-
+//Сделать норм дефолт тесты
 /*
 char* a = "123";
 
@@ -22,11 +22,11 @@ void startTestsFromFile(FILE *file);
 
 void startTestsFromLocal(void);
 
-bool RunTest(const int testN, Coeffs *coeffs, const Nroots nroots_ref, Roots *xref);
+bool RunTest(const int testN, Data refData);
 
-bool read_args(FILE *file, Coeffs *coeffs, Nroots *nroots, Roots *xref);
+bool read_args(FILE *file, Data *refData);
 
-void print_switch(const TypeNroots type, Roots roots, const Nroots nroots);
+void print_switch(const TypeNroots type, Data data);
 
 const char *str_type(const TypeNroots type);
 
@@ -86,24 +86,13 @@ bool flagSwitch(int argc, char **argv){
 
 void startTestsFromLocal(void) {
 
+    Data refData = {};
+
     int n_fail = 0; 
-    Nroots nroots_ref = ONE_ROOT; 
-    Coeffs coeffs {.a = 0, .b = 0, .c = 0}; 
-    Roots xref {.x1 = 0, .x2 = 0}; 
-    xref.x1 = xref.x2 = NAN; 
     
     for (int testN = 0; testN < LOCALDATALEN; testN++) {                   
-                         
-          coeffs.a = localData[testN].a;
-          coeffs.b = localData[testN].b;
-          coeffs.c = localData[testN].c;
-          
-          nroots_ref = localData[testN].nroots;
-          
-          xref.x1 = localData[testN].x1;          
-          xref.x2 = localData[testN].x2;
-                    
-          if (!RunTest(testN + 1, &coeffs, nroots_ref, &xref)) {
+          refData = localData[testN];
+          if (!RunTest(testN + 1, refData)) {
                 n_fail++;
           }
           
@@ -116,46 +105,50 @@ void startTestsFromLocal(void) {
 void startTestsFromFile(FILE *file){
     
     int n_fail = 0;
-    Nroots nroots_ref = ONE_ROOT;  
-    Coeffs coeffs {.a = 0, .b = 0, .c = 0}; 
-    Roots xref {.x1 = 0, .x2 = 0}; 
-    xref.x1 = xref.x2 = NAN;
+    
+    Data refData = {};
     int testN = 1;
     
     
+    while (read_args(file, &refData)){
     
-    while (read_args(file, &coeffs, &nroots_ref, &xref)){
-    
-          if (!RunTest(testN + 1, &coeffs, nroots_ref, &xref)) {
+          if (!RunTest(testN++, refData)) {
                 n_fail++;
           }
     }
     
 }
 
+/*
+void readFileData(FILE file){
+    
+
+}
+*/
+
 
 //--------------------------------------------------------------------------------------------------
 /// RUN TEST WITH GIVEN coeffs AND REFERENCE VALUES
-bool RunTest(const int testN, Coeffs *coeffs, const Nroots nroots_ref, Roots *xref){
+bool RunTest(const int testN, Data refData){
 
-        Roots roots = {.x1 = NAN, .x2 = NAN};
+        Data solveData = {};
 
-        Nroots nroots = squareSolve(*coeffs, &roots);
+        solveData.nroots = squareSolve(refData, &solveData);
         
         //got and reference dont match
         if (! (
-                 nroots == nroots_ref 
-              && isEqual_d(roots.x1, xref -> x1) 
-              && isEqual_d(roots.x2, xref -> x2)
+                 solveData.nroots == refData.nroots
+              && isEqual_d(solveData.x1, refData.x1) 
+              && isEqual_d(solveData.x2, refData.x2)
               ) ) {
 
             _RED printf("Test #%d FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
-                             testN,                    coeffs -> a, coeffs -> b, coeffs -> c); _WHITE
+                             testN,                    refData.a, refData.b, refData.c); _WHITE
                                           
             //print "expected" stroke
-            print_switch(Expected, *xref, nroots_ref); 
+            print_switch(Expected, refData); 
             //print "got" stroke
-            print_switch(Got, roots, nroots);
+            print_switch(Got, solveData);
             
             return false;
         }
@@ -166,9 +159,9 @@ bool RunTest(const int testN, Coeffs *coeffs, const Nroots nroots_ref, Roots *xr
 }
 
 
-void print_switch(const TypeNroots type, Roots roots, const Nroots nroots){
+void print_switch(const TypeNroots type, Data data){
 
-      switch (nroots){
+      switch (data.nroots){
                   
                 case INF_ROOT: 
                 {
@@ -186,11 +179,11 @@ void print_switch(const TypeNroots type, Roots roots, const Nroots nroots){
                 
                     if (type == Got){
                     
-                          _RED printf("     %s 1 root x = %lg\n", str_type(type), roots.x1); _WHITE
+                          _RED printf("     %s 1 root x = %lg\n", str_type(type), data.x1); _WHITE
                     }
                     else{
                           
-                          _RED printf("%s :1 root x = %lg\n", str_type(type), roots.x1); _WHITE
+                          _RED printf("%s :1 root x = %lg\n", str_type(type), data.x1); _WHITE
                     }
                     
                     break;
@@ -200,10 +193,10 @@ void print_switch(const TypeNroots type, Roots roots, const Nroots nroots){
                     
                     if (type == Got)
                     {
-                        _RED printf("     " GOT "2 roots x1 = %lg x2 = %lg\n", roots.x1, roots.x2); _WHITE
+                        _RED printf("     " GOT "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
                     } else 
                     { 
-                          _RED printf("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", roots.x1, roots.x2); _WHITE
+                          _RED printf("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
                     }
                     
                     break;
@@ -226,7 +219,7 @@ const char *str_type(const TypeNroots type){
 
 //--------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
-bool read_args(FILE *file, Coeffs *coeffs, Nroots *nroots, Roots *xref){
+bool read_args(FILE *file, Data *refData){
 
       //input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
       
@@ -241,43 +234,43 @@ bool read_args(FILE *file, Coeffs *coeffs, Nroots *nroots, Roots *xref){
             return false;
       }
       
-      sscanf(line, "%lg %lg %lg %d%n", &(coeffs -> a), &(coeffs -> b), &(coeffs -> c), &int_nroots, &nendptr);
+      sscanf(line, "%lg %lg %lg %d%n", &(refData -> a), &(refData -> b), &(refData -> c), &int_nroots, &nendptr);
       
       
-      xref -> x1 = xref -> x2 = NAN;
+      refData -> x1 = refData -> x2 = NAN;
       
       switch (int_nroots) {
       
           case 0: {
                 
-                *nroots = ZERO_ROOT;
+                refData -> nroots = ZERO_ROOT;
                 break;
           }
           
           case 1: {
                 
-                *nroots = ONE_ROOT;
-                sscanf(line + nendptr, " %lg", &(xref -> x1));
+                refData -> nroots = ONE_ROOT;
+                sscanf(line + nendptr, " %lg", &(refData -> x1));
                 break;
           }
           
           case 2: {
                 
-                *nroots = TWO_ROOT;
-                sscanf(line + nendptr, " %lg %lg", &(xref -> x1), &(xref -> x2));
+                refData -> nroots = TWO_ROOT;
+                sscanf(line + nendptr, " %lg %lg", &(refData -> x1), &(refData -> x2));
                 break;
           }
           
           case -1: {
                 
-                *nroots = INF_ROOT;
+                refData -> nroots = INF_ROOT;
                 break;
           }
           
           default: {}      
       }
       
-      sortRoots(xref);
+      sortRoots(refData);
       
       return true;
 }

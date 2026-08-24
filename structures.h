@@ -2,14 +2,10 @@
 #define STRUCTURES_H
 
 
-struct Coeffs {
-              double a, b, c;
-              };
-              
-              
-struct Roots {
-             double x1, x2;
+struct Data {
+              double a=0, b=0, c=0;
+              Nroots nroots = ZERO_ROOT;
+              double x1=NAN, x2=NAN;
              };
-
 
 #endif

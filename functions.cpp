@@ -100,7 +100,7 @@ bool isEqual_d (double a, double b){
 
 //------------------------------------------------------------------
 /// MAKE ROOTS X1 < X2
-void sortRoots(Roots *roots){
+void sortRoots(Data *roots){
     
     double *x1 = &(roots -> x1);
     double *x2 = &(roots -> x2);

@@ -9,8 +9,8 @@ int main(int argc, char **argv){
       }
       
       //initialization      
-      Coeffs coeffs = {.a = 0, .b = 0, .c = 0};
-      Roots roots = {.x1 = 0, .x2 = 0};
+      Data params = {};
+      Data roots = {};
 
       //many square solve addition
       do {
@@ -26,9 +26,9 @@ int main(int argc, char **argv){
             READ_PARAM('C', c)
             
             //finding roots
-            Nroots nroots =  squareSolve(coeffs, &roots);
+            roots.nroots = squareSolve(params, &roots);
             
-            printRes(roots, nroots);
+            printRes(roots);
             
             //asking body if he wants another equation to solve
             _WHITE printf("Write n if you want to quit program or continue solving equations.\t");

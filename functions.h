@@ -27,7 +27,7 @@ Errors readDouble(char *line, double *input_d);
 
 void clearBuffer(const int last_char);
 
-void sortRoots(Roots *roots);
+void sortRoots(Data *roots);
 
 bool isZero_d(double x);
 

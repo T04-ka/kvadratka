@@ -9,7 +9,7 @@
 //############MACROSES################
 
 #define READ_PARAM(A, B) \
-is_input_ends = readParam(A, &(coeffs.B)); \
+is_input_ends = readParam(A, &(params.B)); \
 if (is_input_ends) return 0; 
 
 

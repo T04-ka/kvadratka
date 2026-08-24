@@ -77,10 +77,10 @@ void printErrors(Errors error){
 
 //----------------------------------------------------------------------------
 //###PRINTING RESULTS OF SOLVING EQUATION###
-void printRes(Roots roots, Nroots nroots){
+void printRes(Data roots){
     //  assert(roots);
       
-      switch (nroots) {
+      switch (roots.nroots) {
       
           case ZERO_ROOT: {
                 _YELLOW printf("\nEquation has no roots.\n");
@@ -137,12 +137,12 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
     int c = 0, len = 0;
     while ((c = getc(pfile)) != EOF && c != '\n' && len < maxlen){
         
-        s[len++] = c;
+        s[len++] = (char) c;
     }
     
     if (c == '\n') {
         
-        s[len++] = c;
+        s[len++] = (char) c;
     }
     
     s[len] = '\0';

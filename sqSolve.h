@@ -8,7 +8,7 @@
 
 
 //############INITIALIZATION##########
-Nroots squareSolve(Coeffs coeffs, Roots *roots);
+Nroots squareSolve(Data params, Data *solveData);
 
 #endif
 
