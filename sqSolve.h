@@ -8,7 +8,7 @@
 
 
 //############INITIALIZATION##########
-Nroots squareSolve(Data params, Data *solveData);
+void squareSolve(Data params, Data *solveData);
 
 #endif
 

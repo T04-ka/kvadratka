@@ -114,7 +114,7 @@ void runMain(){
         READ_PARAM('C', c)
 
         //finding roots
-        roots.nroots = squareSolve(params, &roots);
+        squareSolve(params, &roots);
 
         printRes(roots);
 

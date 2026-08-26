@@ -27,7 +27,7 @@ if (!3) 2 return
 */
 
 ///##SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
-Nroots squareSolve(Data params, Data *solveData) {
+void squareSolve(Data params, Data *solveData) {
 
       double a = params.a, 
              b = params.b,
@@ -35,15 +35,17 @@ Nroots squareSolve(Data params, Data *solveData) {
 
       if (isZero_d(a)){ //A=0
       
-            return linearSolve(b, c, &(solveData -> x1));
+            solveData -> nroots =  linearSolve(b, c, &(solveData -> x1));
+            return;
       }
       //A!=0 
       if (isZero_d(c)){ //Ax^2 + Bx = 0 <=> x(Ax + B) = 0
 
-             return squareZeroC(a, b, solveData);
+             solveData -> nroots = squareZeroC(a, b, solveData);
+             return;
       }
 
-      return normalSquare(a, b, c, solveData);
+      solveData -> nroots =  normalSquare(a, b, c, solveData);
 }
 
 
@@ -54,7 +56,7 @@ Nroots linearSolve(const double a, const double b, double *x){
       if (isZero_d(a)){ //a=0
 
             return isZero_d(b) ? INF_ROOT
-                                     : ZERO_ROOT;
+                               : ZERO_ROOT;
       } else { //a!=0
             
             *x = -b/a;

@@ -12,7 +12,7 @@ void spaceDel(char *s);
 ///RUNING THE PARSE PROGRAM
 void runParse(void){
 
-
+    _WHITE print("Enter polynomial or equation.\n");
 
     while (1){
         Data coeffs = {.a = 0, .b = 0, .c = 0};
@@ -26,10 +26,10 @@ void runParse(void){
 
             Data roots = {.nroots = ZERO_ROOT, .x1 = NAN, .x2 = NAN};
 
-            roots.nroots = squareSolve(coeffs, &roots);
+            squareSolve(coeffs, &roots);
 
             printRes(roots);
-            //printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+          //  printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
         }
     }
 }
@@ -46,34 +46,39 @@ Errors parse(Data *coeffs){
 
         return EMPTY_INPUT;
     }
-    spaceDel(inputLine);
+   // spaceDel(inputLine);
 
     if (*(inputLine) == '\0') {
 
         return EMPTY_INPUT;
     }
-     // printf("[%s]\n", inputLine);
+    //printf("[%s]\n", inputLine);
     SideOfEq sideOfEq = LEFT;
 
-    int sign = 1;
+    int sign = 1, isSignEx = true;
 
     for (char *cptr = inputLine; *cptr != '\n' && *cptr != EOF && *cptr != '\0'; cptr++){
+        //printf("%d\n", cptr - inputLine);
+
+        if (isspace(*cptr)) {
+
+            continue;
+        }
 
         if (*cptr == '=') {
-
             sideOfEq = RIGHT;
-            continue;
+            CHECKSIGNEX
         }
 
         if (*cptr == '+') {
 
-            continue;
+            CHECKSIGNEX
         }
 
         if (*cptr == '-') {
 
             sign = -1;
-            continue;
+            CHECKSIGNEX
         }
 
         double temp = 0;
@@ -88,38 +93,51 @@ Errors parse(Data *coeffs){
             isNumberEx = false;
         }
 
+        if (isNumberEx && temp < 1 && *cptr != '0' ||
+            isNumberEx && !isSignEx)
+        {
+
+            return INPUT_ERROR;
+        }
+        /*
         //      скип знака *
         if (*(cptr + endN) == '*'){
 
             endN ++;
         }
-
+        */
 
         if (*(cptr + endN) != 'X' && *(cptr + endN) != 'x'){
 
-            coeffs -> c += sign * sideOfEq * ((isNumberEx) ? temp : 0);
-             // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+            if (!isNumberEx) {
+
+                return INPUT_ERROR;
+            }
+
+            coeffs -> c += sign * sideOfEq * temp;
+              //printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
             cptr += endN-1;
              // printf("*cptr: %c\n", *cptr);
-            sign = 1;
+            SETDEFAUTLT
         }
-        else if (*(cptr + endN + 1) == '^'){
+        else if (*(cptr + endN + 1) == '^' && *(cptr + endN + 2) == '2') {
 
             coeffs -> a += sign * sideOfEq * ((isNumberEx) ? temp : 1);
              // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
             cptr += endN + 2;
              // printf("*cptr: %c\n", *cptr);
-
-            sign = 1;
+            SETDEFAUTLT
         }
         else {
 
-            // coeffs -> b += sign * sideOfEq * ((isNumberEx) ? temp : 1);
-             printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+            coeffs -> b += sign * sideOfEq * ((isNumberEx) ? temp : 1);
+            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
             cptr += endN;
         //     printf("*cptr: %c\n", *cptr);
-            sign = 1;
+            SETDEFAUTLT
         }
+
+
     }
     return NO_ERROR;
 }

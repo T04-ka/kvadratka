@@ -66,7 +66,7 @@ bool runOneTest(const size_t testN, Data refData){
 
         Data solveData = {};
 
-        solveData.nroots = squareSolve(refData, &solveData);
+        squareSolve(refData, &solveData);
         
         //got and reference dont match
         if (! (
