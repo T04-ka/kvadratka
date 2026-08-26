@@ -30,7 +30,7 @@ bool readParam(const char type_param, double *param){
 
       Errors input_error = EMPTY_INPUT;
       do {  
-            _WHITE printf("\nPlease, enter parametr %c: ", type_param); //space for entering the param
+            _WHITE print("\nPlease, enter parametr %c: ", type_param); //space for entering the param
               
             char line[MAXLEN] = {}; //space for input line
             int len = get_line(line, MAXLEN); //taking line from input stream            
@@ -60,12 +60,12 @@ void printErrors(Errors error){
       switch (error) {
           
           case EMPTY_INPUT: {
-                _RED printf("\nError: empty input.\n"); _WHITE
+                _RED print("\nError: empty input.\n"); _WHITE
                 break;
           }
           
           case INPUT_ERROR: {
-                _RED printf("\nError: wrong input.\n"); _WHITE
+                _RED print("\nError: wrong input.\n"); _WHITE
                 break;
           }
           
@@ -83,22 +83,22 @@ void printRes(Data roots){
       switch (roots.nroots) {
       
           case ZERO_ROOT: {
-                _YELLOW printf("\nEquation has no roots.\n");
+                _YELLOW print("\nEquation has no roots.\n");
                 break;
           }
           
           case ONE_ROOT: {
-                _YELLOW printf("\nEquation has 1 root: x = %g.\n", roots.x1);
+                _YELLOW print("\nEquation has 1 root: x = %g.\n", roots.x1);
                 break;
           }
           
           case TWO_ROOT: {
-                _YELLOW printf("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2);
+                _YELLOW print("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2);
                 break;
           }
           
           case INF_ROOT: {
-                _YELLOW printf("\nEquation has infinity roots.\n");
+                _YELLOW print("\nEquation has infinity roots.\n");
                 break;
           }
           
@@ -152,3 +152,31 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
 
 
 //--------------------------------------------------------------------------
+
+void print(const char *format, ...){
+      
+      va_list argptr;
+      
+      va_start(argptr, format);
+      
+      char lineOfData[PRINTSIZE] = {};      
+      
+      vsprintf(lineOfData, format, argptr);      
+      
+      va_end (argptr);
+      
+      char *lineptr = lineOfData;
+      
+      while(*lineptr != '\0'){
+          
+          for (int nltr = rand() % 3 + 3; nltr > 0; nltr--){
+          
+                putc(*(lineptr++), stderr);   
+          }
+          
+          nanosleep(&SLEEPTIME, NULL);
+      }    
+}
+
+
+//-------------------------------------------------------------

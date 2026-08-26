@@ -133,7 +133,7 @@ bool runOneTest(const size_t testN, Data refData){
               && isEqual_d(solveData.x2, refData.x2)
               ) ) {
 
-            _RED printf("Test #%lu FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
+            _RED print("Test #%lu FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
                              testN,                    refData.a, refData.b, refData.c); _WHITE
                                           
             //print "expected" stroke
@@ -145,7 +145,7 @@ bool runOneTest(const size_t testN, Data refData){
         }
         
         //else: got and referense mach: OK
-        _GREEN printf("Test #%lu passed.\n", testN); _WHITE
+        _GREEN print("Test #%lu passed.\n", testN); _WHITE
         return true;
 }
 
@@ -170,11 +170,11 @@ void print_switch(const TypeNroots type, Data data){
                 
                     if (type == Got){
                     
-                          _RED printf("     %s 1 root x = %lg\n", str_type(type), data.x1); _WHITE
+                          _RED print("     %s 1 root x = %lg\n", str_type(type), data.x1); _WHITE
                     }
                     else{
                           
-                          _RED printf("%s :1 root x = %lg\n", str_type(type), data.x1); _WHITE
+                          _RED print("%s :1 root x = %lg\n", str_type(type), data.x1); _WHITE
                     }
                     
                     break;
@@ -184,10 +184,10 @@ void print_switch(const TypeNroots type, Data data){
                     
                     if (type == Got)
                     {
-                        _RED printf("     " GOT "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
+                        _RED print("     " GOT "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
                     } else 
                     { 
-                          _RED printf("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
+                          _RED print("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
                     }
                     
                     break;

@@ -5,12 +5,16 @@
 #include "functions.h"
 #include "enums.h"
 #include "colors.h"
-
 #include "structures.h"
+
+#include <stdarg.h>
+#include <time.h>
+#include <unistd.h>
   
 
 //############DEFINES##############
 #define MAXLEN 10000
+#define PRINTSIZE 1000
 
 
 //#################INITIALIZATION######################
@@ -25,5 +29,11 @@ bool readAnswear();
 int get_line(char *s, int maxlen);
 
 int get_lineF(FILE *file, char *s, int maxlen);
+
+void print(const char *format, ...);
+
+
+//###################CONSTANTS#####################################
+const timespec SLEEPTIME = {.tv_sec = 0, .tv_nsec = (int) 1e7};
 
 #endif

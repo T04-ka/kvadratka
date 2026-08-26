@@ -16,7 +16,7 @@ int main(int argc, char **argv){
       do {
           
             //starting message
-            _WHITE printf("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
+            _WHITE print("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
             
             
             bool is_input_ends = false;
@@ -31,7 +31,7 @@ int main(int argc, char **argv){
             printRes(roots);
             
             //asking body if he wants another equation to solve
-            _WHITE printf("Write n if you want to quit program or continue solving equations.\t");
+            _WHITE print("Write n if you want to quit program or continue solving equations.\t");
             
             
       } while (readAnswear());
