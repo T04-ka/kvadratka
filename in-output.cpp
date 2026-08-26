@@ -13,7 +13,7 @@ bool readAnswear(void){
       //anal answear
       switch (c){
             
-            case 'n': {
+            case 'q': {
             
                   return false;
             }

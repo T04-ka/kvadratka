@@ -11,6 +11,6 @@ enum SideOfEq {
     RIGHT = -1
 };
 
-void parser(void);
+void runParse(void);
 
 #endif

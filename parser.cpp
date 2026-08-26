@@ -1,6 +1,6 @@
 #include "parser.h"
 
-void parser(void){
+void runParse(void){
 
     char inputLine[MAXLEN] = {};
 

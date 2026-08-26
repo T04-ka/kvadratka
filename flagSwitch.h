@@ -2,7 +2,8 @@
 #define FLAGSWITCH_H
 
 #include "Diagnostic.h"
-
+#include "sqSolve.h"
+#include "in-output.h"
 
 //######################ENUMS##########################
 enum Flags {
@@ -16,15 +17,15 @@ enum Flags {
 #define FILEOPEN(A) FILE *file = fopen(A,"r");                                    \
                     if (file == NULL) {                                           \
                         _RED print("No such file \"%s\".\n", A); _WHITE           \
-                        return true;                                              \
+                        return;                                                   \
                     }
 
 
-#define TESTFLAGCHECK if (strcmp(argv[1], STARTTEST_FLAG))                       \
+#define TESTFLAGCHECK if (strcmp(argv[1], STARTTEST_FLAG))                        \
                       {                                                           \
                           _RED print("Unknown option: %s\n", argv[1]); _WHITE     \
                           print("Usage: [--test] [--parse]\n");                   \
-                          return true;                                            \
+                          return;                                                 \
                       }
 
 
@@ -32,7 +33,7 @@ enum Flags {
                       {                                                           \
                          _RED print("Unknown option: %s\n", argv[2]); _WHITE      \
                          print("Usage: [-f | -f filename.txt]\n");                \
-                         return true; \
+                         return;                                                  \
                       }
 
 
@@ -40,8 +41,11 @@ enum Flags {
                   print("Usage: [-test] [-f | -f filename.txt]\n");
 
 
+#define READ_PARAM(A, B) if (readParam(A, &(params.B))) return;
+
+
 //################INITIALIZATION##################
-bool flagSwitch(int argc, char **argv);
+void flagSwitch(int argc, char **argv);
 
 
 const char STARTTEST_FLAG[] = "--test";
