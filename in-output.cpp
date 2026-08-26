@@ -84,22 +84,22 @@ void printRes(Data roots){
       switch (roots.nroots) {
       
           case ZERO_ROOT: {
-                _YELLOW print("\nEquation has no roots.\n");
+                _YELLOW print("\nEquation has no roots.\n"); _WHITE
                 break;
           }
           
           case ONE_ROOT: {
-                _YELLOW print("\nEquation has 1 root: x = %g.\n", roots.x1);
+                _YELLOW print("\nEquation has 1 root: x = %g.\n", roots.x1); _WHITE
                 break;
           }
           
           case TWO_ROOT: {
-                _YELLOW print("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2);
+                _YELLOW print("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2); _WHITE
                 break;
           }
           
           case INF_ROOT: {
-                _YELLOW print("\nEquation has infinity roots.\n");
+                _YELLOW print("\nEquation has infinity roots.\n"); _WHITE
                 break;
           }
           

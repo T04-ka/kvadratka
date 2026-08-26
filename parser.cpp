@@ -1,5 +1,7 @@
 #include "parser.h"
 #include "enums.h"
+#include "in-output.h"
+#include "sqSolve.h"
 
 
 Errors parse(Data *coeffs);
@@ -10,13 +12,26 @@ void spaceDel(char *s);
 ///RUNING THE PARSE PROGRAM
 void runParse(void){
 
-    Data coeffs = {.a = 0, .b = 0, .c = 0};
 
-    Errors err = parse(&coeffs);
 
-    // switch err
+    while (1){
+        Data coeffs = {.a = 0, .b = 0, .c = 0};
 
-    printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+
+        if (Errors error = parse(&coeffs)) {
+
+            printErrors(error);
+        }
+        else{
+
+            Data roots = {.nroots = ZERO_ROOT, .x1 = NAN, .x2 = NAN};
+
+            roots.nroots = squareSolve(coeffs, &roots);
+
+            printRes(roots);
+            //printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+        }
+    }
 }
 
 
@@ -32,7 +47,12 @@ Errors parse(Data *coeffs){
         return EMPTY_INPUT;
     }
     spaceDel(inputLine);
-   //  printf("[%s]\n", inputLine);
+
+    if (*(inputLine) == '\0') {
+
+        return EMPTY_INPUT;
+    }
+     // printf("[%s]\n", inputLine);
     SideOfEq sideOfEq = LEFT;
 
     int sign = 1;
@@ -78,26 +98,26 @@ Errors parse(Data *coeffs){
         if (*(cptr + endN) != 'X' && *(cptr + endN) != 'x'){
 
             coeffs -> c += sign * sideOfEq * ((isNumberEx) ? temp : 0);
-            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+             // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
             cptr += endN-1;
-            // printf("*cptr: %c\n", *cptr);
+             // printf("*cptr: %c\n", *cptr);
             sign = 1;
         }
         else if (*(cptr + endN + 1) == '^'){
 
             coeffs -> a += sign * sideOfEq * ((isNumberEx) ? temp : 1);
-            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+             // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
             cptr += endN + 2;
-            // printf("*cptr: %c\n", *cptr);
+             // printf("*cptr: %c\n", *cptr);
 
             sign = 1;
         }
         else {
 
-            coeffs -> b += sign * sideOfEq * ((isNumberEx) ? temp : 1);
-            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+            // coeffs -> b += sign * sideOfEq * ((isNumberEx) ? temp : 1);
+             printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
             cptr += endN;
-            // printf("*cptr: %c\n", *cptr);
+        //     printf("*cptr: %c\n", *cptr);
             sign = 1;
         }
     }
