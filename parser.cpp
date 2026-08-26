@@ -1,17 +1,41 @@
 #include "parser.h"
+#include "enums.h"
 
+
+Errors parse(Data *coeffs);
+
+void spaceDel(char *s);
+
+
+///RUNING THE PARSE PROGRAM
 void runParse(void){
-
-    char inputLine[MAXLEN] = {};
 
     Data coeffs = {.a = 0, .b = 0, .c = 0};
 
+    Errors err = parse(&coeffs);
+
+    // switch err
+
+    printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+}
+
+
+//------------------------------------------------------------------
+///PARSING THE STROKE
+Errors parse(Data *coeffs){
+
+    char inputLine[MAXLEN] = {};
+
     int len = get_line(inputLine, MAXLEN);
+    if (len < 1){
 
-
-   // printf("[%s]", inputLine);
-
+        return EMPTY_INPUT;
+    }
+    spaceDel(inputLine);
+   //  printf("[%s]\n", inputLine);
     SideOfEq sideOfEq = LEFT;
+
+    int sign = 1;
 
     for (char *cptr = inputLine; *cptr != '\n' && *cptr != EOF && *cptr != '\0'; cptr++){
 
@@ -21,9 +45,14 @@ void runParse(void){
             continue;
         }
 
-//      скип пробелов
-        if (isspace(*cptr)){
+        if (*cptr == '+') {
 
+            continue;
+        }
+
+        if (*cptr == '-') {
+
+            sign = -1;
             continue;
         }
 
@@ -39,7 +68,7 @@ void runParse(void){
             isNumberEx = false;
         }
 
-//      скип знака *
+        //      скип знака *
         if (*(cptr + endN) == '*'){
 
             endN ++;
@@ -48,22 +77,45 @@ void runParse(void){
 
         if (*(cptr + endN) != 'X' && *(cptr + endN) != 'x'){
 
-            coeffs.c += sideOfEq * ((isNumberEx) ? temp : 0);
-            cptr += endN;
+            coeffs -> c += sign * sideOfEq * ((isNumberEx) ? temp : 0);
+            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+            cptr += endN-1;
+            // printf("*cptr: %c\n", *cptr);
+            sign = 1;
         }
         else if (*(cptr + endN + 1) == '^'){
 
-            coeffs.a += sideOfEq * ((isNumberEx) ? temp : 1);
-            cptr += endN + 3;
+            coeffs -> a += sign * sideOfEq * ((isNumberEx) ? temp : 1);
+            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+            cptr += endN + 2;
+            // printf("*cptr: %c\n", *cptr);
+
+            sign = 1;
         }
         else {
 
-            coeffs.b += sideOfEq * ((isNumberEx) ? temp : 1);
-            cptr += endN + 1;
+            coeffs -> b += sign * sideOfEq * ((isNumberEx) ? temp : 1);
+            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
+            cptr += endN;
+            // printf("*cptr: %c\n", *cptr);
+            sign = 1;
         }
     }
-
-    printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+    return NO_ERROR;
 }
 
 
+//----------------------------------------------------------------------
+///DELETES ALL SPASES FROM STROKE
+void spaceDel(char *s){
+    int j = 0;
+    for (int i = 0; s[i] != EOF && s[i] != '\n' && s[i] != '\0'; i++){
+
+        if (!isspace(s[i])){
+
+            s[j++] = s[i];
+        }
+    }
+
+    s[j] = '\0';
+}
