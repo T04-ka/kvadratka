@@ -124,3 +124,18 @@ bool isZero_d(double x){
 
 
 //----------------------------------------------
+///FLAG DEFINER
+Flags flagDef(char *s){
+
+      if (!strcmp(s, STARTTEST_FLAG)) {
+
+            return TEST;
+      }
+
+      if (!strcmp(s, PARSE_FLAG)) {
+
+            return PARSE;
+      }
+
+      return WRONG;
+}

@@ -12,6 +12,14 @@
 #include "structures.h"
 
 
+//######################ENUMS##########################
+enum Flags {
+    TEST = 0,
+    PARSE = 1,
+    WRONG = -1
+};
+
+
 //############DEFINES##############
 #define BORDER 0.000001
 
@@ -30,5 +38,13 @@ void clearBuffer(const int last_char);
 void sortRoots(Data *roots);
 
 bool isZero_d(double x);
+
+Flags flagDef(char *s);
+
+
+//######CONSTANTS##########
+const char STARTTEST_FLAG[] = "--test";
+const char PARSE_FLAG[] = "--parse";
+const char READFROMFILE_FLAG[] = "-f";
 
 #endif
