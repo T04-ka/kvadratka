@@ -1,5 +1,6 @@
 #include "in-output.h"
 
+
 //###READING BODY ANSWER TO CONTINUE SOLVING###
 bool readAnswear(void){  
       
@@ -171,7 +172,8 @@ void print(const char *format, ...){
           
           for (int nltr = rand() % 3 + 3; nltr > 0; nltr--){
           
-                putc(*(lineptr++), stderr);   
+                putchar(*(lineptr++));
+                fflush(stdout);
           }
           
           nanosleep(&SLEEPTIME, NULL);

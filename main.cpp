@@ -12,6 +12,7 @@ int main(int argc, char **argv){
       Data params = {};
       Data roots = {};
 
+
       //many square solve addition
       do {
           

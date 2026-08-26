@@ -34,6 +34,6 @@ void print(const char *format, ...);
 
 
 //###################CONSTANTS#####################################
-const timespec SLEEPTIME = {.tv_sec = 0, .tv_nsec = (int) 1e7};
+const timespec SLEEPTIME = {.tv_sec = 0, .tv_nsec = (int) 1E7};
 
 #endif

@@ -1,7 +1,5 @@
 #include "Diagnostic.h"
 
-//сделать считывание из файла в массив и обьединить в функиию считывание труктур из массива
-//Сделать норм дефолт тесты
 /*
 char* a = "123";
 
@@ -10,18 +8,12 @@ const char* a = "123";
 a = "234567";
 a = "345678901234"; // a can be changed
 
-
-
 char * const a;
 const char const * a;
 
 */
 
 //###############INITIALIZATION#######################
-void startTestsFromFile(FILE *file);
-
-void runTests(const Data *refData, size_t len);
-
 bool runOneTest(const size_t testN, Data refData);
 
 size_t readArgsF(FILE *file, Data** dataptr);
@@ -30,56 +22,6 @@ void print_switch(const TypeNroots type, Data data);
 
 const char *str_type(const TypeNroots type);
 
-
-///HEAD DIAGNOSTIC FUNCTION
-bool flagSwitch(int argc, char **argv){
-    
-    switch (argc){
-        case 1: 
-        {
-            return false;
-        }
-        
-        case 2:
-        {
-            TESTFLAGCHECK
-            
-            runTests(localData, LOCALDATALEN);
-            break;
-        }
-        
-        case 3:
-        {
-            TESTFLAGCHECK
-            
-            FILEFLAGCHECK
-            
-            FILEOPEN(DEFAULTFILE)
-            
-            startTestsFromFile(file);
-            break;
-        }
-        
-        case 4:
-        {
-            TESTFLAGCHECK
-            
-            FILEFLAGCHECK
-            
-            FILEOPEN(argv[3])
-            
-            startTestsFromFile(file);
-            break;
-        }
-        
-        default: 
-        {
-            ELSEPRINT
-        }
-    }
-    
-    return true;
-}
 
 /*
 struct polynom = {

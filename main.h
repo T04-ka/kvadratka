@@ -6,6 +6,9 @@
 #include "in-output.h"
 #include "Diagnostic.h"
 
+#include "parser.h"
+#include "flagSwitch.h"
+
 //############MACROSES################
 
 #define READ_PARAM(A, B) \
