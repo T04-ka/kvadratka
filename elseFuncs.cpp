@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "elseFuncs.h"
 
 /// CHECKING IF ONLY SPACE IN LINE
 ///

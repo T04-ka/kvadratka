@@ -31,7 +31,7 @@ bool readParam(const char type_param, double *param){
 
       Errors input_error = EMPTY_INPUT;
       do {  
-            _WHITE print("\nPlease, enter parametr %c: ", type_param); //space for entering the param
+            _WHITE slowPrint("\nPlease, enter parametr %c: ", type_param); //space for entering the param
               
             char line[MAXLEN] = {}; //space for input line
             int len = get_line(line, MAXLEN); //taking line from input stream            
@@ -61,12 +61,12 @@ void printErrors(Errors error){
       switch (error) {
           
           case EMPTY_INPUT: {
-                _RED print("\nError: empty input.\n"); _WHITE
+                _RED slowPrint("\nError: empty input.\n"); _WHITE
                 break;
           }
           
           case INPUT_ERROR: {
-                _RED print("\nError: wrong input.\n"); _WHITE
+                _RED slowPrint("\nError: wrong input.\n"); _WHITE
                 break;
           }
           
@@ -84,22 +84,22 @@ void printRes(Data roots){
       switch (roots.nroots) {
       
           case ZERO_ROOT: {
-                _YELLOW print("\nEquation has no roots.\n"); _WHITE
+                _YELLOW slowPrint("\nEquation has no roots.\n"); _WHITE
                 break;
           }
           
           case ONE_ROOT: {
-                _YELLOW print("\nEquation has 1 root: x = %g.\n", roots.x1); _WHITE
+                _YELLOW slowPrint("\nEquation has 1 root: x = %g.\n", roots.x1); _WHITE
                 break;
           }
           
           case TWO_ROOT: {
-                _YELLOW print("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2); _WHITE
+                _YELLOW slowPrint("\nEquation has 2 roots: x1 = %g, x2 = %g.\n", roots.x1, roots.x2); _WHITE
                 break;
           }
           
           case INF_ROOT: {
-                _YELLOW print("\nEquation has infinity roots.\n"); _WHITE
+                _YELLOW slowPrint("\nEquation has infinity roots.\n"); _WHITE
                 break;
           }
           
@@ -153,8 +153,8 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
 
 
 //--------------------------------------------------------------------------
-
-void print(const char *format, ...){
+///MAKES SLOW OUTPUT
+void slowPrint(const char *format, ...){
       
       va_list argptr;
       

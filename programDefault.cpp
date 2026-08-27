@@ -20,7 +20,7 @@ void runDefault(){
 
         printRes(roots);
 
-        _WHITE print("Write q if you want to quit program: ");
+        _WHITE slowPrint("Write q if you want to quit program: ");
 
     } while (readAnswear());
 }
@@ -35,7 +35,7 @@ void enterParams(Data* params){
 
 
     //starting message
-    _WHITE print("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
+    _WHITE slowPrint("Enter data: \"A B C\" for equation A*x^2 + B*x + c = 0.");
 
     READ_PARAM('A', a)
     READ_PARAM('B', b)

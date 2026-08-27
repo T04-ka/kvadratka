@@ -7,7 +7,6 @@
 #include "colors.h"
 #include "enums.h"
 #include "sqSolve.h"
-#include "functions.h"
 #include "in-output.h"
 #include "structures.h"
 

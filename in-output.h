@@ -2,7 +2,7 @@
 #define INOUTPUT_H
 
 //######################INCLUDES#######################
-#include "functions.h"
+#include "elseFuncs.h"
 #include "enums.h"
 #include "colors.h"
 #include "structures.h"
@@ -30,7 +30,7 @@ int get_line(char *s, int maxlen);
 
 int get_lineF(FILE *file, char *s, int maxlen);
 
-void print(const char *format, ...);
+void slowPrint(const char *format, ...);
 
 
 //###################CONSTANTS#########################

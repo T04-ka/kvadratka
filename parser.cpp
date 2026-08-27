@@ -12,7 +12,7 @@ void runParse(void){
 
     do
     {
-        _WHITE print("Enter polynomial or equation.\n");
+        _WHITE slowPrint("Enter polynomial or equation.\n");
 
         Data coeffs = {.a = 0, .b = 0, .c = 0};
 
@@ -30,8 +30,9 @@ void runParse(void){
             printRes(roots);
 
            //printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
-           printf("Enter 'q' if you want to quit the program: ");
         }
+        _WHITE slowPrint("Enter 'q' if you want to quit the program: ");
+
     } while(readAnswear()); //SUKA BLYAT DOBAVIT VVOD FRAZI
 }
 

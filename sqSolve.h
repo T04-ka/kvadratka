@@ -2,7 +2,7 @@
 #define SQSOLVE_H
 
 //############INCLUDES#############
-#include "functions.h"
+#include "elseFuncs.h"
 #include "enums.h"
 #include "structures.h"
 

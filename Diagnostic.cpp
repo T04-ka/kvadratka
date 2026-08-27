@@ -66,11 +66,11 @@ bool runOneTest(const size_t testN, Data refData){
               && isEqual_d(solveData.x2, refData.x2)
               ) ) {
 
-            _RED print("Test #%lu FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
+            _RED slowPrint("Test #%lu FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
                              testN,                    refData.a, refData.b, refData.c); _WHITE
                                           
             //print "expected" stroke
-            print_switch(Expected, refData); 
+            print_switch(Expected, refData);
             //print "got" stroke
             print_switch(Got, solveData);
             
@@ -78,7 +78,7 @@ bool runOneTest(const size_t testN, Data refData){
         }
         
         //else: got and referense mach: OK
-        _GREEN print("Test #%lu passed.\n", testN); _WHITE
+        _GREEN slowPrint("Test #%lu passed.\n", testN); _WHITE
         return true;
 }
 
@@ -91,13 +91,13 @@ void print_switch(const TypeNroots type, Data data){
                   
                 case INF_ROOT: 
                 {
-                    _RED printf("%s " INFROOTS, str_type(type)); _WHITE
+                    _RED slowPrint("%s " INFROOTS, str_type(type)); _WHITE
                     break;
                 }
                 
                 case ZERO_ROOT: 
                 {
-                    _RED printf("%s " NOROOTS, str_type(type)); _WHITE
+                    _RED slowPrint("%s " NOROOTS, str_type(type)); _WHITE
                     break;
                 }
                 
@@ -105,11 +105,11 @@ void print_switch(const TypeNroots type, Data data){
                 
                     if (type == Got){
                     
-                          _RED print("     %s 1 root x = %lg\n", str_type(type), data.x1); _WHITE
+                          _RED slowPrint("     %s 1 root x = %lg\n", str_type(type), data.x1); _WHITE
                     }
                     else{
                           
-                          _RED print("%s :1 root x = %lg\n", str_type(type), data.x1); _WHITE
+                          _RED slowPrint("%s :1 root x = %lg\n", str_type(type), data.x1); _WHITE
                     }
                     
                     break;
@@ -119,10 +119,10 @@ void print_switch(const TypeNroots type, Data data){
                     
                     if (type == Got)
                     {
-                        _RED print("     " GOT "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
+                        _RED slowPrint("     " GOT "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
                     } else 
                     { 
-                          _RED print("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
+                          _RED slowPrint("     " EXPECTED "2 roots x1 = %lg x2 = %lg\n", data.x1, data.x2); _WHITE
                     }
                     
                     break;

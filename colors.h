@@ -13,5 +13,5 @@
 #define _CYAN printf("\e[0;36m");
 #define _WHITE printf("\e[0;37m");
 
-//use RED for errors, WHITE for input words, YELLOW for output result   
+//use RED for errors, WHITE for input words, YELLOW for output result, GREEN for passed tests
 #endif

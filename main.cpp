@@ -29,8 +29,8 @@ int main(int argc, char **argv){
 
                         case WRONG:
                         {
-                              _RED print("Unknown option: %s\n", argv[1]); _WHITE
-                              print("Usage: [--test] [--parse]\n");
+                              _RED slowPrint("Unknown option: %s\n", argv[1]); _WHITE
+                              slowPrint("Usage: [--test] [--parse]\n");
                               break;
                         }
 
@@ -62,8 +62,8 @@ int main(int argc, char **argv){
 
             default:
             {
-                  _RED print("Unknown option.\n"); _WHITE
-                  print("Usage: [--test] [--parse] [-f | -f filename.txt]\n");
+                  _RED slowPrint("Unknown option.\n"); _WHITE
+                  slowPrint("Usage: [--test] [--parse] [-f | -f filename.txt]\n");
             }
       }
       return 0;

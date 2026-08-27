@@ -25,7 +25,7 @@ if (!2) 1 return
 if (!3) 2 return
 
 */
-
+//------------------------------------------------------------------------
 ///##SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
 void squareSolve(Data params, Data *solveData) {
 
@@ -49,7 +49,7 @@ void squareSolve(Data params, Data *solveData) {
 }
 
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------
 ///GIVE SOLUTION FOR EQUATION AX+B=0###
 Nroots linearSolve(const double a, const double b, double *x){
 
@@ -65,8 +65,8 @@ Nroots linearSolve(const double a, const double b, double *x){
 }
 
 
-//----------------------------------------------------------------
-///Solving part of square equation with C=0 
+//------------------------------------------------------------------------
+///Solving part of square equation with C=0
 Nroots squareZeroC(const double a, const double b, Data *solveData){
       
          //   putchar('\n');
@@ -89,7 +89,7 @@ Nroots squareZeroC(const double a, const double b, Data *solveData){
 }
 
 
-//-------------------------------------------------------------------------------------
+//------------------------------------------------------------------------
 ///SOLVING NORMAL SQUARE, WHERE DISCRIMINANT NEDEED
 Nroots normalSquare(const double a, const double b, const double c, Data *solveData){
       
