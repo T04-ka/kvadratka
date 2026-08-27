@@ -1,13 +1,14 @@
-#include "elseFuncs.h"
+#include "bin/elseFuncs.h"
 
-/// CHECKING IF ONLY SPACE IN LINE
+
+
+//---------------------------------------------------------
+/// Checks is only space in stroke
 ///
+/// @param[in]    char *s     Stroke
 ///
-///
-///
-///
-///
-///
+/// @return true if stroke is empty,
+///         false if not.
 ///
 //---------------------------------------------------------
 
@@ -16,36 +17,28 @@ bool is_OnlySpace_in_line(char *s){
       int i = 0;
       char c = 0;
       while ((c = s[i++]) != '\n' && c != '\0'){
-      
+
             if (!isspace(c)) return false;
       }
-      
+
       return true;
 }
 
-//-------------------------------------------------------
-//###CHECKING IF ONLY DIGITS IN LINE###
-bool is_OnlyDigit_in_line(char *s){
-      
-      int i = 0, dot_count = 0;
-      char c = 0;
-      while ((c=s[i++]) != '\n' && c != '\0'){
-            
-            if (!(isdigit(c) || c == '.' || isspace(c))) return false;
-            
-            if (c == '.'){
-                  
-                  dot_count++;
-            }
-      }
-      
-      return (dot_count < 2) ? true
-                             : false;
-}
 
 
 //-------------------------------------------------------------
-/// CHECK ON CORRECTION INPUT
+/// Checks the correctness of input
+///
+/// @param[in]    char *s            Input stroke
+/// @param[out]   double* input_d    The pointer on double read
+///
+/// @return INPUT_ERROR if input was wrong,
+///         EMPTY_INPUT if input was empty,
+///         NO_ERROR if input was correct;
+///
+/// @note A correct input is one number of type Double
+//---------------------------------------------------------
+
 Errors readDouble(char *s, double *input_d){
 
       *input_d = 0;
@@ -65,8 +58,16 @@ Errors readDouble(char *s, double *input_d){
 }
 
 
+
 //------------------------------------------------------------------------
-/// CLEARS INPUT BUFFER
+/// Clears input buffer, if needed
+///
+/// @param[in]    int last_char   The last char written to buffer
+///
+/// @note Clears buffer until '\n' is written
+///
+//------------------------------------------------------------------------
+
 void clearBuffer(int last_char){
 
       if (last_char == '\n'){
@@ -79,8 +80,21 @@ void clearBuffer(int last_char){
 }
 
 
+
 //------------------------------------------------------------
-/// RETURNS TRUE IF DOUBLE A = DOUBLE B AND FALSE IF NOT
+/// Checks the equality of two Double numbers
+///
+/// @param[in]    double a     First double
+/// @param[in]    double b     Second double
+///
+/// @return true if numbers are equal
+///     and false if not
+///
+/// @note Compares double numbers with accuracy BORDER,
+///       defined in header file
+///
+//------------------------------------------------------------
+
 bool isEqual_d (double a, double b){
     
     //if nan==nan
@@ -98,8 +112,15 @@ bool isEqual_d (double a, double b){
 }
 
 
+
 //------------------------------------------------------------------
-/// MAKE ROOTS X1 < X2
+/// Sorts roots in structure
+///
+/// @param[in]    Data* roots      Pointer on "Data" structure
+/// @param[out]   Data* roots      Change value of roots right in structure
+///
+//------------------------------------------------------------
+
 void sortRoots(Data *roots){
     
     double *x1 = &(roots -> x1);
@@ -116,6 +137,14 @@ void sortRoots(Data *roots){
 
 
 //------------------------------------------------
+/// Checks is double equal to zero
+///
+/// @param[in]    double x     Double number
+///
+/// @return true if x = 0,
+///         false if x != 0.
+///
+//------------------------------------------------------------
 
 bool isZero_d(double x){
     
@@ -123,8 +152,18 @@ bool isZero_d(double x){
 }
 
 
+
 //----------------------------------------------
-///FLAG DEFINER
+/// Defines flag entered in stroke
+///
+/// @param[in]    char *s     Input stroke
+///
+/// @return TEST if test flag was entered,
+///         PARSE if parse flag was entered,
+///         WRONG if wrong flag was entered.
+///
+//------------------------------------------------------------
+
 Flags flagDef(char *s){
 
       if (!strcmp(s, STARTTEST_FLAG)) {
@@ -139,3 +178,7 @@ Flags flagDef(char *s){
 
       return WRONG;
 }
+
+
+
+//------------------------------------------------------------

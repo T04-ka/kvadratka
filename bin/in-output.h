@@ -15,7 +15,7 @@
 //######################DEFINES########################
 #define MAXLEN 10000
 #define PRINTSIZE 1000
-
+#define STOPSYMB 'q'
 
 //#################INITIALIZATION######################
 void printRes(Data roots);

@@ -1,4 +1,4 @@
-#include "Diagnostic.h"
+#include "bin/Diagnostic.h"
 
 /*
 char* a = "123";
@@ -23,8 +23,14 @@ void print_switch(const TypeNroots type, Data data);
 const char *str_type(const TypeNroots type);
 
 
+
 //------------------------------------------------------------------------
-/// DO DIAGNOSTIC OF SQUARE_SOLVE
+/// Reads data from file and runs unit tests function
+///
+/// @param[in]    FILE* file    The file with data
+///
+//------------------------------------------------------------------------
+
 void startTestsFromFile(FILE *file){
     
     Data *fileData = NULL;
@@ -37,8 +43,15 @@ void startTestsFromFile(FILE *file){
 }
 
 
+
 //------------------------------------------------------------------------
-///START RUNNING TESTS
+/// Runs "Diagnostic" part of program
+///
+/// @param[in]    Data *refData    Array with input data structures
+/// @param[in]    size_t len       Len of *refData array
+///
+//------------------------------------------------------------------------
+
 void runTests(const Data *refData, size_t len){
       
       int n_fail = 0;
@@ -51,8 +64,19 @@ void runTests(const Data *refData, size_t len){
 }
 
 
+
 //------------------------------------------------------------------------
-/// RUN TEST WITH GIVEN coeffs AND REFERENCE VALUES
+/// Runs one test
+///
+/// @param[in]    size_t testN    The number of test
+/// @param[in]    Data refData    The structure with reference data
+///
+/// @return true if test has passed and
+///         false if not.
+///
+/// @note Prints the result of test.
+//------------------------------------------------------------------------
+
 bool runOneTest(const size_t testN, Data refData){
 
         Data solveData = {};
@@ -83,8 +107,15 @@ bool runOneTest(const size_t testN, Data refData){
 }
 
 
+
 //------------------------------------------------------------------------
-///PRINTS RESULT OF TEST
+/// Prints result of test
+///
+/// @param[in]    TypeNroots type    Type of print (got/expected)
+/// @param[in]    Data data          "Data" structure with data to print
+///
+//------------------------------------------------------------------------
+
 void print_switch(const TypeNroots type, Data data){
 
       switch (data.nroots){
@@ -133,8 +164,16 @@ void print_switch(const TypeNroots type, Data data){
 }
 
 
+
 //------------------------------------------------------------------------
-///CONVERTS TYPE TO ITS STR MEANING
+/// Makes a stroke with type given
+///
+/// @param[in]    TypeNroots type    Got/Expected type
+///
+/// @return Pointer on stroked type, located in ROdata.
+///
+//------------------------------------------------------------------------
+
 const char *str_type(const TypeNroots type){
     
     const char *GOT_WORD = "Got";
@@ -144,21 +183,37 @@ const char *str_type(const TypeNroots type){
 }
 
 
-//------------------------------------------------------------------------
-/// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
-size_t readArgsF(FILE *file, Data** dataArr){
 
-//input line must complains to format: "A B C N X1 X2\n" X1 can be not written if N = 0, X2 can be not written if N < 2, if eq has inf roots, write -1 insted N
+//------------------------------------------------------------------------
+/// Reads data entered in file and write in array of structures
+///
+/// @param[in]     FILE* file        The file with data
+/// @param[out]    Data** dataArr    Pointer on pointer on array with "Data" structures
+///
+/// @return Len of resulting array
+///
+/// @note Allocate the memory with realloc() and write data in heap buffer,
+///       works only with pointers.
+///
+/// @note Input line must complains to format: "A B C N X1 X2\n",
+///       X1 can be not written if N = 0, X2 can be not written if N < 2,
+///       if equation has inf roots, -1 must be written insted of N
+///
+//------------------------------------------------------------------------
+
+size_t readArgsF(FILE* file, Data** dataArr){
+
       char line[MAXLEN] = {};
       
       size_t testsN = 0;
       size_t ReallocBorder = 0;
+
       for (; get_lineF(file, line, MAXLEN) > 1; testsN++){
           
           if (testsN == ReallocBorder) {
           
                *dataArr = (Data*) realloc(*dataArr, sizeofDataStruct * (ReallocBorder = 2 * testsN + 1));
-          }// very dolgo 
+          }
           
           Data* datatoRead = *dataArr + testsN;
 

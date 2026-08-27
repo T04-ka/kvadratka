@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "bin/parser.h"
 
 //######INITIALIZATION######
 Errors parse(Data *coeffs);
@@ -6,8 +6,12 @@ Errors parse(Data *coeffs);
 void spaceDel(char *s);
 
 
-//------------------------------------------------------------------------
-///RUNING THE PARSE PROGRAM
+
+//-------------------------------------------------------------------------
+/// Runs "Parse" part of program
+///
+//-------------------------------------------------------------------------
+
 void runParse(void){
 
     do
@@ -37,8 +41,26 @@ void runParse(void){
 }
 
 
-//------------------------------------------------------------------------
-///PARSING THE STROKE
+
+//-------------------------------------------------------------------------
+/// Reads stroke from input stream and parses it
+///
+/// @param[out]    Data* coeffs    Pointer on "Data" structure with coefficients
+///
+/// @return INPUT_ERROR if input was wrong,
+///         EMPTY_INPUT if input was empty,
+///         NO_ERROR if input was correct;
+///
+/// @note Go along the line and analyse symbols:
+///          1. Skip the spaces,
+///          2. Check equation side "switch",
+///          3. Check signs '+' and '-',
+///          4. Scan the number (if exist),
+///          5. Check that only correct case had written,
+///          6. Write the coefficient
+///
+//-------------------------------------------------------------------------
+
 #define SETARG(A)                                                                        \
                         coeffs -> A += sign * sideOfEq * ((isNumberEx) ? temp : 1);      \
                         cptr += endN + ((#A[0] == 'a') ? 2 : (#A[0] == 'b') ? 0 : -1);   \
@@ -57,6 +79,7 @@ void runParse(void){
 
 
 //------------------------------------------------------------------------
+/// PARSE THE STROKE
 Errors parse(Data *coeffs){
 
     char inputLine[MAXLEN] = {};
@@ -147,16 +170,3 @@ Errors parse(Data *coeffs){
 
 
 //------------------------------------------------------------------------
-///DELETES ALL SPASES FROM STROKE
-void spaceDel(char *s){
-    int j = 0;
-    for (int i = 0; s[i] != EOF && s[i] != '\n' && s[i] != '\0'; i++){
-
-        if (!isspace(s[i])){
-
-            s[j++] = s[i];
-        }
-    }
-
-    s[j] = '\0';
-}

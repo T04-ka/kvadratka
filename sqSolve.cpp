@@ -1,4 +1,4 @@
-#include "sqSolve.h"
+#include "bin/sqSolve.h"
 
 
 //######INCIDE FUNCTIONS INITILIZATION######
@@ -25,8 +25,15 @@ if (!2) 1 return
 if (!3) 2 return
 
 */
+
 //------------------------------------------------------------------------
-///##SOLVING SQUARE EQUATION Ax^2+Bx+C=0###
+/// Solving square equation Ax^2 + Bx + C = 0
+///
+/// @param[in]      Data params      "Data" structure with A, B, C parametrs
+/// @params[out]    Data* solveData  Pointer on "Data" structure with results
+///
+//------------------------------------------------------------------------
+
 void squareSolve(Data params, Data *solveData) {
 
       double a = params.a, 
@@ -49,8 +56,19 @@ void squareSolve(Data params, Data *solveData) {
 }
 
 
+
 //------------------------------------------------------------------------
-///GIVE SOLUTION FOR EQUATION AX+B=0###
+/// Solving equation AX + B = 0
+///
+/// @param[in]   double a    Parametr A
+/// @param[in]   double b    Parametr B
+/// @param[in]   double c    Parametr C
+/// @param[out]  double* x   Pointer on root
+///
+/// @return Number of roots
+///
+//------------------------------------------------------------------------
+
 Nroots linearSolve(const double a, const double b, double *x){
 
       if (isZero_d(a)){ //a=0
@@ -65,8 +83,19 @@ Nroots linearSolve(const double a, const double b, double *x){
 }
 
 
+
 //------------------------------------------------------------------------
-///Solving part of square equation with C=0
+/// Solving equation AX^2 + BX = 0
+///
+/// @param[in]   double a          Parametr A
+/// @param[in]   double b          Parametr B
+/// @param[in]   double c          Parametr C
+/// @param[out]  Data* solveData   Pointer on "Data" structure with results
+///
+/// @return Number of roots
+///
+//------------------------------------------------------------------------
+
 Nroots squareZeroC(const double a, const double b, Data *solveData){
       
          //   putchar('\n');
@@ -89,8 +118,19 @@ Nroots squareZeroC(const double a, const double b, Data *solveData){
 }
 
 
+
 //------------------------------------------------------------------------
-///SOLVING NORMAL SQUARE, WHERE DISCRIMINANT NEDEED
+/// Solving default square equation with discriminant
+///
+/// @param[in]   double a          Parametr A
+/// @param[in]   double b          Parametr B
+/// @param[in]   double c          Parametr C
+/// @param[out]  Data* solveData   Pointer on "Data" structure with results
+///
+/// @return Number of roots
+///
+//------------------------------------------------------------------------
+
 Nroots normalSquare(const double a, const double b, const double c, Data *solveData){
       
         //now its normal square equation

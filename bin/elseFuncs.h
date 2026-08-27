@@ -27,8 +27,6 @@ enum Flags {
 //#################INITIALIZATION######################
 bool is_OnlySpace_in_line(char *s);
 
-bool is_OnlyDigit_in_line(char *s);
-
 bool isEqual_d(double a, double b);
 
 Errors readDouble(char *line, double *input_d);

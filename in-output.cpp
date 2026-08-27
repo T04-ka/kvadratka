@@ -1,7 +1,15 @@
-#include "in-output.h"
+#include "bin/in-output.h"
 
 
-//###READING BODY ANSWER TO CONTINUE SOLVING###
+
+//----------------------------------------------------------------------------
+/// Reads user's answear about continuation of program
+///
+/// @returns true if user wanted to continue program,
+///          false if wanted to stop
+///
+//----------------------------------------------------------------------------
+
 bool readAnswear(void){  
       
       //asking person until get the answer or program ends by him
@@ -13,7 +21,7 @@ bool readAnswear(void){
       //anal answear
       switch (c){
             
-            case 'q': {
+            case STOPSYMB: {
             
                   return false;
             }
@@ -25,9 +33,23 @@ bool readAnswear(void){
       }
 }
 
-//------------------------------------------------
-//###READING INPUT PARAM A/B/C###
-bool readParam(const char type_param, double *param){
+
+
+//----------------------------------------------------------------------------
+/// Reads input parametrs from stdin
+///
+/// @param[in]    const char type_param    Type of parametr (A, B, C)
+/// @param[out]   double* param            Pointer on var that parametr need to be written in
+///
+/// @return true if param has written,
+///         false if user stoped input (Ctrl + D)
+///
+/// @note Prints prints error message if input was wrong and
+///       repeats input until correct parametr will be written.
+///
+//----------------------------------------------------------------------------
+
+bool readParam(const char type_param, double* param){
 
       Errors input_error = EMPTY_INPUT;
       do {  
@@ -36,7 +58,7 @@ bool readParam(const char type_param, double *param){
             char line[MAXLEN] = {}; //space for input line
             int len = get_line(line, MAXLEN); //taking line from input stream            
             
-            //###END OF INPUT CHECK###
+            //###ENDOFINPUT CHECK###
             if (len == 0){
                   
                   printErrors(EMPTY_INPUT);
@@ -55,8 +77,15 @@ bool readParam(const char type_param, double *param){
       return false;
 }
 
-//-----------------------------------------
-//###PRINTING ERRORS###
+
+
+//----------------------------------------------------------------------------
+/// Prints error message
+///
+/// @param[in]    Errors error      Type of error
+///
+//----------------------------------------------------------------------------
+
 void printErrors(Errors error){
       switch (error) {
           
@@ -76,8 +105,15 @@ void printErrors(Errors error){
       }
 }
 
+
+
 //----------------------------------------------------------------------------
-//###PRINTING RESULTS OF SOLVING EQUATION###
+/// Prints result of equations solving
+///
+/// @param[in]    Data roots    "Data" structure with solving results
+///
+//----------------------------------------------------------------------------
+
 void printRes(Data roots){
     //  assert(roots);
       
@@ -107,8 +143,19 @@ void printRes(Data roots){
       }
 }
 
-//---------------------------------------------------------------
-//###READING LINE###
+
+
+//----------------------------------------------------------------------------
+/// Reading line from input stream
+///
+/// @param[in]     int mxlen   Maximum possible len of input line
+/// @param[out]    char *s     Stroke where symbols from input are written
+///
+/// @return Lenth of entered stroke
+///
+/// @note Puts '\0' on every stroke end
+//----------------------------------------------------------------------------
+
 int get_line(char *s, int mxlen){
       
       int c = 0;
@@ -131,8 +178,19 @@ int get_line(char *s, int mxlen){
 }
 
 
+
 //-------------------------------------------------------------------------
-/// READING LINE FROM FILE
+/// Reading line from file
+///
+/// @param[in]     int mxlen   Maximum possible len of input line
+/// @param[out]    char *s     Stroke where symbols from input are written
+///
+/// @return Lenth of entered stroke
+///
+/// @note Puts '\0' on every stroke end
+///
+//-------------------------------------------------------------------------
+
 int get_lineF(FILE *pfile, char *s, int maxlen){
     
     int c = 0, len = 0;
@@ -152,8 +210,17 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
 }
 
 
+
 //--------------------------------------------------------------------------
-///MAKES SLOW OUTPUT
+/// Make the slow output
+///
+/// @param[in]    const char *format      A stroke with output format
+/// @paramp[in]   ...                     Variables for output
+///
+/// @note Puts every symbol with delation, defined in header file.
+///
+//-------------------------------------------------------------------------
+
 void slowPrint(const char *format, ...){
       
       va_list argptr;

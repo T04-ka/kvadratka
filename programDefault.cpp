@@ -1,10 +1,14 @@
-#include "programDefault.h"
+#include "bin/programDefault.h"
 
 void enterParams(Data *coeffs);
 
 
-//------------------------------------------------------------------------
-///RUNING DEFAULT PART OF PROGRAM
+
+//-------------------------------------------------------------------------
+/// Running default part of program
+///
+//-------------------------------------------------------------------------
+
 void runDefault(){
 
     //initialization
@@ -26,8 +30,14 @@ void runDefault(){
 }
 
 
-//--------------------------------------------------
-///ENTERING PARAMS IN DEFAULT PROGRAM
+
+//-------------------------------------------------------------------------
+/// Enters coefficients
+///
+/// @param[out]   Data* params    Pointer on "Data" structure with parametrs
+///
+//-------------------------------------------------------------------------
+
 #define READ_PARAM(A, B)    if (readParam(A, &(params -> B))) \
                                 return;
 
