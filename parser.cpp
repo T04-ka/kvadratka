@@ -1,17 +1,19 @@
 #include "parser.h"
 
-
+//######INITIALIZATION######
 Errors parse(Data *coeffs);
 
 void spaceDel(char *s);
 
 
+//------------------------------------------------------------------------
 ///RUNING THE PARSE PROGRAM
 void runParse(void){
 
-    _WHITE print("Enter polynomial or equation.\n");
+    do
+    {
+        _WHITE print("Enter polynomial or equation.\n");
 
-    do {
         Data coeffs = {.a = 0, .b = 0, .c = 0};
 
 
@@ -27,21 +29,38 @@ void runParse(void){
 
             printRes(roots);
 
-           printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+           //printf("A: %lg, B: %lg, C: %lg\n", coeffs.a, coeffs.b, coeffs.c);
+           printf("Enter 'q' if you want to quit the program: ");
         }
-    } while(readAnswear());
+    } while(readAnswear()); //SUKA BLYAT DOBAVIT VVOD FRAZI
 }
 
 
-//------------------------------------------------------------------
+//------------------------------------------------------------------------
 ///PARSING THE STROKE
+#define SETARG(A)                                                                        \
+                        coeffs -> A += sign * sideOfEq * ((isNumberEx) ? temp : 1);      \
+                        cptr += endN + ((#A[0] == 'a') ? 2 : (#A[0] == 'b') ? 0 : -1);   \
+                        sign = 1;                                                        \
+                        isSignEx = false;                                                \
+                        isEqWasPrev = true;                                              \
+                        continue;
+
+
+//------------------------------------------------------------------------
+#define CHECKSIGNEX if (isSignEx && !isEqWasPrev && cptr - inputLine != 0) {         \
+                        return INPUT_ERROR;                                          \
+                    }                                                                \
+                    isSignEx = true;                                                 \
+                    isEqWasPrev = false;
+
+
+//------------------------------------------------------------------------
 Errors parse(Data *coeffs){
 
     char inputLine[MAXLEN] = {};
 
-    int len = get_line(inputLine, MAXLEN);
-    clearBuffer(0);
-    if (len < 1){
+    if (get_line(inputLine, MAXLEN) < 1){
 
         return EMPTY_INPUT;
     }
@@ -51,13 +70,13 @@ Errors parse(Data *coeffs){
 
         return EMPTY_INPUT;
     }
-    //printf("[%s]\n", inputLine);
+   // printf("[%s]\n", inputLine);
     SideOfEq sideOfEq = LEFT;
 
     int sign = 1, isSignEx = true, isEqWasPrev = false;
 
     for (char *cptr = inputLine; *cptr != '\n' && *cptr != EOF && *cptr != '\0'; cptr++){
-        //printf("%d\n", cptr - inputLine);
+        // printf("%d\n", cptr - inputLine);
 
         if (isspace(*cptr)) {
 
@@ -96,8 +115,8 @@ Errors parse(Data *coeffs){
         }
 
         //проверка на .99 && 2 2 2 2
-        if (isNumberEx && temp < 1 && *cptr != '0' ||
-            isNumberEx && !isSignEx)
+        if ((isNumberEx && temp < 1 && *cptr != '0') ||
+            (isNumberEx && !isSignEx))
         {
 
             return INPUT_ERROR;
@@ -109,26 +128,24 @@ Errors parse(Data *coeffs){
 
                 return INPUT_ERROR;
             }
-
             SETARG(c)
-              //printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
         }
         else if (*(cptr + endN + 1) == '^' && *(cptr + endN + 2) == '2') { //проверка на ^2
 
             SETARG(a)
-             // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq);
         }
         else {
 
             SETARG(b)
-            // printf("*cptr: %c, temp = %lg, sign = %d, sideOfEq = %d ", *cptr, temp, sign, sideOfEq)
         }
     }
     return NO_ERROR;
 }
+#undef SETURG
+#undef CHECKSIGNEX
 
 
-//----------------------------------------------------------------------
+//------------------------------------------------------------------------
 ///DELETES ALL SPASES FROM STROKE
 void spaceDel(char *s){
     int j = 0;

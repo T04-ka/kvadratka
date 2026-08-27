@@ -1,7 +1,7 @@
 #ifndef DIAGNOSTIC_H
 #define DIAGNOSTIC_H
 
-//###############INCLUDES#######################
+//######################INCLUDES#######################
 #include <stdio.h>
 
 #include "colors.h"
@@ -12,9 +12,7 @@
 #include "structures.h"
 
 
-
-//###############DEFINES########################
-
+//######################DEFINES#######################
 #define MAXLEN 10000
 #define MAXFLEN 100
 #define EXPECTED "Expected: "
@@ -25,22 +23,20 @@
 #define DEFAULTFILE "test.txt"
 
 
-
-
-
-//#################INITIALIZATION######################
+//######################INITIALIZATION#################
 void startTestsFromFile(FILE *file);
 
 void runTests(const Data *refData, size_t len);
 
-//################CONSTANTS##############################
 
-const Data localData[] = {
-                    {0, 0, 0, INF_ROOT},
-                    {0, 0, 1, ZERO_ROOT},
-                    {1, 0, -1, TWO_ROOT, -1, 1}
-                    };
+//######################CONSTANTS######################
+static const Data localData[] = {
+    {0, 0, 0, INF_ROOT},
+    {0, 0, 1, ZERO_ROOT},
+    {1, 0, -1, TWO_ROOT, -1, 1}
+};
+
+static const unsigned int sizeofDataStruct = sizeof(Data);
 
 
-const unsigned int sizeofDataStruct = sizeof(Data);
 #endif

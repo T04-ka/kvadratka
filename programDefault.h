@@ -1,16 +1,12 @@
 #ifndef FLAGSWITCH_H
 #define FLAGSWITCH_H
 
-
+//######################INCLUDES######################
 #include "in-output.h"
 #include "sqSolve.h"
 
-//########################MACROSES#############################
-#define READ_PARAM(A, B) if (readParam(A, &(params -> B))) return;
 
-
-//################INITIALIZATION##################
+//######################INITIALIZATION################
 void runDefault();
-
 
 #endif

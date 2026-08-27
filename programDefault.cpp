@@ -3,7 +3,8 @@
 void enterParams(Data *coeffs);
 
 
-
+//------------------------------------------------------------------------
+///RUNING DEFAULT PART OF PROGRAM
 void runDefault(){
 
     //initialization
@@ -19,7 +20,7 @@ void runDefault(){
 
         printRes(roots);
 
-        _WHITE print("Write q if you want to quit program. ");
+        _WHITE print("Write q if you want to quit program: ");
 
     } while (readAnswear());
 }
@@ -27,6 +28,9 @@ void runDefault(){
 
 //--------------------------------------------------
 ///ENTERING PARAMS IN DEFAULT PROGRAM
+#define READ_PARAM(A, B)    if (readParam(A, &(params -> B))) \
+                                return;
+
 void enterParams(Data* params){
 
 

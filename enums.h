@@ -9,15 +9,24 @@ enum Nroots {
   INF_ROOT = 8
 };
 
+
 enum Errors {
   INPUT_ERROR = -1,
   EMPTY_INPUT = -2,
   NO_ERROR = 0
 };
 
+
 enum TypeNroots {
   Got = 0,
   Expected = 1
+};
+
+
+enum SideOfEq {
+
+  LEFT = 1,
+  RIGHT = -1
 };
 
 #endif

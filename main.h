@@ -16,6 +16,7 @@ if (file == NULL) {                                                             
 }
 
 
+//------------------------------------------------------------------------
 #define TESTFLAGCHECK if (strcmp(argv[1], STARTTEST_FLAG))                        \
 {                                                                                 \
     _RED print("Unknown option: %s\n", argv[1]); _WHITE                           \
@@ -24,16 +25,13 @@ if (file == NULL) {                                                             
 }
 
 
+//------------------------------------------------------------------------
 #define FILEFLAGCHECK if (strcmp(argv[2], READFROMFILE_FLAG))                     \
 {                                                                                 \
     _RED print("Unknown option: %s\n", argv[2]); _WHITE                           \
         print("Usage: [-f | -f filename.txt]\n");                                 \
         return 0;                                                                 \
 }
-
-
-#define ELSEPRINT _RED print("Unknown option.\n"); _WHITE                         \
-print("Usage: [-test] [-f | -f filename.txt]\n");
 
 
 #endif

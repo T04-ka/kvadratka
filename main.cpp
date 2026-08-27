@@ -4,6 +4,7 @@
 int main(int argc, char **argv){
       
       switch (argc){
+
             case 1:
             {
                   runDefault();
@@ -12,7 +13,6 @@ int main(int argc, char **argv){
 
             case 2:
             {
-
                   switch (flagDef(argv[1])){
 
                         case TEST:
@@ -40,34 +40,31 @@ int main(int argc, char **argv){
                   break;
             }
 
-                        case 3:
-                        {
-                              TESTFLAGCHECK
+            case 3:
+            {
+                  TESTFLAGCHECK
+                  FILEFLAGCHECK
+                  FILEOPEN(DEFAULTFILE)
 
-                              FILEFLAGCHECK
+                  startTestsFromFile(file);
+                  break;
+            }
 
-                              FILEOPEN(DEFAULTFILE)
+            case 4:
+            {
+                  TESTFLAGCHECK
+                  FILEFLAGCHECK
+                  FILEOPEN(argv[3])
 
-                              startTestsFromFile(file);
-                              break;
-                        }
+                  startTestsFromFile(file);
+                  break;
+            }
 
-                        case 4:
-                        {
-                              TESTFLAGCHECK
-
-                              FILEFLAGCHECK
-
-                              FILEOPEN(argv[3])
-
-                              startTestsFromFile(file);
-                              break;
-                        }
-
-                        default:
-                        {
-                              ELSEPRINT
-                        }
+            default:
+            {
+                  _RED print("Unknown option.\n"); _WHITE
+                  print("Usage: [--test] [--parse] [-f | -f filename.txt]\n");
+            }
       }
       return 0;
 }

@@ -23,18 +23,7 @@ void print_switch(const TypeNroots type, Data data);
 const char *str_type(const TypeNroots type);
 
 
-/*
-struct polynom = {
-                  double data[3];
-                  int highDegree;                  
-                  };
-                  
-enum { COEFF_ A = 0 };
-
-
-poly.data [COEFF_A] = 8;
-*/
-//-------------------------------------------------------------------
+//------------------------------------------------------------------------
 /// DO DIAGNOSTIC OF SQUARE_SOLVE
 void startTestsFromFile(FILE *file){
     
@@ -48,6 +37,8 @@ void startTestsFromFile(FILE *file){
 }
 
 
+//------------------------------------------------------------------------
+///START RUNNING TESTS
 void runTests(const Data *refData, size_t len){
       
       int n_fail = 0;
@@ -60,7 +51,7 @@ void runTests(const Data *refData, size_t len){
 }
 
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------
 /// RUN TEST WITH GIVEN coeffs AND REFERENCE VALUES
 bool runOneTest(const size_t testN, Data refData){
 
@@ -92,6 +83,8 @@ bool runOneTest(const size_t testN, Data refData){
 }
 
 
+//------------------------------------------------------------------------
+///PRINTS RESULT OF TEST
 void print_switch(const TypeNroots type, Data data){
 
       switch (data.nroots){
@@ -140,7 +133,7 @@ void print_switch(const TypeNroots type, Data data){
 }
 
 
-//---------------------------------------------------------
+//------------------------------------------------------------------------
 ///CONVERTS TYPE TO ITS STR MEANING
 const char *str_type(const TypeNroots type){
     
@@ -151,7 +144,7 @@ const char *str_type(const TypeNroots type){
 }
 
 
-//--------------------------------------------------------------------
+//------------------------------------------------------------------------
 /// READS INPUT ARGS AND RETURN TRUE/FALSE IN MEAN OF EXISTENCE of THIS ARGS
 size_t readArgsF(FILE *file, Data** dataArr){
 
@@ -208,19 +201,11 @@ size_t readArgsF(FILE *file, Data** dataArr){
               
               default: {}      
           }
-          
-   //       printf("%lg %lg %lg \n--------------------\n", datatoRead.a, datatoRead.b, datatoRead.c);
-          
           sortRoots(datatoRead);
-      }/*
-    for (size_t i = 0; i < testsN; i++){
-          
-          printf("%lg %lg %lg \n", (*dataArr)[i].a, (*dataArr)[i].b, (*dataArr)[i].c);
-    }*/
-   //   free(*dataArr + testsN + 1);
+      }
       
       return testsN;
 }
 
 
-//-----------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------
