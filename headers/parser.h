@@ -21,6 +21,10 @@ enum SideOfEq {
 
 
 //---------------------------------
+/// Runs "Parse" part of program
+///
+//---------------------------------
+
 void runParse(void);
 
 #endif

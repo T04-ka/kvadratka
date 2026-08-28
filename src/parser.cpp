@@ -1,13 +1,29 @@
 #include "./../headers/parser.h"
 
 //######INITIALIZATION######
+//-------------------------------------------------------------------------
+/// Reads string from input stream and parses it
+///
+/// @param[out]    coeffs    Pointer to "Data" structure with coefficients
+///
+/// @return INPUT_ERROR if input was wrong,
+///         EMPTY_INPUT if input was empty,
+///         NO_ERROR if input was correct;
+///
+/// @note Go along the line and analyse symbols:
+///          1. Skip the spaces,
+///          2. Check equation side "switch",
+///          3. Check signs '+' and '-',
+///          4. Scan the number (if exist),
+///          5. Check that only correct case had written,
+///          6. Write the coefficient
+///
+//-------------------------------------------------------------------------
+
 Errors parse(Data *coeffs);
 
 
 
-//-------------------------------------------------------------------------
-/// Runs "Parse" part of program
-///
 //-------------------------------------------------------------------------
 
 void runParse(void){
@@ -70,23 +86,6 @@ void runParse(void){
 
 
 
-//-------------------------------------------------------------------------
-/// Reads string from input stream and parses it
-///
-/// @param[out]    coeffs    Pointer to "Data" structure with coefficients
-///
-/// @return INPUT_ERROR if input was wrong,
-///         EMPTY_INPUT if input was empty,
-///         NO_ERROR if input was correct;
-///
-/// @note Go along the line and analyse symbols:
-///          1. Skip the spaces,
-///          2. Check equation side "switch",
-///          3. Check signs '+' and '-',
-///          4. Scan the number (if exist),
-///          5. Check that only correct case had written,
-///          6. Write the coefficient
-///
 //-------------------------------------------------------------------------
 
 Errors parse(Data *coeffs){

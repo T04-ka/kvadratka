@@ -1,8 +1,20 @@
 #include "./../headers/programDefault.h"
 
+
+
+//-------------------------------------------------------------------------
+/// Enters coefficients
+///
+/// @param[out]   Data* params    Pointer on "Data" structure with parametrs
+///
+//-------------------------------------------------------------------------
+
 void enterParams(Data *coeffs);
 
 
+
+
+//-------------------------------------------------------------------------
 
 void runDefault(){
 
@@ -40,11 +52,6 @@ void runDefault(){
 
 
 //-------------------------------------------------------------------------
-/// Enters coefficients
-///
-/// @param[out]   Data* params    Pointer on "Data" structure with parametrs
-///
-//-------------------------------------------------------------------------
 
 void enterParams(Data* params){
 
@@ -58,3 +65,4 @@ void enterParams(Data* params){
 
 }
 
+//-------------------------------------------------------------------------

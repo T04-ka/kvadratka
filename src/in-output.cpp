@@ -1,14 +1,7 @@
 #include "./../headers/in-output.h"
 
 
-
-//----------------------------------------------------------------------------
-/// Reads user's answear about continuation of program
-///
-/// @returns true if user wanted to continue program,
-///          false if wanted to stop
-///
-//----------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 bool readAnswear(void){  
       
@@ -34,20 +27,7 @@ bool readAnswear(void){
 }
 
 
-
-//----------------------------------------------------------------------------
-/// Reads input parametrs from stdin
-///
-/// @param[in]    type_param    Type of parametr (A, B, C)
-/// @param[out]   param         Pointer to var that parametr need to be written in
-///
-/// @return true if param has written,
-///         false if user stoped input (Ctrl + D)
-///
-/// @note Prints prints error message if input was wrong and
-///       repeats input until correct parametr will be written.
-///
-//----------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 bool readParam(const char type_param, double* param){
 
@@ -78,13 +58,7 @@ bool readParam(const char type_param, double* param){
 }
 
 
-
-//----------------------------------------------------------------------------
-/// Prints error message
-///
-/// @param[in]    error      Type of error
-///
-//----------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 void printErrors(Errors error){
       switch (error) {
@@ -106,13 +80,7 @@ void printErrors(Errors error){
 }
 
 
-
-//----------------------------------------------------------------------------
-/// Prints result of equations solving
-///
-/// @param[in]    roots    "Data" structure with solving results
-///
-//----------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 void printRes(Data roots){
     //  assert(roots);
@@ -144,17 +112,7 @@ void printRes(Data roots){
 }
 
 
-
-//----------------------------------------------------------------------------
-/// Reads line from input stream
-///
-/// @param[in]     mxlen   Maximum possible len of input line
-/// @param[out]    s     String where symbols from input are written
-///
-/// @return Lenth of entered string
-///
-/// @note Puts '\0' on every string end
-//----------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 int get_line(char *s, int mxlen){
       
@@ -178,18 +136,7 @@ int get_line(char *s, int mxlen){
 }
 
 
-
-//-------------------------------------------------------------------------
-/// Reads line from file
-///
-/// @param[in]     mxlen   Maximum possible len of input line
-/// @param[out]    s     String where symbols from input are written
-///
-/// @return Lenth of entered string
-///
-/// @note Puts '\0' on every string end
-///
-//-------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 int get_lineF(FILE *pfile, char *s, int maxlen){
     
@@ -210,16 +157,7 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
 }
 
 
-
-//--------------------------------------------------------------------------
-/// Makes the slow output
-///
-/// @param[in]   format      A string with output format
-/// @param[in]   ...         Variables for output
-///
-/// @note Puts every symbol with delation, defined in header file.
-///
-//-------------------------------------------------------------------------
+//-------------------------------------------------------------
 
 void slowPrint(const char *format, ...){
       
