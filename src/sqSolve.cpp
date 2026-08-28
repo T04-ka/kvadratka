@@ -1,4 +1,4 @@
-#include "bin/sqSolve.h"
+#include "./../headers/sqSolve.h"
 
 
 //######INCIDE FUNCTIONS INITILIZATION######
@@ -27,10 +27,10 @@ if (!3) 2 return
 */
 
 //------------------------------------------------------------------------
-/// Solving square equation Ax^2 + Bx + C = 0
+/// Solves square equation Ax^2 + Bx + C = 0
 ///
 /// @param[in]      Data params      "Data" structure with A, B, C parametrs
-/// @params[out]    Data* solveData  Pointer on "Data" structure with results
+/// @param[out]     Data* solveData  Pointer to "Data" structure with results
 ///
 //------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ void squareSolve(Data params, Data *solveData) {
 
 
 //------------------------------------------------------------------------
-/// Solving equation AX + B = 0
+/// Solves equation AX + B = 0
 ///
 /// @param[in]   double a    Parametr A
 /// @param[in]   double b    Parametr B
@@ -85,7 +85,7 @@ Nroots linearSolve(const double a, const double b, double *x){
 
 
 //------------------------------------------------------------------------
-/// Solving equation AX^2 + BX = 0
+/// Solves equation AX^2 + BX = 0
 ///
 /// @param[in]   double a          Parametr A
 /// @param[in]   double b          Parametr B
@@ -120,7 +120,7 @@ Nroots squareZeroC(const double a, const double b, Data *solveData){
 
 
 //------------------------------------------------------------------------
-/// Solving default square equation with discriminant
+/// Solves default square equation with discriminant
 ///
 /// @param[in]   double a          Parametr A
 /// @param[in]   double b          Parametr B

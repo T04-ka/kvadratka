@@ -1,21 +1,22 @@
-#include "bin/elseFuncs.h"
+#include "./../headers/elseFuncs.h"
 
 
 
-//---------------------------------------------------------
-/// Checks is only space in stroke
+//------------------------------------------------------------------
+/// Checks is only space in string
 ///
-/// @param[in]    char *s     Stroke
+/// @param[in]    char *s     string
 ///
-/// @return true if stroke is empty,
+/// @return true if string is empty,
 ///         false if not.
 ///
-//---------------------------------------------------------
+//------------------------------------------------------------------
 
 bool is_OnlySpace_in_line(char *s){
 
       int i = 0;
       char c = 0;
+
       while ((c = s[i++]) != '\n' && c != '\0'){
 
             if (!isspace(c)) return false;
@@ -26,18 +27,18 @@ bool is_OnlySpace_in_line(char *s){
 
 
 
-//-------------------------------------------------------------
+//------------------------------------------------------------------
 /// Checks the correctness of input
 ///
-/// @param[in]    char *s            Input stroke
-/// @param[out]   double* input_d    The pointer on double read
+/// @param[in]    char *s            Input string
+/// @param[out]   double* input_d    The pointer to double read
 ///
 /// @return INPUT_ERROR if input was wrong,
 ///         EMPTY_INPUT if input was empty,
 ///         NO_ERROR if input was correct;
 ///
 /// @note A correct input is one number of type Double
-//---------------------------------------------------------
+//------------------------------------------------------------------
 
 Errors readDouble(char *s, double *input_d){
 
@@ -59,14 +60,14 @@ Errors readDouble(char *s, double *input_d){
 
 
 
-//------------------------------------------------------------------------
+//------------------------------------------------------------------
 /// Clears input buffer, if needed
 ///
 /// @param[in]    int last_char   The last char written to buffer
 ///
-/// @note Clears buffer until '\n' is written
+/// @note Clears buffer until '\\n' is written
 ///
-//------------------------------------------------------------------------
+//------------------------------------------------------------------
 
 void clearBuffer(int last_char){
 
@@ -81,7 +82,7 @@ void clearBuffer(int last_char){
 
 
 
-//------------------------------------------------------------
+//------------------------------------------------------------------
 /// Checks the equality of two Double numbers
 ///
 /// @param[in]    double a     First double
@@ -93,7 +94,7 @@ void clearBuffer(int last_char){
 /// @note Compares double numbers with accuracy BORDER,
 ///       defined in header file
 ///
-//------------------------------------------------------------
+//------------------------------------------------------------------
 
 bool isEqual_d (double a, double b){
     
@@ -117,9 +118,9 @@ bool isEqual_d (double a, double b){
 /// Sorts roots in structure
 ///
 /// @param[in]    Data* roots      Pointer on "Data" structure
-/// @param[out]   Data* roots      Change value of roots right in structure
+/// @param[out]   Data* roots      Changed value of roots right in structure
 ///
-//------------------------------------------------------------
+//------------------------------------------------------------------
 
 void sortRoots(Data *roots){
     
@@ -136,7 +137,7 @@ void sortRoots(Data *roots){
 }
 
 
-//------------------------------------------------
+//------------------------------------------------------------------
 /// Checks is double equal to zero
 ///
 /// @param[in]    double x     Double number
@@ -144,7 +145,7 @@ void sortRoots(Data *roots){
 /// @return true if x = 0,
 ///         false if x != 0.
 ///
-//------------------------------------------------------------
+//------------------------------------------------------------------
 
 bool isZero_d(double x){
     
@@ -153,16 +154,16 @@ bool isZero_d(double x){
 
 
 
-//----------------------------------------------
-/// Defines flag entered in stroke
+//------------------------------------------------------------------
+/// Defines flag entered in string
 ///
-/// @param[in]    char *s     Input stroke
+/// @param[in]    char *s     Input string
 ///
 /// @return TEST if test flag was entered,
 ///         PARSE if parse flag was entered,
 ///         WRONG if wrong flag was entered.
 ///
-//------------------------------------------------------------
+//------------------------------------------------------------------
 
 Flags flagDef(char *s){
 
@@ -181,4 +182,4 @@ Flags flagDef(char *s){
 
 
 
-//------------------------------------------------------------
+//------------------------------------------------------------------

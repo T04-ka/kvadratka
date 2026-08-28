@@ -1,5 +1,15 @@
-#include "bin/main.h"
+#include "./../headers/main.h"
 
+
+
+//------------------------------------------------------------------
+///
+/// Runs main program
+///
+/// @param[in]    int argc    Argc
+/// @param[out]   char **argv Argv
+///
+//------------------------------------------------------------------
 
 int main(int argc, char **argv){
       

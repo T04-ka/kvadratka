@@ -1,4 +1,4 @@
-#include "bin/in-output.h"
+#include "./../headers/in-output.h"
 
 
 
@@ -39,7 +39,7 @@ bool readAnswear(void){
 /// Reads input parametrs from stdin
 ///
 /// @param[in]    const char type_param    Type of parametr (A, B, C)
-/// @param[out]   double* param            Pointer on var that parametr need to be written in
+/// @param[out]   double* param            Pointer to var that parametr need to be written in
 ///
 /// @return true if param has written,
 ///         false if user stoped input (Ctrl + D)
@@ -146,14 +146,14 @@ void printRes(Data roots){
 
 
 //----------------------------------------------------------------------------
-/// Reading line from input stream
+/// Reads line from input stream
 ///
 /// @param[in]     int mxlen   Maximum possible len of input line
-/// @param[out]    char *s     Stroke where symbols from input are written
+/// @param[out]    char *s     String where symbols from input are written
 ///
-/// @return Lenth of entered stroke
+/// @return Lenth of entered string
 ///
-/// @note Puts '\0' on every stroke end
+/// @note Puts '\0' on every string end
 //----------------------------------------------------------------------------
 
 int get_line(char *s, int mxlen){
@@ -180,14 +180,14 @@ int get_line(char *s, int mxlen){
 
 
 //-------------------------------------------------------------------------
-/// Reading line from file
+/// Reads line from file
 ///
 /// @param[in]     int mxlen   Maximum possible len of input line
-/// @param[out]    char *s     Stroke where symbols from input are written
+/// @param[out]    char *s     String where symbols from input are written
 ///
-/// @return Lenth of entered stroke
+/// @return Lenth of entered string
 ///
-/// @note Puts '\0' on every stroke end
+/// @note Puts '\0' on every string end
 ///
 //-------------------------------------------------------------------------
 
@@ -212,9 +212,9 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
 
 
 //--------------------------------------------------------------------------
-/// Make the slow output
+/// Makes the slow output
 ///
-/// @param[in]    const char *format      A stroke with output format
+/// @param[in]    const char *format      A string with output format
 /// @paramp[in]   ...                     Variables for output
 ///
 /// @note Puts every symbol with delation, defined in header file.

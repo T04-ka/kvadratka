@@ -2,13 +2,8 @@
 #define DIAGNOSTIC_H
 
 //######################INCLUDES#######################
-#include <stdio.h>
-
-#include "colors.h"
-#include "enums.h"
 #include "sqSolve.h"
 #include "in-output.h"
-#include "structures.h"
 
 
 //######################DEFINES#######################
@@ -19,7 +14,7 @@
 #define INFROOTS "infinity roots\n"
 #define NOROOTS "no roots\n"
 #define LOCALDATALEN 3
-#define DEFAULTFILE "test.txt"
+#define DEFAULTFILE "./tests/test.txt"
 
 
 //######################INITIALIZATION#################

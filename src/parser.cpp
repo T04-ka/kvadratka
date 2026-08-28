@@ -1,9 +1,7 @@
-#include "bin/parser.h"
+#include "./../headers/parser.h"
 
 //######INITIALIZATION######
 Errors parse(Data *coeffs);
-
-void spaceDel(char *s);
 
 
 
@@ -41,11 +39,30 @@ void runParse(void){
 }
 
 
+//-------------------------------------------------------------------------
+
+#define SETARG(A)                                                                        \
+                        coeffs -> A += sign * sideOfEq * ((isNumberEx) ? temp : 1);      \
+                        cptr += endN + ((#A[0] == 'a') ? 2 : (#A[0] == 'b') ? 0 : -1);   \
+                        sign = 1;                                                        \
+                        isSignEx = false;                                                \
+                        isEqWasPrev = true;                                              \
+                        continue;
+
+
+//------------------------------------------------------------------------
+
+#define CHECKSIGNEX if (isSignEx && !isEqWasPrev && cptr - inputLine != 0) {         \
+                        return INPUT_ERROR;                                          \
+                    }                                                                \
+                    isSignEx = true;                                                 \
+                    isEqWasPrev = false;
+
 
 //-------------------------------------------------------------------------
-/// Reads stroke from input stream and parses it
+/// Reads string from input stream and parses it
 ///
-/// @param[out]    Data* coeffs    Pointer on "Data" structure with coefficients
+/// @param[out]    Data* coeffs    Pointer to "Data" structure with coefficients
 ///
 /// @return INPUT_ERROR if input was wrong,
 ///         EMPTY_INPUT if input was empty,
@@ -61,25 +78,6 @@ void runParse(void){
 ///
 //-------------------------------------------------------------------------
 
-#define SETARG(A)                                                                        \
-                        coeffs -> A += sign * sideOfEq * ((isNumberEx) ? temp : 1);      \
-                        cptr += endN + ((#A[0] == 'a') ? 2 : (#A[0] == 'b') ? 0 : -1);   \
-                        sign = 1;                                                        \
-                        isSignEx = false;                                                \
-                        isEqWasPrev = true;                                              \
-                        continue;
-
-
-//------------------------------------------------------------------------
-#define CHECKSIGNEX if (isSignEx && !isEqWasPrev && cptr - inputLine != 0) {         \
-                        return INPUT_ERROR;                                          \
-                    }                                                                \
-                    isSignEx = true;                                                 \
-                    isEqWasPrev = false;
-
-
-//------------------------------------------------------------------------
-/// PARSE THE STROKE
 Errors parse(Data *coeffs){
 
     char inputLine[MAXLEN] = {};
@@ -132,13 +130,13 @@ Errors parse(Data *coeffs){
 
         int endN = 0;
 
-        //проверка наличия коэфициента
+        //number existance check
         if (!sscanf(cptr, "%lg%n", &temp, &endN)) {
 
             isNumberEx = false;
         }
 
-        //проверка на .99 && 2 2 2 2
+        //check .99 && 2 2 2 2
         if ((isNumberEx && temp < 1 && *cptr != '0') ||
             (isNumberEx && !isSignEx))
         {

@@ -1,4 +1,4 @@
-#include "bin/Diagnostic.h"
+#include "./../headers/Diagnostic.h"
 
 /*
 char* a = "123";
@@ -27,7 +27,7 @@ const char *str_type(const TypeNroots type);
 //------------------------------------------------------------------------
 /// Reads data from file and runs unit tests function
 ///
-/// @param[in]    FILE* file    The file with data
+/// @param[in]    FILE* file   The file with data
 ///
 //------------------------------------------------------------------------
 
@@ -93,9 +93,9 @@ bool runOneTest(const size_t testN, Data refData){
             _RED slowPrint("Test #%lu FAILED. For parametrs a = %lg  b = %lg  c = %lg\n",
                              testN,                    refData.a, refData.b, refData.c); _WHITE
                                           
-            //print "expected" stroke
+            //print "expected" string
             print_switch(Expected, refData);
-            //print "got" stroke
+            //print "got" string
             print_switch(Got, solveData);
             
             return false;
@@ -166,11 +166,11 @@ void print_switch(const TypeNroots type, Data data){
 
 
 //------------------------------------------------------------------------
-/// Makes a stroke with type given
+/// Makes a string with type given
 ///
 /// @param[in]    TypeNroots type    Got/Expected type
 ///
-/// @return Pointer on stroked type, located in ROdata.
+/// @return Pointer on stringd type, located in ROdata.
 ///
 //------------------------------------------------------------------------
 
@@ -188,7 +188,7 @@ const char *str_type(const TypeNroots type){
 /// Reads data entered in file and write in array of structures
 ///
 /// @param[in]     FILE* file        The file with data
-/// @param[out]    Data** dataArr    Pointer on pointer on array with "Data" structures
+/// @param[out]    Data** dataArr    Pointer to pointer to array with "Data" structures
 ///
 /// @return Len of resulting array
 ///
