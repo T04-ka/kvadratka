@@ -3,9 +3,9 @@
 
 //############INCLUDES#############
 #include "elseFuncs.h"
-#include "enums.h"
-#include "structures.h"
 
+
+// TODO: я бы засунул сюда Data, enum
 
 //############INITIALIZATION##########
 void squareSolve(Data params, Data *solveData);

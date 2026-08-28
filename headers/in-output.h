@@ -3,9 +3,7 @@
 
 //######################INCLUDES#######################
 #include "elseFuncs.h"
-#include "enums.h"
 #include "colors.h"
-#include "structures.h"
 
 #include <stdarg.h>
 #include <time.h>

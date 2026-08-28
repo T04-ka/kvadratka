@@ -1,7 +1,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-//###############INCLUDES#######################
+//###############INCLUDES##############################
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
@@ -13,6 +13,11 @@
 
 
 //######################ENUMS##########################
+//-----------------------------------------------------
+/// Enumeration with type of input flags
+///
+//-----------------------------------------------------
+
 enum Flags {
     TEST = 0,
     PARSE = 1,
@@ -20,7 +25,7 @@ enum Flags {
 };
 
 
-//############DEFINES##############
+//######################DEFINES########################
 #define BORDER 0.000001
 
 
@@ -40,7 +45,7 @@ bool isZero_d(double x);
 Flags flagDef(char *s);
 
 
-//######CONSTANTS##########
+//######################CONSTANTS######################
 const char STARTTEST_FLAG[] = "--test";
 const char PARSE_FLAG[] = "--parse";
 const char READFROMFILE_FLAG[] = "-f";

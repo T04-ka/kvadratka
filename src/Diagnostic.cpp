@@ -14,21 +14,68 @@ const char const * a;
 */
 
 //###############INITIALIZATION#######################
+//------------------------------------------------------------------------
+/// Runs one test
+///
+/// @param[in]    testN    The number of test
+/// @param[in]    refData    The structure with reference data
+///
+/// @return true if test has passed and
+///         false if not.
+///
+/// @note Prints the result of test.
+//------------------------------------------------------------------------
+
 bool runOneTest(const size_t testN, Data refData);
-
-size_t readArgsF(FILE *file, Data** dataptr);
-
-void print_switch(const TypeNroots type, Data data);
-
-const char *str_type(const TypeNroots type);
 
 
 
 //------------------------------------------------------------------------
-/// Reads data from file and runs unit tests function
+/// Reads data entered in file and write in array of structures
 ///
-/// @param[in]    FILE* file   The file with data
+/// @param[in]     file        The file with data
+/// @param[out]    dataArr    Pointer to pointer to array with "Data" structures
 ///
+/// @return Len of resulting array
+///
+/// @note Allocate the memory with realloc() and write data in heap buffer,
+///       works only with pointers.
+///
+/// @note Input line must complains to format: "A B C N X1 X2\n",
+///       X1 can be not written if N = 0, X2 can be not written if N < 2,
+///       if equation has inf roots, -1 must be written insted of N
+///
+//------------------------------------------------------------------------
+
+size_t readArgsF(FILE *file, Data** dataptr);
+
+
+
+//------------------------------------------------------------------------
+/// Prints result of test
+///
+/// @param[in]    type    Type of print (got/expected)
+/// @param[in]    data          "Data" structure with data to print
+///
+//------------------------------------------------------------------------
+
+void print_switch(const TypeOutput type, Data data);
+
+
+
+//------------------------------------------------------------------------
+/// Makes a string with type given
+///
+/// @param[in]    type    Got/Expected type
+///
+/// @return Pointer on stringd type, located in ROdata.
+///
+//------------------------------------------------------------------------
+
+const char* str_type(const TypeOutput type);
+
+
+
 //------------------------------------------------------------------------
 
 void startTestsFromFile(FILE *file){
@@ -43,13 +90,6 @@ void startTestsFromFile(FILE *file){
 }
 
 
-
-//------------------------------------------------------------------------
-/// Runs "Diagnostic" part of program
-///
-/// @param[in]    Data *refData    Array with input data structures
-/// @param[in]    size_t len       Len of *refData array
-///
 //------------------------------------------------------------------------
 
 void runTests(const Data *refData, size_t len){
@@ -64,17 +104,6 @@ void runTests(const Data *refData, size_t len){
 }
 
 
-
-//------------------------------------------------------------------------
-/// Runs one test
-///
-/// @param[in]    size_t testN    The number of test
-/// @param[in]    Data refData    The structure with reference data
-///
-/// @return true if test has passed and
-///         false if not.
-///
-/// @note Prints the result of test.
 //------------------------------------------------------------------------
 
 bool runOneTest(const size_t testN, Data refData){
@@ -107,16 +136,9 @@ bool runOneTest(const size_t testN, Data refData){
 }
 
 
-
-//------------------------------------------------------------------------
-/// Prints result of test
-///
-/// @param[in]    TypeNroots type    Type of print (got/expected)
-/// @param[in]    Data data          "Data" structure with data to print
-///
 //------------------------------------------------------------------------
 
-void print_switch(const TypeNroots type, Data data){
+void print_switch(const TypeOutput type, Data data){
 
       switch (data.nroots){
                   
@@ -164,17 +186,9 @@ void print_switch(const TypeNroots type, Data data){
 }
 
 
-
-//------------------------------------------------------------------------
-/// Makes a string with type given
-///
-/// @param[in]    TypeNroots type    Got/Expected type
-///
-/// @return Pointer on stringd type, located in ROdata.
-///
 //------------------------------------------------------------------------
 
-const char *str_type(const TypeNroots type){
+const char *str_type(const TypeOutput type){
     
     const char *GOT_WORD = "Got";
     const char *EXPECTED_WORD = "Expected";
@@ -183,22 +197,6 @@ const char *str_type(const TypeNroots type){
 }
 
 
-
-//------------------------------------------------------------------------
-/// Reads data entered in file and write in array of structures
-///
-/// @param[in]     FILE* file        The file with data
-/// @param[out]    Data** dataArr    Pointer to pointer to array with "Data" structures
-///
-/// @return Len of resulting array
-///
-/// @note Allocate the memory with realloc() and write data in heap buffer,
-///       works only with pointers.
-///
-/// @note Input line must complains to format: "A B C N X1 X2\n",
-///       X1 can be not written if N = 0, X2 can be not written if N < 2,
-///       if equation has inf roots, -1 must be written insted of N
-///
 //------------------------------------------------------------------------
 
 size_t readArgsF(FILE* file, Data** dataArr){

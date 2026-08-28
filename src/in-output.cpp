@@ -38,8 +38,8 @@ bool readAnswear(void){
 //----------------------------------------------------------------------------
 /// Reads input parametrs from stdin
 ///
-/// @param[in]    const char type_param    Type of parametr (A, B, C)
-/// @param[out]   double* param            Pointer to var that parametr need to be written in
+/// @param[in]    type_param    Type of parametr (A, B, C)
+/// @param[out]   param         Pointer to var that parametr need to be written in
 ///
 /// @return true if param has written,
 ///         false if user stoped input (Ctrl + D)
@@ -82,7 +82,7 @@ bool readParam(const char type_param, double* param){
 //----------------------------------------------------------------------------
 /// Prints error message
 ///
-/// @param[in]    Errors error      Type of error
+/// @param[in]    error      Type of error
 ///
 //----------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ void printErrors(Errors error){
 //----------------------------------------------------------------------------
 /// Prints result of equations solving
 ///
-/// @param[in]    Data roots    "Data" structure with solving results
+/// @param[in]    roots    "Data" structure with solving results
 ///
 //----------------------------------------------------------------------------
 
@@ -148,8 +148,8 @@ void printRes(Data roots){
 //----------------------------------------------------------------------------
 /// Reads line from input stream
 ///
-/// @param[in]     int mxlen   Maximum possible len of input line
-/// @param[out]    char *s     String where symbols from input are written
+/// @param[in]     mxlen   Maximum possible len of input line
+/// @param[out]    s     String where symbols from input are written
 ///
 /// @return Lenth of entered string
 ///
@@ -182,8 +182,8 @@ int get_line(char *s, int mxlen){
 //-------------------------------------------------------------------------
 /// Reads line from file
 ///
-/// @param[in]     int mxlen   Maximum possible len of input line
-/// @param[out]    char *s     String where symbols from input are written
+/// @param[in]     mxlen   Maximum possible len of input line
+/// @param[out]    s     String where symbols from input are written
 ///
 /// @return Lenth of entered string
 ///
@@ -214,8 +214,8 @@ int get_lineF(FILE *pfile, char *s, int maxlen){
 //--------------------------------------------------------------------------
 /// Makes the slow output
 ///
-/// @param[in]    const char *format      A string with output format
-/// @paramp[in]   ...                     Variables for output
+/// @param[in]   format      A string with output format
+/// @param[in]   ...         Variables for output
 ///
 /// @note Puts every symbol with delation, defined in header file.
 ///

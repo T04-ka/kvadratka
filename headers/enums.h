@@ -2,6 +2,11 @@
 #define ENUMS
 
 //############ENUMS################
+//---------------------------------
+/// Number of roots enumeration
+///
+//---------------------------------
+
 enum Nroots {
   ZERO_ROOT = 0,
   ONE_ROOT = 1,
@@ -10,6 +15,12 @@ enum Nroots {
 };
 
 
+
+//---------------------------------
+/// Type of errors enumeration
+///
+//---------------------------------
+
 enum Errors {
   INPUT_ERROR = -1,
   EMPTY_INPUT = -2,
@@ -17,16 +28,5 @@ enum Errors {
 };
 
 
-enum TypeNroots {
-  Got = 0,
-  Expected = 1
-};
-
-
-enum SideOfEq {
-
-  LEFT = 1,
-  RIGHT = -1
-};
 
 #endif

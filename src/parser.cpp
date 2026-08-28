@@ -39,6 +39,12 @@ void runParse(void){
 }
 
 
+
+//-------------------------------------------------------------------------
+/// Adds value for defined argument
+///
+/// @param[in]  A   Type of argument (a, b, c)
+///
 //-------------------------------------------------------------------------
 
 #define SETARG(A)                                                                        \
@@ -50,19 +56,24 @@ void runParse(void){
                         continue;
 
 
-//------------------------------------------------------------------------
 
-#define CHECKSIGNEX if (isSignEx && !isEqWasPrev && cptr - inputLine != 0) {         \
-                        return INPUT_ERROR;                                          \
-                    }                                                                \
-                    isSignEx = true;                                                 \
+//-------------------------------------------------------------------------
+/// Checks sign existance
+///
+//-------------------------------------------------------------------------
+
+#define CHECKSIGNEX if (isSignEx && !isEqWasPrev && cptr - inputLine != 0) {             \
+                        return INPUT_ERROR;                                              \
+                    }                                                                    \
+                    isSignEx = true;                                                     \
                     isEqWasPrev = false;
+
 
 
 //-------------------------------------------------------------------------
 /// Reads string from input stream and parses it
 ///
-/// @param[out]    Data* coeffs    Pointer to "Data" structure with coefficients
+/// @param[out]    coeffs    Pointer to "Data" structure with coefficients
 ///
 /// @return INPUT_ERROR if input was wrong,
 ///         EMPTY_INPUT if input was empty,

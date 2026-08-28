@@ -4,11 +4,6 @@ void enterParams(Data *coeffs);
 
 
 
-//-------------------------------------------------------------------------
-/// Runs default part of program
-///
-//-------------------------------------------------------------------------
-
 void runDefault(){
 
     //initialization
@@ -32,9 +27,17 @@ void runDefault(){
 
 
 //-------------------------------------------------------------------------
+/// Call function and write parameter in "Data" structure
+///
+/// @param[in]  A   Type of parameter (A, B, C)
+/// @param[in]  B   "Data" structure case
+///
+//-------------------------------------------------------------------------
 
 #define READ_PARAM(A, B)    if (readParam(A, &(params -> B))) \
                                 return;
+
+
 
 //-------------------------------------------------------------------------
 /// Enters coefficients

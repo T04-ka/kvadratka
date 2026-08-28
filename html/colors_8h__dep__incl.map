@@ -1,0 +1,25 @@
+<map id="headers/colors.h" name="headers/colors.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="337,5,465,33"/>
+<area shape="rect" id="Node000002" href="$in-output_8h.html" title=" " alt="" coords="327,81,475,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="402,47,403,82,399,79,400,51"/>
+<area shape="rect" id="Node000003" href="$Diagnostic_8h.html" title=" " alt="" coords="422,157,580,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="432,115,486,156,481,156,431,121"/>
+<area shape="rect" id="Node000007" href="$parser_8h.html" title=" " alt="" coords="51,157,180,184"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="334,115,168,159,166,154,337,111"/>
+<area shape="rect" id="Node000009" href="$programDefault_8h.html" title=" " alt="" coords="205,157,397,184"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="373,117,320,158,317,154,369,120"/>
+<area shape="rect" id="Node000011" href="$in-output_8cpp.html" title=" " alt="" coords="604,157,734,184"/>
+<area shape="poly" id="edge12_Node000002_Node000011" title=" " alt="" coords="463,110,624,155,618,157,463,116"/>
+<area shape="rect" id="Node000004" href="$main_8h.html" title=" " alt="" coords="141,232,264,260"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="430,190,257,234,255,229,435,187"/>
+<area shape="rect" id="Node000006" href="$Diagnostic_8cpp.html" title=" " alt="" coords="486,232,626,260"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="521,195,549,233,543,231,519,200"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title=" " alt="" coords="150,308,254,336"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="204,274,205,309,200,306,200,278"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="143,192,190,231,184,232,142,197"/>
+<area shape="rect" id="Node000008" href="$parser_8cpp.html" title=" " alt="" coords="5,232,117,260"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="95,199,73,233,69,230,98,195"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="274,192,221,234,218,230,269,195"/>
+<area shape="rect" id="Node000010" href="$programDefault_8cpp.html" title=" " alt="" coords="287,232,462,260"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="326,193,364,232,359,232,324,198"/>
+</map>

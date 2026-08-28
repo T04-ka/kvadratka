@@ -1,13 +1,43 @@
 #include "./../headers/main.h"
 
 
+/*
+ * main
+ * + argparser
+ * + programDefault
+ * | + square_inoutput
+ * | + square_solve
+ * + Diagnostic
+ * | + fileinput
+ * | + inoutput
+ * | + square_solve
+ * + Parser
+ * | + parserinput
+ * | + square_solve
+ * | + inoutput
+ *
+ *  square_solve
+ *  + Data
+ *  + solve()
+ *  + enum
+ *
+ *  square_inoutput <- square_solve, inoutput
+ *  +
+ *  +
+ *  + errors
+ *
+ *  errors
+ *  + enum
+ *  + printErrors()
+ */
+
 
 //------------------------------------------------------------------
 ///
 /// Runs main program
 ///
-/// @param[in]    int argc    Argc
-/// @param[out]   char **argv Argv
+/// @param[in]    argc    Argc
+/// @param[out]   argv    Argv
 ///
 //------------------------------------------------------------------
 

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------
 /// Checks is only space in string
 ///
-/// @param[in]    char *s     string
+/// @param[in]    s     string
 ///
 /// @return true if string is empty,
 ///         false if not.
@@ -30,8 +30,8 @@ bool is_OnlySpace_in_line(char *s){
 //------------------------------------------------------------------
 /// Checks the correctness of input
 ///
-/// @param[in]    char *s            Input string
-/// @param[out]   double* input_d    The pointer to double read
+/// @param[in]    s            Input string
+/// @param[out]   input_d    The pointer to double read
 ///
 /// @return INPUT_ERROR if input was wrong,
 ///         EMPTY_INPUT if input was empty,
@@ -63,7 +63,7 @@ Errors readDouble(char *s, double *input_d){
 //------------------------------------------------------------------
 /// Clears input buffer, if needed
 ///
-/// @param[in]    int last_char   The last char written to buffer
+/// @param[in]    last_char   The last char written to buffer
 ///
 /// @note Clears buffer until '\\n' is written
 ///
@@ -85,8 +85,8 @@ void clearBuffer(int last_char){
 //------------------------------------------------------------------
 /// Checks the equality of two Double numbers
 ///
-/// @param[in]    double a     First double
-/// @param[in]    double b     Second double
+/// @param[in]    a     First double
+/// @param[in]    b     Second double
 ///
 /// @return true if numbers are equal
 ///     and false if not
@@ -117,8 +117,8 @@ bool isEqual_d (double a, double b){
 //------------------------------------------------------------------
 /// Sorts roots in structure
 ///
-/// @param[in]    Data* roots      Pointer on "Data" structure
-/// @param[out]   Data* roots      Changed value of roots right in structure
+/// @param[in]    roots      Pointer on "Data" structure
+/// @param[out]   roots      Changed value of roots right in structure
 ///
 //------------------------------------------------------------------
 
@@ -140,7 +140,7 @@ void sortRoots(Data *roots){
 //------------------------------------------------------------------
 /// Checks is double equal to zero
 ///
-/// @param[in]    double x     Double number
+/// @param[in]    x     Double number
 ///
 /// @return true if x = 0,
 ///         false if x != 0.
@@ -157,7 +157,7 @@ bool isZero_d(double x){
 //------------------------------------------------------------------
 /// Defines flag entered in string
 ///
-/// @param[in]    char *s     Input string
+/// @param[in]    s     Input string
 ///
 /// @return TEST if test flag was entered,
 ///         PARSE if parse flag was entered,

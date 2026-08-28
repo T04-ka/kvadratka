@@ -29,8 +29,8 @@ if (!3) 2 return
 //------------------------------------------------------------------------
 /// Solves square equation Ax^2 + Bx + C = 0
 ///
-/// @param[in]      Data params      "Data" structure with A, B, C parametrs
-/// @param[out]     Data* solveData  Pointer to "Data" structure with results
+/// @param[in]      params      "Data" structure with A, B, C parametrs
+/// @param[out]     solveData  Pointer to "Data" structure with results
 ///
 //------------------------------------------------------------------------
 
@@ -60,10 +60,10 @@ void squareSolve(Data params, Data *solveData) {
 //------------------------------------------------------------------------
 /// Solves equation AX + B = 0
 ///
-/// @param[in]   double a    Parametr A
-/// @param[in]   double b    Parametr B
-/// @param[in]   double c    Parametr C
-/// @param[out]  double* x   Pointer on root
+/// @param[in]   a    Parametr A
+/// @param[in]   b    Parametr B
+/// @param[in]   c    Parametr C
+/// @param[out]  x    Pointer on root
 ///
 /// @return Number of roots
 ///
@@ -87,10 +87,10 @@ Nroots linearSolve(const double a, const double b, double *x){
 //------------------------------------------------------------------------
 /// Solves equation AX^2 + BX = 0
 ///
-/// @param[in]   double a          Parametr A
-/// @param[in]   double b          Parametr B
-/// @param[in]   double c          Parametr C
-/// @param[out]  Data* solveData   Pointer on "Data" structure with results
+/// @param[in]    a          Parametr A
+/// @param[in]    b          Parametr B
+/// @param[in]    c          Parametr C
+/// @param[out]   solveData   Pointer on "Data" structure with results
 ///
 /// @return Number of roots
 ///
@@ -122,10 +122,10 @@ Nroots squareZeroC(const double a, const double b, Data *solveData){
 //------------------------------------------------------------------------
 /// Solves default square equation with discriminant
 ///
-/// @param[in]   double a          Parametr A
-/// @param[in]   double b          Parametr B
-/// @param[in]   double c          Parametr C
-/// @param[out]  Data* solveData   Pointer on "Data" structure with results
+/// @param[in]    a          Parametr A
+/// @param[in]    b          Parametr B
+/// @param[in]    c          Parametr C
+/// @param[out]   solveData   Pointer on "Data" structure with results
 ///
 /// @return Number of roots
 ///
